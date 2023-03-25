@@ -1,0 +1,20 @@
+
+.activeLink {
+    color: white;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+.activeLink:hover {
+    color: #c4c4c4;
+}
+
+.nonActiveLink {
+    color: gray;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+.nonActiveLink:hover {
+    color: white;
+}
