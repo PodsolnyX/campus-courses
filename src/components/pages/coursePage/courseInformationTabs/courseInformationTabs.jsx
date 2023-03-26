@@ -1,6 +1,6 @@
 import {Tab, Tabs} from "react-bootstrap";
 import "./courseInformationTab.css";
-import NotificationsTab from "./notificationsTab/notificationsTab";
+import NoticeTabContainer from "./noticeTab/noticeTabContainer";
 
 const CourseInformationTabs = () => {
     return (
@@ -22,7 +22,7 @@ const CourseInformationTabs = () => {
                 </div>
             </Tab>
             <Tab eventKey="notifications" title={<div>Уведомления<span className={"badge bg-danger ms-1"}>3+</span></div>}>
-                <NotificationsTab/>
+                <NoticeTabContainer/>
             </Tab>
         </Tabs>
     );
