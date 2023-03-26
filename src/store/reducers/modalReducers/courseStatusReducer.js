@@ -1,3 +1,5 @@
+import {toast} from "react-toastify";
+
 const
     OPEN_COURSE_STATUS_MODAL = "OPEN_COURSE_STATUS_MODAL",
     CLOSE_COURSE_STATUS_MODAL = "CLOSE_COURSE_STATUS_MODAL",

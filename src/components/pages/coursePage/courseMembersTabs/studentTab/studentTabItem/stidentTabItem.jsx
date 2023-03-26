@@ -1,4 +1,7 @@
 import {Button, ListGroup} from "react-bootstrap";
+import {toast} from "react-toastify";
+import { Slide, Flip, Bounce } from 'react-toastify';
+import {toastSuccess} from "../../../../../../helpers/toaster";
 
 const StudentTabItem = (props) => {
     return (
@@ -31,8 +34,12 @@ const StudentTabItem = (props) => {
                             props.variant === 2 ?
                                 <div className={"row"}>
                                     <div className={"d-flex justify-content-end"}>
-                                        <Button variant={"outline-primary"} className={"me-2"}>Принять</Button>
-                                        <Button variant={"outline-danger"}>Отклонить</Button>
+                                        <Button variant={"outline-primary"} className={"me-2"} onClick={() => toastSuccess("Студент успешно принят")}>
+                                            Принять
+                                        </Button>
+                                        <Button variant={"outline-danger"} onClick={() => toastSuccess("Студент успешно отклонён")}>
+                                            Отклонить
+                                        </Button>
                                     </div>
                                 </div>
                                 : undefined

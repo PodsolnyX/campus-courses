@@ -13,12 +13,15 @@ import TaughtCoursesPage from "./components/pages/taughtCoursesPage/taughtCourse
 import NotFoundPage from "./components/pages/notFoundPage/notFoundPage";
 import Footer from "./components/other/footer/footer";
 import CoursePageContainer from "./components/pages/coursePage/coursePageContainer";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (
         <div className="App">
             <NavBar/>
             <DeletePopupContainer/>
+            <ToastContainer/>
             <div className={"content"}>
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
