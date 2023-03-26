@@ -1,6 +1,6 @@
 import {Tab, Tabs} from "react-bootstrap";
-import StudentTab from "./studentTab/studentTab";
-import TeacherTab from "./teacherTab/teacherTab";
+import TeacherTabContainer from "./teacherTab/teacherTabContainer";
+import StudentTabContainer from "./studentTab/studentTabContainer";
 
 const CourseMembersTabs = () => {
     return (
@@ -11,10 +11,10 @@ const CourseMembersTabs = () => {
                 justify
             >
                 <Tab eventKey="teachers" title="Преподаватели">
-                    <TeacherTab/>
+                    <TeacherTabContainer/>
                 </Tab>
                 <Tab eventKey="students" title="Студенты">
-                    <StudentTab/>
+                    <StudentTabContainer/>
                 </Tab>
             </Tabs>
         </div>

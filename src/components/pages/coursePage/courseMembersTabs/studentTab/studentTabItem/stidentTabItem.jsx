@@ -20,10 +20,10 @@ const StudentTabItem = (props) => {
                     {
                         props.variant === 1 ?
                             <div className={"row"}>
-                                <div className={"col-12 mb-2"}>
-                                    Промежуточная аттестация - <span className={"badge bg-success"}>успешно пройдено</span>
+                                <div className={"col-12 mb-2"} onClick={props.openMarkModal} style={{cursor: "pointer"}}>
+                                    Промежуточная аттестация - <span className={"badge bg-success"}>пройдено</span>
                                 </div>
-                                <div className={"col-12"}>
+                                <div className={"col-12"} onClick={props.openMarkModal} style={{cursor: "pointer"}}>
                                     Финальная аттестация - <span className={"badge bg-secondary"}>отметки нет</span>
                                 </div>
                             </div>
