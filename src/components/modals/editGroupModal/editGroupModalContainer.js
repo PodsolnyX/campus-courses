@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {closeGroupsModal, editValueGroupsModal} from "../../../store/reducers/groupsModalReducer";
+import {closeGroupsModal, editValueGroupsModal} from "../../../store/reducers/modalReducers/groupsModalReducer";
 import EditGroupModal from "./editGroupModal";
 
 let mapStateToProps = (state) => {
@@ -12,5 +12,5 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     closeGroupsModal,
-    editTitleGroupsModal: editValueGroupsModal
+    editValueGroupsModal
 })(EditGroupModal);

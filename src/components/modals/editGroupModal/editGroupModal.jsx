@@ -3,7 +3,7 @@ import {Button, Modal} from "react-bootstrap";
 const EditGroupModal = (props) => {
 
     const onInputChange = (e) => {
-        props.editTitleGroupsModal(e.target.value);
+        props.editValueGroupsModal(e.target.value);
     }
 
     return (

@@ -10,7 +10,7 @@ const NotificationsTab = () => {
                 <ListGroup.Item variant={"danger"}>Важное уведомление</ListGroup.Item>
                 {
                     arrNot.map((not, i) =>
-                        <ListGroup.Item>{not}</ListGroup.Item>
+                        <ListGroup.Item key={i}>{not}</ListGroup.Item>
                     )
                 }
             </ListGroup>

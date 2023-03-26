@@ -1,7 +1,8 @@
 import {Button, Card, ListGroup} from "react-bootstrap";
+import EditCourseStatusModalContainer from "../../../modals/editCourseStatusModal/editCourseStatusModalContainer";
 
 
-const CourseInfo = () => {
+const CourseInfo = (props) => {
     return (
         <div className={"mt-2"}>
             <div className={"fw-bold my-auto"}>Основные данные курса</div>
@@ -9,11 +10,12 @@ const CourseInfo = () => {
                 <ListGroup variant="flush">
                     <ListGroup.Item>
                         <div className={"d-flex justify-content-between"}>
+                            <EditCourseStatusModalContainer/>
                             <div>
                                 <div className={"fw-bold"}>Статус курса</div>
                                 <div className={"text-success"}>Открыт для записи</div>
                             </div>
-                            <div className={"my-auto"}>
+                            <div className={"my-auto"} onClick={props.openCourseStatusModal}>
                                 <Button variant={"outline-warning"}>Изменить статус</Button>
                             </div>
                         </div>

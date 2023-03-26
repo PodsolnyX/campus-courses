@@ -11,8 +11,8 @@ import ConcreteGroupPageContainer from "./components/pages/concreteGroupPage/con
 import UserCoursesPage from "./components/pages/userCoursesPage/userCoursesPage";
 import TaughtCoursesPage from "./components/pages/taughtCoursesPage/taughtCoursesPage";
 import NotFoundPage from "./components/pages/notFoundPage/notFoundPage";
-import CoursePage from "./components/pages/coursePage/coursePage";
 import Footer from "./components/other/footer/footer";
+import CoursePageContainer from "./components/pages/coursePage/coursePageContainer";
 
 function App() {
     return (
@@ -29,7 +29,7 @@ function App() {
                     <Route path="/groups/:id" element={<ConcreteGroupPageContainer/>}/>
                     <Route path="/courses/my" element={<UserCoursesPage/>}/>
                     <Route path="/courses/teaching" element={<TaughtCoursesPage/>}/>
-                    <Route path="/courses/:id" element={<CoursePage/>}/>
+                    <Route path="/courses/:id" element={<CoursePageContainer/>}/>
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>
             </div>
