@@ -1,12 +1,12 @@
 import {connect} from "react-redux";
-import {closeGroupsModal, editValueGroupsModal} from "../../../store/reducers/modalReducers/groupsModalReducer";
 import EditGroupModal from "./editGroupModal";
+import {closeGroupsModal, editValueGroupsModal} from "../../../../../store/reducers/groupsPageReducer";
 
 let mapStateToProps = (state) => {
     return {
-        isShow: state.groupsModal.isShow,
-        isEdit: state.groupsModal.isEdit,
-        value: state.groupsModal.value
+        isShowModal: state.groupsPage.isShowModal,
+        isEdit: state.groupsPage.isEdit,
+        value: state.groupsPage.value
     };
 }
 

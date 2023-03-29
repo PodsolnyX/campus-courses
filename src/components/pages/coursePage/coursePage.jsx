@@ -1,7 +1,7 @@
 import {Button, Container} from "react-bootstrap";
 import CourseInformationTabs from "./courseInformationTabs/courseInformationTabs";
 import CourseMembersTabs from "./courseMembersTabs/courseMembersTabs";
-import EditCourseModalContainer from "../../modals/editCourseModal/editCourseModalContainer";
+import EditCourseModalContainer from "./modals/editCourseModal/editCourseModalContainer";
 import CourseInfoContainer from "./courseInfo/courseInfoContainer";
 
 const CoursePage = (props) => {

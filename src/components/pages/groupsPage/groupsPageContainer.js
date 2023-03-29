@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import GroupsPage from "./groupsPage";
-import {openGroupsModal} from "../../../store/reducers/modalReducers/groupsModalReducer";
+import {openGroupsModal} from "../../../store/reducers/groupsPageReducer";
 
 let mapStateToProps = (state) => {
     return {};

@@ -1,5 +1,5 @@
 import {Button, Card, ListGroup} from "react-bootstrap";
-import EditCourseStatusModalContainer from "../../../modals/editCourseStatusModal/editCourseStatusModalContainer";
+import EditCourseStatusModalContainer from "../modals/editCourseStatusModal/editCourseStatusModalContainer";
 
 
 const CourseInfo = (props) => {

@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {closeTeacherModal, editValueTeacherModal} from "../../../store/reducers/modalReducers/teacherModalReducer";
+import {closeTeacherModal, editValueTeacherModal} from "../../../../../store/reducers/modalReducers/teacherModalReducer";
 import AddTeacherModal from "./addTeacherModal";
 
 let mapStateToProps = (state) => {

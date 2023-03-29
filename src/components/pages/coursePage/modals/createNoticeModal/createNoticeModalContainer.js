@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {closeNoticeModal, editValueNoticeModal} from "../../../store/reducers/modalReducers/noticeModalReducer";
+import {closeNoticeModal, editValueNoticeModal} from "../../../../../store/reducers/modalReducers/noticeModalReducer";
 import CreateNoticeModal from "./createNoticeModal";
 
 let mapStateToProps = (state) => {

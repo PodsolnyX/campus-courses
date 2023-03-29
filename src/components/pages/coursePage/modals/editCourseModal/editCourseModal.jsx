@@ -1,5 +1,5 @@
 import {Button, Form, Modal} from "react-bootstrap";
-import HtmlEditor from "../../other/htmlEditor/htmlEditor";
+import HtmlEditor from "../../../../other/htmlEditor/htmlEditor";
 import Select from "react-select";
 
 const EditCourseModal = (props) => {

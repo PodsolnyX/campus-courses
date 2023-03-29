@@ -1,6 +1,6 @@
 import {Button, Card, Container, ListGroup} from "react-bootstrap";
 import ListCoursesItem from "./listCoursesItem/listCoursesItem";
-import EditCourseModalContainer from "../../modals/editCourseModal/editCourseModalContainer";
+import EditCourseModalContainer from "../coursePage/modals/editCourseModal/editCourseModalContainer";
 
 const ConcreteGroupPage = (props) => {
     return (

@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
 import ListGroupItem from "./listGroupItem";
-import {openDeletePopup} from "../../../../store/reducers/modalReducers/deletePopupReducer";
-import {openGroupsModal} from "../../../../store/reducers/modalReducers/groupsModalReducer";
+import {openDeletePopup, openGroupsModal} from "../../../../store/reducers/groupsPageReducer";
 
 let mapStateToProps = (state, props) => {
     return {

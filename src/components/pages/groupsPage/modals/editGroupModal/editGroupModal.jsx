@@ -8,7 +8,7 @@ const EditGroupModal = (props) => {
 
     return (
         <Modal
-            show={props.isShow}
+            show={props.isShowModal}
             onHide={props.closeGroupsModal}
             keyboard={true}
             centered

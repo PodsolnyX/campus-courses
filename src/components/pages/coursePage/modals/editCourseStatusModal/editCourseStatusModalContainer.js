@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import EditCourseStatusModal from "./editCourseStatusModal";
 import {
     closeCourseStatusModal, editValueCourseStatusModal
-} from "../../../store/reducers/modalReducers/courseStatusReducer";
+} from "../../../../../store/reducers/modalReducers/courseStatusReducer";
 
 let mapStateToProps = (state) => {
     return {

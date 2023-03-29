@@ -4,7 +4,7 @@ const DeletePopup = (props) => {
 
     return (
         <Modal
-            show={props.isShow}
+            show={props.isShowPopup}
             onHide={props.closeDeletePopup}
             keyboard={true}
             centered

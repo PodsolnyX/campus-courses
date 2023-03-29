@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
 import DeletePopup from "./deletePopup";
-import {closeDeletePopup} from "../../../store/reducers/modalReducers/deletePopupReducer";
+import {closeDeletePopup} from "../../../../../store/reducers/groupsPageReducer";
 
 let mapStateToProps = (state) => {
     return {
-        isShow: state.deletePopup.isShow
+        isShowPopup: state.groupsPage.isShowPopup
     };
 }
 

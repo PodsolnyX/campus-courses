@@ -1,6 +1,6 @@
 import {ListGroup} from "react-bootstrap";
 import StudentTabItem from "./studentTabItem/stidentTabItem";
-import EditMarkModalContainer from "../../../../modals/editMarkModal/editMarkModalContainer";
+import EditMarkModalContainer from "../../modals/editMarkModal/editMarkModalContainer";
 
 const StudentTab = (props) => {
     return (

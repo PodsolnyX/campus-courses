@@ -1,5 +1,5 @@
 import {Button, ListGroup} from "react-bootstrap";
-import CreateNoticeModalContainer from "../../../../modals/createNoticeModal/createNoticeModalContainer";
+import CreateNoticeModalContainer from "../../modals/createNoticeModal/createNoticeModalContainer";
 
 
 const NoticeTab = (props) => {

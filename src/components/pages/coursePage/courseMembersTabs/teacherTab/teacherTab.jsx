@@ -1,6 +1,6 @@
 import {Button, ListGroup} from "react-bootstrap";
 import TeacherTabItem from "./teacherTabItem/teacherTabItem";
-import AddTeacherModalContainer from "../../../../modals/addTeacherModal/addTeacherModalContainer";
+import AddTeacherModalContainer from "../../modals/addTeacherModal/addTeacherModalContainer";
 
 const TeacherTab = (props) => {
     return (
