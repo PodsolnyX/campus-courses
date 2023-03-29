@@ -2,7 +2,6 @@ import './App.css';
 import {Route, Routes} from "react-router-dom";
 import NavBar from "./components/other/navbar/navbar";
 import MainPage from "./components/pages/mainPage/mainPage";
-import LoginPage from "./components/pages/loginPage/loginPage";
 import ProfilePage from "./components/pages/profilePage/profilePage";
 import DeletePopupContainer from "./components/pages/groupsPage/modals/deletePopup/deletePopupContainer";
 import GroupsPageContainer from "./components/pages/groupsPage/groupsPageContainer";
@@ -15,6 +14,7 @@ import CoursePageContainer from "./components/pages/coursePage/coursePageContain
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RegistrationPageContainer from "./components/pages/registrationPage/registrationPageContainer";
+import LoginPageContainer from "./components/pages/loginPage/loginPageContainer";
 
 function App() {
     return (
@@ -26,7 +26,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/registration" element={<RegistrationPageContainer/>}/>
-                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/login" element={<LoginPageContainer/>}/>
                     <Route path="/profile" element={<ProfilePage/>}/>
                     <Route path="/groups" element={<GroupsPageContainer/>}/>
                     <Route path="/groups/:id" element={<ConcreteGroupPageContainer/>}/>

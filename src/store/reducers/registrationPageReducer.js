@@ -24,7 +24,6 @@ const registrationPageReducer = (state = initialState, action) => {
                 }
             };
         case REGISTER_USER:
-            console.log(state.formData)
             return {
                 ...state
             }
