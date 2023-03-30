@@ -9,11 +9,13 @@ import groupsPageReducer from "./reducers/groupsPageReducer";
 import registrationPageReducer from "./reducers/registrationPageReducer";
 import loginPageReducer from "./reducers/loginPageReducer";
 import userReducer from "./reducers/userReducer";
+import profilePageReducer from "./reducers/profilePageReducer";
 
 let reducers = combineReducers({
     groupsPage: groupsPageReducer,
     registrationPage: registrationPageReducer,
     loginPage: loginPageReducer,
+    profilePage: profilePageReducer,
     user: userReducer,
     courseModal: courseModalReducer,
     courseStatusModal: courseStatusModalReducer,

@@ -73,11 +73,27 @@ const logoutUser = () => {
         });
 }
 
+const editUserProfile = (userData) => {
+    return instance.put("profile", {
+        fullName: userData.fullName.trimEnd(),
+        birthDate: userData.birthDate
+    })
+        .then(response => {
+            if (response.status === 200) {
+                return response.data;
+            }
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 export const userAPI = {
     registerUser: registerUser,
     loginUser: loginUser,
     getProfile: getProfile,
     getRoles: getRoles,
-    logoutUser: logoutUser
+    logoutUser: logoutUser,
+    editUserProfile: editUserProfile
 };
 

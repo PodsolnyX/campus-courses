@@ -1,7 +1,6 @@
 export const FormFIO = (props) => {
     return (
         <div>
-            <label htmlFor="" className="form-label">ФИО</label>
             <input {...props.register("name", {
                 required: "Обязательное поле",
                 pattern: {
@@ -11,7 +10,7 @@ export const FormFIO = (props) => {
             })}
                    className={`form-control ${props.errors?.name?.message ? "border-danger" : undefined}`}
                    onChange={props.onChange} placeholder={"Иванов Иван Иванович"} type="text"
-                   id="inputName" name="name"/>
+                   id="inputName" name="name" disabled={props.disabled}/>
             <div className={"text-danger"}>{props.errors?.name?.message}</div>
         </div>
     );
@@ -20,7 +19,6 @@ export const FormFIO = (props) => {
 export const FormEmail = (props) => {
     return (
         <div>
-            <label htmlFor="" className="form-label">Email</label>
             <input {...props.register("email", {
                 required: "Обязательное поле",
                 pattern: {
@@ -28,10 +26,10 @@ export const FormEmail = (props) => {
                     message: "Неправильный формат email-адреса"
                 }
             })}
-                   className={`form-control ${ props.errors?.email?.message ? "border-danger" : undefined}`}
+                   className={`form-control ${props.errors?.email?.message ? "border-danger" : undefined}`}
                    onChange={props.onChange} type="email"
                    placeholder="name@example.com" id="inputEmail" name="email"
-                   aria-describedby="email"/>
+                   aria-describedby="email" disabled={props.disabled}/>
             <div className={"text-danger"}>{props.errors?.email?.message}</div>
         </div>
     );
@@ -40,7 +38,6 @@ export const FormEmail = (props) => {
 export const FormBirthDay = (props) => {
     return (
         <div>
-            <label htmlFor="" className="form-label">Дата рождения</label>
             <input {...props.register("birthDate", {
                 required: "Обязательное поле",
                 max: {
@@ -52,10 +49,10 @@ export const FormBirthDay = (props) => {
                     message: "Вы слишком стары для этого"
                 }
             })}
-                   className={`form-control ${ props.errors?.birthDate?.message ? "border-danger" : undefined}`}
+                   className={`form-control ${props.errors?.birthDate?.message ? "border-danger" : undefined}`}
                    id="inputBirthDate" name="birthDate"
-                   onChange={props.onChange} type="date"
-                   max={new Date().toISOString().slice(0, 10)} />
+                   onChange={props.onChange} type="date" disabled={props.disabled}
+                   max={new Date().toISOString().slice(0, 10)}/>
             <div className={"text-danger"}>{props.errors?.birthDate?.message}</div>
         </div>
     );
@@ -64,7 +61,6 @@ export const FormBirthDay = (props) => {
 export const FormPassword = (props) => {
     return (
         <div>
-            <label htmlFor="" className="form-label">Пароль</label>
             <input {...props.register("password", {
                 required: "Обязательное поле",
                 minLength: {
@@ -80,8 +76,8 @@ export const FormPassword = (props) => {
                     message: "Пароль должен содержать хотя бы одну цифру"
                 }
             })}
-                   className={`form-control ${ props.errors?.password?.message ? "border-danger" : undefined}`}
-                   onChange={props.onChange} type="password"
+                   className={`form-control ${props.errors?.password?.message ? "border-danger" : undefined}`}
+                   onChange={props.onChange} type="password" disabled={props.disabled}
                    id="inputPassword" name="password"/>
             <div className={"text-danger"}>{props.errors?.password?.message}</div>
         </div>
@@ -91,7 +87,6 @@ export const FormPassword = (props) => {
 export const FormPasswordConfirm = (props) => {
     return (
         <div>
-            <label htmlFor="" className="form-label">Подтверждение пароля</label>
             <input {...props.register("passwordConfirmation", {
                 required: "Обязательное поле",
                 validate: (val) => {
@@ -100,8 +95,8 @@ export const FormPasswordConfirm = (props) => {
                     }
                 }
             })}
-                   className={`form-control ${ props.errors?.passwordConfirmation?.message ? "border-danger" : undefined}`}
-                   onChange={props.onChange} type="password"
+                   className={`form-control ${props.errors?.passwordConfirmation?.message ? "border-danger" : undefined}`}
+                   onChange={props.onChange} type="password" disabled={props.disabled}
                    id="inputPasswordConfirmation"
                    name="passwordConfirmation"/>
             <div className={"text-danger"}>{props.errors?.passwordConfirmation?.message}</div>

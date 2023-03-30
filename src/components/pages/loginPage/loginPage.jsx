@@ -2,7 +2,6 @@ import {Button, Card, Container} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {FormEmail, FormPassword} from "../../other/forms/forms";
-import {useNavigate} from "react-router-dom";
 
 const LoginPage = (props) => {
 
@@ -30,9 +29,11 @@ const LoginPage = (props) => {
                     <form className={"mt-3"} id="form-login"
                           onSubmit={handleSubmit(onSubmit)}>
                         <div>
+                            <label htmlFor="" className="form-label">Email</label>
                             <FormEmail register={register} errors={errors} onChange={onChange}/>
                         </div>
                         <div className="pt-2">
+                            <label htmlFor="" className="form-label">Пароль</label>
                             <FormPassword register={register} errors={errors} onChange={onChange}/>
                         </div>
                         <div className="pt-3">

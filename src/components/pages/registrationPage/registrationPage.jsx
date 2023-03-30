@@ -33,21 +33,26 @@ const RegistrationPage = (props) => {
                           onSubmit={handleSubmit(onSubmit)}
                     >
                         <div className="col">
+                            <label htmlFor="" className="form-label">ФИО</label>
                             <FormFIO register={register} errors={errors} onChange={onChange}/>
                         </div>
                         <div className={"row mt-2"}>
                             <div className={"col-12 col-lg-6"}>
+                                <label htmlFor="" className="form-label">Email</label>
                                 <FormEmail register={register} errors={errors} onChange={onChange}/>
                             </div>
                             <div className="col-12 col-lg-6">
+                                <label htmlFor="" className="form-label">Дата рождения</label>
                                 <FormBirthDay register={register} errors={errors} onChange={onChange}/>
                             </div>
                         </div>
                         <div className="row mt-2">
                             <div className="col-12 col-lg-6">
+                                <label htmlFor="" className="form-label">Пароль</label>
                                 <FormPassword register={register} errors={errors} onChange={onChange}/>
                             </div>
                             <div className="col-12 col-lg-6">
+                                <label htmlFor="" className="form-label">Подтверждение пароля</label>
                                 <FormPasswordConfirm register={register} errors={errors} onChange={onChange} watch={watch}/>
                             </div>
                         </div>

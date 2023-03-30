@@ -19,6 +19,7 @@ import {getUserProfile} from "./store/reducers/userReducer";
 import {useEffect} from "react";
 import NavbarContainer from "./components/other/navbar/navbarContainer";
 import PrivateRoute from "./helpers/privateRoute";
+import ProfilePageContainer from "./components/pages/profilePage/profilePageContainer";
 
 let mapStateToProps = (state) => {
     return {
@@ -51,7 +52,7 @@ function App (props) {
                     <Route path="/login"
                            element={<PrivateRoute component={<LoginPageContainer/>} unauthorized={true}/>}/>
                     <Route path="/profile"
-                           element={<PrivateRoute component={<ProfilePage/>}/>}/>
+                           element={<PrivateRoute component={<ProfilePageContainer/>}/>}/>
                     <Route path="/groups"
                            element={<PrivateRoute component={<GroupsPageContainer/>}/>}/>
                     <Route path="/groups/:id"
