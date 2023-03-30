@@ -70,6 +70,14 @@ export const FormPassword = (props) => {
                 minLength: {
                     value: 6,
                     message: "Длина пароля должна быть более 6 символов"
+                },
+                maxLength: {
+                    value: 32,
+                    message: "Пароль слишком длинный, Вы перестарались"
+                },
+                pattern: {
+                    value: /\d/,
+                    message: "Пароль должен содержать хотя бы одну цифру"
                 }
             })}
                    className={`form-control ${ props.errors?.password?.message ? "border-danger" : undefined}`}

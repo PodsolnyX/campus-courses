@@ -1,6 +1,5 @@
 import './App.css';
-import {Route, Routes} from "react-router-dom";
-import NavBar from "./components/other/navbar/navbar";
+import {Route, Routes, Navigate} from "react-router-dom";
 import MainPage from "./components/pages/mainPage/mainPage";
 import ProfilePage from "./components/pages/profilePage/profilePage";
 import DeletePopupContainer from "./components/pages/groupsPage/modals/deletePopup/deletePopupContainer";
@@ -11,28 +10,58 @@ import TaughtCoursesPage from "./components/pages/taughtCoursesPage/taughtCourse
 import NotFoundPage from "./components/pages/notFoundPage/notFoundPage";
 import Footer from "./components/other/footer/footer";
 import CoursePageContainer from "./components/pages/coursePage/coursePageContainer";
-import { ToastContainer} from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RegistrationPageContainer from "./components/pages/registrationPage/registrationPageContainer";
 import LoginPageContainer from "./components/pages/loginPage/loginPageContainer";
+import {connect} from "react-redux";
+import {getUserProfile} from "./store/reducers/userReducer";
+import {useEffect} from "react";
+import NavbarContainer from "./components/other/navbar/navbarContainer";
+import PrivateRoute from "./helpers/privateRoute";
 
-function App() {
+let mapStateToProps = (state) => {
+    return {
+        isAuth: state.user.isAuth
+    };
+}
+
+export default connect(mapStateToProps, {
+    getUserProfile
+})(App);
+
+function App (props) {
+
+    useEffect(() => {
+        if (props.isAuth)
+            props.getUserProfile();
+    }, []);
+
     return (
         <div className="App">
-            <NavBar/>
+            <NavbarContainer/>
             <DeletePopupContainer/>
             <ToastContainer/>
             <div className={"content"}>
                 <Routes>
-                    <Route path="/" element={<MainPage/>}/>
-                    <Route path="/registration" element={<RegistrationPageContainer/>}/>
-                    <Route path="/login" element={<LoginPageContainer/>}/>
-                    <Route path="/profile" element={<ProfilePage/>}/>
-                    <Route path="/groups" element={<GroupsPageContainer/>}/>
-                    <Route path="/groups/:id" element={<ConcreteGroupPageContainer/>}/>
-                    <Route path="/courses/my" element={<UserCoursesPage/>}/>
-                    <Route path="/courses/teaching" element={<TaughtCoursesPage/>}/>
-                    <Route path="/courses/:id" element={<CoursePageContainer/>}/>
+                    <Route path="/"
+                           element={<PrivateRoute component={<MainPage/>}/>}/>
+                    <Route path="/registration"
+                           element={<PrivateRoute component={<RegistrationPageContainer/>} unauthorized={true}/>}/>
+                    <Route path="/login"
+                           element={<PrivateRoute component={<LoginPageContainer/>} unauthorized={true}/>}/>
+                    <Route path="/profile"
+                           element={<PrivateRoute component={<ProfilePage/>}/>}/>
+                    <Route path="/groups"
+                           element={<PrivateRoute component={<GroupsPageContainer/>}/>}/>
+                    <Route path="/groups/:id"
+                           element={<PrivateRoute component={<ConcreteGroupPageContainer/>}/>}/>
+                    <Route path="/courses/my"
+                           element={<PrivateRoute component={<UserCoursesPage/>} role={["IsStudent"]}/>}/>
+                    <Route path="/courses/teaching"
+                           element={<PrivateRoute component={<TaughtCoursesPage/>} role={["IsTeacher"]}/>}/>
+                    <Route path="/courses/:id"
+                           element={<PrivateRoute component={<CoursePageContainer/>}/>}/>
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>
             </div>
@@ -41,4 +70,6 @@ function App() {
     );
 }
 
-export default App;
+
+
+

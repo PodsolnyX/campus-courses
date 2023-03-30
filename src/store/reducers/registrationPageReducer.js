@@ -1,10 +1,13 @@
+import {userAPI} from "../../api/userAPI";
+import {toastSuccess} from "../../helpers/toaster";
+import {setIsAuth, setUserProfile} from "./userReducer";
+
 const
-    SET_REGISTRATION_FORM_DATA = "SET_REGISTRATION_FORM_DATA",
-    REGISTER_USER = "REGISTER_USER"
+    SET_REGISTRATION_FORM_DATA = "SET_REGISTRATION_FORM_DATA"
 ;
 
 let initialState = {
-    formData : {
+    formData: {
         name: "",
         email: "",
         birthDate: "",
@@ -20,19 +23,26 @@ const registrationPageReducer = (state = initialState, action) => {
                 ...state,
                 formData: {
                     ...state.formData,
-                    [action.keyValue] : action.value
+                    [action.keyValue]: action.value
                 }
             };
-        case REGISTER_USER:
-            return {
-                ...state
-            }
         default:
             return state;
     }
 }
 
 export const setRegistrationFormData = (keyValue, value) => ({type: SET_REGISTRATION_FORM_DATA, keyValue, value});
-export const registerUser = () => ({type: REGISTER_USER});
+
+export const registerUser = () => (dispatch, getState) => {
+    userAPI.registerUser(getState().registrationPage.formData).then(data => {
+        if (data) {
+            localStorage.setItem('token', data.token);
+            toastSuccess("Вы успешно зарегистрировались!");
+            dispatch(setIsAuth());
+            userAPI.getProfile().then(data => dispatch(setUserProfile(data)));
+        }
+    });
+
+}
 
 export default registrationPageReducer;

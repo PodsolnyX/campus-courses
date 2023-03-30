@@ -1,6 +1,9 @@
+import {userAPI} from "../../api/userAPI";
+import {toastSuccess} from "../../helpers/toaster";
+import {setIsAuth, setUserProfile} from "./userReducer";
+
 const
-    SET_LOGIN_FORM_DATA = "SET_LOGIN_FORM_DATA",
-    LOGIN_USER = "REGISTER_USER"
+    SET_LOGIN_FORM_DATA = "SET_LOGIN_FORM_DATA"
 ;
 
 let initialState = {
@@ -20,17 +23,22 @@ const loginPageReducer = (state = initialState, action) => {
                     [action.keyValue] : action.value
                 }
             };
-        case LOGIN_USER:
-            console.log(state.formData)
-            return {
-                ...state
-            }
         default:
             return state;
     }
 }
 
 export const setLoginFormData = (keyValue, value) => ({type: SET_LOGIN_FORM_DATA, keyValue, value});
-export const loginUser = () => ({type: LOGIN_USER});
+export const loginUser = () => (dispatch, getState) => {
+    userAPI.loginUser(getState().loginPage.formData).then(data => {
+        if (data) {
+            localStorage.setItem('token', data.token);
+            dispatch(setIsAuth());
+            userAPI.getProfile().then(data => dispatch(setUserProfile(data)));
+            toastSuccess("Вы успешно авторизовались!")
+        }
+    });
+
+}
 
 export default loginPageReducer;

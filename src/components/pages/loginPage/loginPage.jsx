@@ -2,6 +2,7 @@ import {Button, Card, Container} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {FormEmail, FormPassword} from "../../other/forms/forms";
+import {useNavigate} from "react-router-dom";
 
 const LoginPage = (props) => {
 
@@ -18,7 +19,7 @@ const LoginPage = (props) => {
     }
 
     const onChange = (e) => {
-        props.setLoginFormData(e.target.name, e.target.value.trimEnd())
+        props.setLoginFormData(e.target.name, e.target.value.trimEnd());
     }
 
     return (

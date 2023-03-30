@@ -5,9 +5,9 @@ export const toastSuccess = (text) => {
 }
 
 export const toastInfo = (text) => {
-    toast.info(text, {autoClose: 10000, closeButton: true, transition: Slide});
+    toast.info(text, {autoClose: false, closeButton: true, transition: Slide});
 }
 
 export const toastError = (text) => {
-    toast.error(text, {autoClose: 3000, closeButton: false, transition: Slide});
+    toast.error(text, {autoClose: false, closeButton: true, transition: Slide});
 }
