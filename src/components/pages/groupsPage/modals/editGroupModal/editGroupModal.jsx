@@ -25,7 +25,7 @@ const EditGroupModal = (props) => {
                     <label htmlFor="" className="form-label">Название группы</label>
                     <input type="text" className="form-control" id="inputGroup"
                            onChange={onInputChange}
-                           name="groupName" value={props.value}/>
+                           name="groupName" value={props.currentGroup.name}/>
                 </div>
             </Modal.Body>
             <Modal.Footer>

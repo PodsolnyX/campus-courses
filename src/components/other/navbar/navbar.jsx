@@ -24,13 +24,13 @@ const NavBar = (props) => {
                                 </NavLink> : undefined
                         }
                         {
-                            props.isAuth && props.userRoles["IsStudent"] === true ?
+                            props.isAuth && props.userRoles["isStudent"] === true ?
                                 <NavLink className={({isActive}) => isActive ? s.activeLink : s.nonActiveLink}
                                          to={"/courses/my"}>Мои курсы
                                 </NavLink> : undefined
                         }
                         {
-                            props.isAuth && props.userRoles["IsTeacher"] === true ?
+                            props.isAuth && props.userRoles["isTeacher"] === true ?
                                 <NavLink className={({isActive}) => isActive ? s.activeLink : s.nonActiveLink}
                                          to={"/courses/teaching"}>Преподаваемые курсы
                                 </NavLink> : undefined

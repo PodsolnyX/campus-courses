@@ -1,11 +1,16 @@
 import {connect} from "react-redux";
 import GroupsPage from "./groupsPage";
-import {openGroupsModal} from "../../../store/reducers/groupsPageReducer";
+import {getGroups, openGroupsModal} from "../../../store/reducers/groupsPageReducer";
 
 let mapStateToProps = (state) => {
-    return {};
+    return {
+        groups: state.groupsPage.groups,
+        isLoading: state.groupsPage.isLoading,
+        userRoles: state.user.userRoles
+    };
 }
 
 export default connect(mapStateToProps, {
-    openGroupsModal
+    openGroupsModal,
+    getGroups
 })(GroupsPage);

@@ -58,9 +58,9 @@ function App (props) {
                     <Route path="/groups/:id"
                            element={<PrivateRoute component={<ConcreteGroupPageContainer/>}/>}/>
                     <Route path="/courses/my"
-                           element={<PrivateRoute component={<UserCoursesPage/>} role={["IsStudent"]}/>}/>
+                           element={<PrivateRoute component={<UserCoursesPage/>} role={["isStudent"]}/>}/>
                     <Route path="/courses/teaching"
-                           element={<PrivateRoute component={<TaughtCoursesPage/>} role={["IsTeacher"]}/>}/>
+                           element={<PrivateRoute component={<TaughtCoursesPage/>} role={["isTeacher"]}/>}/>
                     <Route path="/courses/:id"
                            element={<PrivateRoute component={<CoursePageContainer/>}/>}/>
                     <Route path="*" element={<NotFoundPage/>}/>

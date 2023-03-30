@@ -6,7 +6,7 @@ let mapStateToProps = (state) => {
     return {
         isShowModal: state.groupsPage.isShowModal,
         isEdit: state.groupsPage.isEdit,
-        value: state.groupsPage.value
+        currentGroup: state.groupsPage.currentGroup
     };
 }
 

@@ -1,26 +1,42 @@
+import {groupsAPI} from "../../api/groupsAPI";
+
 const
     OPEN_GROUPS_MODAL = "OPEN_GROUPS_MODAL",
+    SET_GROUPS = "SET_GROUPS",
     CLOSE_GROUPS_MODAL = "CLOSE_GROUPS_MODAL",
     EDIT_VALUE_GROUPS_MODAL = "EDIT_VALUE_GROUPS_MODAL",
     OPEN_DELETE_POPUP = "OPEN_DELETE_POPUP",
-    CLOSE_DELETE_POPUP = "CLOSE_DELETE_POPUP"
+    CLOSE_DELETE_POPUP = "CLOSE_DELETE_POPUP",
+    SET_LOADING_GROUPS = "SET_LOADING_GROUPS"
 ;
 
 let initialState = {
     isShowModal: false,
     isShowPopup: false,
     isEdit: false,
-    value: ""
+    currentGroup: {},
+    groups: [],
+    isLoading: false
 };
 
 const groupsPageReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_GROUPS:
+            return {
+                ...state,
+                groups: action.data
+            };
+        case SET_LOADING_GROUPS:
+            return {
+                ...state,
+                isLoading: action.isLoading
+            };
         case OPEN_GROUPS_MODAL:
             return {
                 ...state,
                 isShowModal: true,
                 isEdit: action.isEdit,
-                value: action.value
+                currentGroup: action.data
             };
         case CLOSE_GROUPS_MODAL:
             return {
@@ -47,11 +63,22 @@ const groupsPageReducer = (state = initialState, action) => {
     }
 }
 
-export const openGroupsModal = (value, isEdit) => ({type: OPEN_GROUPS_MODAL, value, isEdit});
+export const openGroupsModal = (data, isEdit) => ({type: OPEN_GROUPS_MODAL, data, isEdit});
 export const closeGroupsModal = () => ({type: CLOSE_GROUPS_MODAL});
 export const editValueGroupsModal = (value) => ({type: EDIT_VALUE_GROUPS_MODAL, value})
 
 export const openDeletePopup = () => ({type: OPEN_DELETE_POPUP});
 export const closeDeletePopup = () => ({type: CLOSE_DELETE_POPUP});
+
+export const setGroups = (data) => ({type: SET_GROUPS, data});
+export const setLoadingGroups = (isLoading) => ({type: SET_LOADING_GROUPS, isLoading});
+
+export const getGroups = () => (dispatch) => {
+    dispatch(setLoadingGroups(true));
+    groupsAPI.getGroups().then(data => {
+        if (data) dispatch(setGroups(data));
+        dispatch(setLoadingGroups(false));
+    })
+}
 
 export default groupsPageReducer;

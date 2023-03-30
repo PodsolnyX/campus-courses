@@ -5,7 +5,8 @@ import {openDeletePopup, openGroupsModal} from "../../../../store/reducers/group
 let mapStateToProps = (state, props) => {
     return {
         title: props.title,
-        isEdit: props.isEdit
+        isEdit: props.isEdit,
+        data: props.data
     };
 }
 

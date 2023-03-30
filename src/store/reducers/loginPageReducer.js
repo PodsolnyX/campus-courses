@@ -1,6 +1,6 @@
 import {userAPI} from "../../api/userAPI";
 import {toastSuccess} from "../../helpers/toaster";
-import {setIsAuth, setUserProfile} from "./userReducer";
+import {setIsAuth, setUserProfile, setUserRoles} from "./userReducer";
 
 const
     SET_LOGIN_FORM_DATA = "SET_LOGIN_FORM_DATA"
@@ -35,6 +35,7 @@ export const loginUser = () => (dispatch, getState) => {
             localStorage.setItem('token', data.token);
             dispatch(setIsAuth());
             userAPI.getProfile().then(data => dispatch(setUserProfile(data)));
+            userAPI.getRoles().then(data => dispatch(setUserRoles(data)))
             toastSuccess("Вы успешно авторизовались!")
         }
     });
