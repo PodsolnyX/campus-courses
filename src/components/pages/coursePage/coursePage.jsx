@@ -11,8 +11,6 @@ const CoursePage = (props) => {
         props.getCourseDetails(props.router.params.id);
     }, [])
 
-    console.log(props)
-
     return (
         <Container className={"col"}>
             <div className="col-12 col-lg-10 mx-auto mt-5">

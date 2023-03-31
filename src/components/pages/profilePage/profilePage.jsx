@@ -28,6 +28,11 @@ const ProfilePage = (props) => {
         props.setProfileFormData(key, e.target.value);
     }
 
+    const onSave = () => {
+        if(Object.entries(errors).length === 0)
+            props.saveProfileData();
+    }
+
     return (
         <Container className={"col"}>
             <Card className="col-12 col-md-10 col-lg-8 mx-auto mt-5">
@@ -39,7 +44,7 @@ const ProfilePage = (props) => {
                             <LoadSpinner/>
                             :
                             <form className={"mt-5 ms-3 me-3"}
-                                  onSubmit={handleSubmit(props.saveProfileData)}
+                                  onSubmit={handleSubmit(onSave)}
                             >
                                 <div className="row">
                                     <label htmlFor="" className="col-4 form-label">ФИО</label>
@@ -60,7 +65,7 @@ const ProfilePage = (props) => {
                                 <div className="mt-3 d-flex justify-content-end">
                                     {
                                         props.isEdit ?
-                                            <Button variant={"outline-primary"} onClick={props.saveProfileData}>
+                                            <Button variant={"outline-primary"} onClick={onSave}>
                                                 Сохранить
                                             </Button>
                                             :

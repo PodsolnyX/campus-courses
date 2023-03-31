@@ -21,7 +21,8 @@ const GroupsPage = (props) => {
                         <h3>Группы кампусных курсов</h3>
                         {
                             isEdit ?
-                                <Button variant={"outline-primary"} onClick={() => props.openGroupsModal({}, false)}
+                                <Button variant={"outline-primary"}
+                                        onClick={() => props.openGroupsModal({name: ""}, false)}
                                 >Создать группу</Button>
                                 : undefined
                         }

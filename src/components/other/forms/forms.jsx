@@ -104,6 +104,20 @@ export const FormPasswordConfirm = (props) => {
     );
 }
 
+export const FormGroupName = (props) => {
+    return (
+        <div>
+            <input {...props.register("groupName", {
+                required: "Обязательное поле",
+            })}
+                   className={`form-control ${props.errors?.groupName?.message ? "border-danger" : undefined}`}
+                   onChange={props.onChange} type="text" id={"inputGroupName"}
+                   name="groupName" disabled={props.disabled}/>
+            <div className={"text-danger"}>{props.errors?.groupName?.message}</div>
+        </div>
+    );
+}
+
 
 
 

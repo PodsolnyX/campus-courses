@@ -1,8 +1,11 @@
 import {Spinner} from "react-bootstrap";
 
-const LoadSpinner = () => {
+const LoadSpinner = (props) => {
+
+    const marginX = props.marginX ? props.marginX : 5;
+
     return (
-        <div className={"d-flex mt-5 mb-5"}>
+        <div className={`d-flex mt-${marginX} mb-${marginX}`}>
             <Spinner className={"mx-auto"} animation="border"/>
         </div>
     );

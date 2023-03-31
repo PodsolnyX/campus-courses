@@ -34,9 +34,12 @@ const ConcreteGroupPage = (props) => {
                                 :
                                 <ListGroup variant="flush">
                                     {
-                                        props.groupCourses.map(course =>
-                                            <ListCoursesItem data={course} key={course.id}/>
-                                        )
+                                        props.groupCourses.length === 0
+                                            ?
+                                            <div className={"text-secondary mx-auto my-3"}>В данной группе ещё нет курсов</div>
+                                            :
+                                            props.groupCourses.map(course =>
+                                                <ListCoursesItem data={course} key={course.id}/>)
                                     }
                                 </ListGroup>
                         }

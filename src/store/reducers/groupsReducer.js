@@ -1,14 +1,16 @@
 import {groupsAPI} from "../../api/groupsAPI";
+import {toastSuccess} from "../../helpers/toaster";
 
 const
     OPEN_GROUPS_MODAL = "OPEN_GROUPS_MODAL",
     SET_GROUPS = "SET_GROUPS",
     SET_GROUP_COURSES = "SET_GROUP_COURSES",
     CLOSE_GROUPS_MODAL = "CLOSE_GROUPS_MODAL",
-    EDIT_VALUE_GROUPS_MODAL = "EDIT_VALUE_GROUPS_MODAL",
+    EDIT_NAME_GROUPS_MODAL = "EDIT_NAME_GROUPS_MODAL",
     OPEN_DELETE_POPUP = "OPEN_DELETE_POPUP",
     CLOSE_DELETE_POPUP = "CLOSE_DELETE_POPUP",
-    SET_LOADING_GROUPS = "SET_LOADING_GROUPS"
+    SET_LOADING_GROUPS = "SET_LOADING_GROUPS",
+    SET_LOADING_MODAL_GROUPS = "SET_LOADING_MODAL_GROUPS"
 ;
 
 let initialState = {
@@ -18,7 +20,8 @@ let initialState = {
     currentGroup: {},
     groups: [],
     groupCourses: [],
-    isLoading: false
+    isLoading: false,
+    isLoadingModal: false
 };
 
 const groupsReducer = (state = initialState, action) => {
@@ -38,6 +41,11 @@ const groupsReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: action.isLoading
             };
+        case SET_LOADING_MODAL_GROUPS:
+            return {
+                ...state,
+                isLoadingModal: action.isLoading
+            };
         case OPEN_GROUPS_MODAL:
             return {
                 ...state,
@@ -50,15 +58,19 @@ const groupsReducer = (state = initialState, action) => {
                 ...state,
                 isShowModal: false
             };
-        case EDIT_VALUE_GROUPS_MODAL:
+        case EDIT_NAME_GROUPS_MODAL:
             return {
                 ...state,
-                value: action.value
+                currentGroup: {
+                    ...state.currentGroup,
+                    name: action.name
+                }
             };
         case OPEN_DELETE_POPUP:
             return {
                 ...state,
-                isShowPopup: true
+                isShowPopup: true,
+                currentGroup: action.data
             };
         case CLOSE_DELETE_POPUP:
             return {
@@ -72,14 +84,15 @@ const groupsReducer = (state = initialState, action) => {
 
 export const openGroupsModal = (data, isEdit) => ({type: OPEN_GROUPS_MODAL, data, isEdit});
 export const closeGroupsModal = () => ({type: CLOSE_GROUPS_MODAL});
-export const editValueGroupsModal = (value) => ({type: EDIT_VALUE_GROUPS_MODAL, value})
+export const editNameGroupsModal = (name) => ({type: EDIT_NAME_GROUPS_MODAL, name})
 
-export const openDeletePopup = () => ({type: OPEN_DELETE_POPUP});
+export const openDeletePopup = (data) => ({type: OPEN_DELETE_POPUP, data});
 export const closeDeletePopup = () => ({type: CLOSE_DELETE_POPUP});
 
 export const setGroups = (data) => ({type: SET_GROUPS, data});
 export const setGroupCourses = (data) => ({type: SET_GROUP_COURSES, data})
 export const setLoadingGroups = (isLoading) => ({type: SET_LOADING_GROUPS, isLoading});
+export const setLoadingModalGroups = (isLoading) => ({type: SET_LOADING_MODAL_GROUPS, isLoading});
 
 export const getGroups = () => (dispatch) => {
     dispatch(setLoadingGroups(true));
@@ -94,6 +107,44 @@ export const getGroupCourses = (id) => (dispatch) => {
     groupsAPI.getGroupCourses(id).then(data => {
         if (data) dispatch(setGroupCourses(data));
         dispatch(setLoadingGroups(false));
+    })
+}
+
+export const createGroup = () => (dispatch, getState) => {
+    dispatch(setLoadingModalGroups(true));
+    groupsAPI.createGroup(getState().groupsPage.currentGroup.name).then(data => {
+        if (data) {
+            dispatch(closeGroupsModal());
+            toastSuccess("Группа успешно создана");
+            dispatch(getGroups());
+        }
+        dispatch(setLoadingModalGroups(false));
+    })
+}
+
+export const editGroup = () => (dispatch, getState) => {
+    dispatch(setLoadingModalGroups(true));
+    groupsAPI.editGroup(getState().groupsPage.currentGroup.id,
+        getState().groupsPage.currentGroup.name)
+        .then(data => {
+            if (data) {
+                dispatch(closeGroupsModal());
+                toastSuccess("Группа успешно изменена");
+                dispatch(getGroups());
+            }
+            dispatch(setLoadingModalGroups(false));
+        })
+}
+
+export const deleteGroup = () => (dispatch, getState) => {
+    dispatch(setLoadingModalGroups(true));
+    groupsAPI.deleteGroup(getState().groupsPage.currentGroup.id).then(data => {
+        if (data === 200) {
+            dispatch(closeDeletePopup());
+            toastSuccess("Группа успешно удалена");
+            dispatch(getGroups());
+        }
+        dispatch(setLoadingModalGroups(false));
     })
 }
 

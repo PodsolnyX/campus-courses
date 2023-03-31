@@ -17,7 +17,7 @@ const registerUser = (userData) => {
 
         })
         .catch(error => {
-            if (error.response.data.DuplicateUserName)
+            if (error.response.status === 409)
                 toastError("Аккаунт с данным email-адресом уже существует")
             else
                 toastError("Неверный формат данных")

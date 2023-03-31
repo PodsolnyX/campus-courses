@@ -17,7 +17,9 @@ const ListGroupItem = (props) => {
                                   onClick={() => props.openGroupsModal(props.data, true)}>
                               Изменить
                           </Button>
-                          <Button variant={"outline-danger"} onClick={props.openDeletePopup}>Удалить</Button>
+                          <Button variant={"outline-danger"} onClick={() => props.openDeletePopup(props.data)}>
+                              Удалить
+                          </Button>
                       </div>
                       :
                       undefined

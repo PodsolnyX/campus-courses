@@ -23,7 +23,44 @@ const getGroupCourses = (id) => {
         });
 }
 
+const createGroup = (name) => {
+    return instance.post(`groups`, {
+        name: name
+    })
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
+const editGroup = (id, name) => {
+    return instance.put(`groups/${id}`, {
+        name: name
+    })
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
+const deleteGroup = (id) => {
+    return instance.delete(`groups/${id}`)
+        .then(response => {
+            if (response.status === 200) return 200;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 export const groupsAPI = {
     getGroups: getGroups,
-    getGroupCourses: getGroupCourses
+    getGroupCourses: getGroupCourses,
+    createGroup: createGroup,
+    editGroup: editGroup,
+    deleteGroup: deleteGroup
 };
