@@ -2,6 +2,7 @@ import {Button, Card, Container, Spinner} from "react-bootstrap";
 import {useEffect} from "react";
 import {FormBirthDay, FormFIO} from "../../other/forms/forms";
 import {useForm} from "react-hook-form";
+import LoadSpinner from "../../other/loadSpinner/loadSpinner";
 
 const ProfilePage = (props) => {
 
@@ -35,9 +36,7 @@ const ProfilePage = (props) => {
                     {
                         props.isLoading
                             ?
-                            <div className={"d-flex mt-5 mb-5"}>
-                                <Spinner className={"mx-auto"} animation="border" />
-                            </div>
+                            <LoadSpinner/>
                             :
                             <form className={"mt-5 ms-3 me-3"}
                                   onSubmit={handleSubmit(props.saveProfileData)}

@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
-import {openCourseStatusModal} from "../../../../store/reducers/modalReducers/courseStatusReducer";
-import CourseInfo from "./courseInfo";
+import CourseMembersTabs from "./courseMembersTabs";
 
 let mapStateToProps = (state) => {
     return {
@@ -10,5 +9,4 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    openCourseStatusModal
-})(CourseInfo);
+})(CourseMembersTabs);

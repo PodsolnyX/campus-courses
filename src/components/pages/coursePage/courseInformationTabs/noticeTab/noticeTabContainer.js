@@ -4,6 +4,7 @@ import {openNoticeModal} from "../../../../../store/reducers/modalReducers/notic
 
 let mapStateToProps = (state) => {
     return {
+        notifications: state.coursePage.course.notifications
     };
 }
 

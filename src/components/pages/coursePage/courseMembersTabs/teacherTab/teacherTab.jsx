@@ -4,14 +4,17 @@ import AddTeacherModalContainer from "../../modals/addTeacherModal/addTeacherMod
 
 const TeacherTab = (props) => {
     return (
-        <div className={"border-bottom border-end border-start border-1 p-3"}>
+        <div>
             <AddTeacherModalContainer/>
             <Button variant={"outline-primary"} className={"mb-3"} onClick={props.openTeacherModal}>
                 Добавить преподавателя
             </Button>
             <ListGroup variant={"flush"}>
-                <TeacherTabItem variant={1}/>
-                <TeacherTabItem/>
+                {
+                    props.teachers?.map(t =>
+                        <TeacherTabItem data={t} key={t.email}/>
+                    )
+                }
             </ListGroup>
         </div>
     );

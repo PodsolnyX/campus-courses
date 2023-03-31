@@ -10,9 +10,11 @@ import registrationPageReducer from "./reducers/registrationPageReducer";
 import loginPageReducer from "./reducers/loginPageReducer";
 import userReducer from "./reducers/userReducer";
 import profilePageReducer from "./reducers/profilePageReducer";
+import coursesReducer from "./reducers/coursesReducer";
 
 let reducers = combineReducers({
     groupsPage: groupsReducer,
+    coursePage: coursesReducer,
     registrationPage: registrationPageReducer,
     loginPage: loginPageReducer,
     profilePage: profilePageReducer,

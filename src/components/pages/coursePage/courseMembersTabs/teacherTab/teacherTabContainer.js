@@ -4,6 +4,7 @@ import {openTeacherModal} from "../../../../../store/reducers/modalReducers/teac
 
 let mapStateToProps = (state) => {
     return {
+        teachers: state.coursePage.course.teachers,
     };
 }
 

@@ -3,18 +3,21 @@ import CreateNoticeModalContainer from "../../modals/createNoticeModal/createNot
 
 
 const NoticeTab = (props) => {
-    const arrNot = ["Уведомление1", "Уведомление3", "Уведомление3", "Уведомление3", "Уведомление3", "Уведомление3", "Уведомление3"]
+
     return (
         <div className={"border-bottom border-end border-start border-1 p-3"}>
             <CreateNoticeModalContainer/>
             <Button variant={"outline-primary"} onClick={props.openNoticeModal}>
                 Создать уведомление</Button>
             <ListGroup variant="flush" className={"mt-3"} style={{maxHeight:"200px", overflowY: "auto"}}>
-                <ListGroup.Item variant={"danger"}>Важное уведомление</ListGroup.Item>
                 {
-                    arrNot.map((not, i) =>
-                        <ListGroup.Item key={i}>{not}</ListGroup.Item>
-                    )
+                    props.notifications?.length === 0 ?
+                        <div className={"text-secondary mx-auto mb-3"}>Уведомлений нет</div>
+                        : props.notifications?.map((not, i) =>
+                            <ListGroup.Item variant={not.isImportant ? "danger" : undefined} key={i}>
+                                {not.text}
+                            </ListGroup.Item>
+                        )
                 }
             </ListGroup>
         </div>

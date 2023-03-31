@@ -10,6 +10,7 @@ instance.interceptors.response.use(response => response,
     error => {
         if (error.response?.status === 401) {
             localStorage.removeItem('token');
+            window.location.pathname = "/login";
             clearUserProfile();
         }
         return Promise.reject(error);

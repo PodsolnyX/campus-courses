@@ -4,6 +4,7 @@ import {openMarkModal} from "../../../../../store/reducers/modalReducers/markMod
 
 let mapStateToProps = (state) => {
     return {
+        students: state.coursePage.course.students
     };
 }
 

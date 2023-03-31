@@ -2,6 +2,7 @@ import {Button, Card, Container, ListGroup, Spinner} from "react-bootstrap";
 import ListCoursesItem from "./listCoursesItem/listCoursesItem";
 import EditCourseModalContainer from "../coursePage/modals/editCourseModal/editCourseModalContainer";
 import {useEffect} from "react";
+import LoadSpinner from "../../other/loadSpinner/loadSpinner";
 
 const ConcreteGroupPage = (props) => {
 
@@ -29,9 +30,7 @@ const ConcreteGroupPage = (props) => {
                     <Card className={"mt-4"}>
                         {
                             props.isLoading ?
-                                <div className={"d-flex mt-5 mb-5"}>
-                                    <Spinner className={"mx-auto"} animation="border"/>
-                                </div>
+                                <LoadSpinner/>
                                 :
                                 <ListGroup variant="flush">
                                     {

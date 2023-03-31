@@ -1,8 +1,9 @@
 import {Tab, Tabs} from "react-bootstrap";
 import TeacherTabContainer from "./teacherTab/teacherTabContainer";
 import StudentTabContainer from "./studentTab/studentTabContainer";
+import LoadSpinner from "../../../other/loadSpinner/loadSpinner";
 
-const CourseMembersTabs = () => {
+const CourseMembersTabs = (props) => {
     return (
         <div className="mt-4 mb-5">
             <Tabs
@@ -11,10 +12,16 @@ const CourseMembersTabs = () => {
                 justify
             >
                 <Tab eventKey="teachers" title="Преподаватели">
-                    <TeacherTabContainer/>
+                    <div className={"border-bottom border-end border-start border-1 p-3"}>
+                        <TeacherTabContainer/>
+                    </div>
                 </Tab>
                 <Tab eventKey="students" title="Студенты">
-                    <StudentTabContainer/>
+                    <div className={"border-bottom border-end border-start border-1 p-3"}>
+                        {
+                            props.isLoading ? <LoadSpinner/> : <StudentTabContainer/>
+                        }
+                    </div>
                 </Tab>
             </Tabs>
         </div>

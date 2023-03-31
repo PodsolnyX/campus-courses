@@ -8,7 +8,7 @@ const getCourseDetails = (id) => {
         })
         .catch(error => {
             if (error.response.status === 404)
-                toastError("Данный курс не найдена")
+                toastError("Данный курс не найден")
             else toastError("Что-то пошло не так")
         });
 }

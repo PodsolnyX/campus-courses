@@ -1,24 +1,37 @@
 import {Button, Container} from "react-bootstrap";
-import CourseInformationTabs from "./courseInformationTabs/courseInformationTabs";
-import CourseMembersTabs from "./courseMembersTabs/courseMembersTabs";
 import EditCourseModalContainer from "./modals/editCourseModal/editCourseModalContainer";
 import CourseInfoContainer from "./courseInfo/courseInfoContainer";
+import {useEffect} from "react";
+import CourseInfoTabsContainer from "./courseInformationTabs/courseInfoTabsContainer";
+import CourseMembersTabsContainer from "./courseMembersTabs/courseMembersTabsContainer";
 
 const CoursePage = (props) => {
+
+    useEffect(() => {
+        props.getCourseDetails(props.router.params.id);
+    }, [])
+
+    console.log(props)
+
     return (
         <Container className={"col"}>
             <div className="col-12 col-lg-10 mx-auto mt-5">
-                <div className={"d-flex justify-content-between"}>
+                <div>
                     <EditCourseModalContainer/>
-                    <h3>BIGDATA: ПРОГРАММНЫЕ МЕТОДЫ С PYTHON3</h3>
-                    <div>
-                        <Button variant={"outline-warning"} onClick={props.openCourseModal}>
-                            Редактировать данные</Button>
-                    </div>
+                    {
+                        props.isLoading ? undefined :
+                            <div className={"d-flex justify-content-between"}>
+                                <h3>{props.course?.name?.toUpperCase()}</h3>
+                                <div>
+                                    <Button variant={"outline-warning"} onClick={props.openCourseModal}>
+                                        Редактировать данные</Button>
+                                </div>
+                            </div>
+                    }
                 </div>
                 <CourseInfoContainer/>
-                <CourseInformationTabs/>
-                <CourseMembersTabs/>
+                <CourseInfoTabsContainer/>
+                <CourseMembersTabsContainer/>
             </div>
         </Container>
     );

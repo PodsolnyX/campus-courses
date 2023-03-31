@@ -18,7 +18,7 @@ import {connect} from "react-redux";
 import {getUserProfile} from "./store/reducers/userReducer";
 import {useEffect} from "react";
 import NavbarContainer from "./components/other/navbar/navbarContainer";
-import PrivateRoute from "./helpers/privateRoute";
+import PrivateRoute from "./hoc/privateRoute";
 import ProfilePageContainer from "./components/pages/profilePage/profilePageContainer";
 
 let mapStateToProps = (state) => {

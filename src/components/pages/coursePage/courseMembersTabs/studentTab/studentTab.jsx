@@ -4,12 +4,16 @@ import EditMarkModalContainer from "../../modals/editMarkModal/editMarkModalCont
 
 const StudentTab = (props) => {
     return (
-        <div className={"border-bottom border-end border-start border-1 p-3"}>
+        <div>
             <EditMarkModalContainer/>
             <ListGroup variant={"flush"}>
-                <StudentTabItem variant={1} openMarkModal={props.openMarkModal}/>
-                <StudentTabItem variant={2} openMarkModal={props.openMarkModal}/>
-                <StudentTabItem variant={3} openMarkModal={props.openMarkModal}/>
+                {
+                    props.students?.length === 0 ?
+                        <div className={"text-secondary mx-auto my-3"}>Заявок студентов нет</div>
+                    : props.students?.map(s =>
+                        <StudentTabItem data={s} openMarkModal={props.openMarkModal} key={s.id}/>
+                    )
+                }
             </ListGroup>
         </div>
     );
