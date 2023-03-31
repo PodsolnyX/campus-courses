@@ -8,7 +8,7 @@ const ListGroupItem = (props) => {
       <ListGroup.Item>
           <div className={"row"}>
               <div className={"col my-2"} >
-                  <Link to={`/groups/${props.data.id}?name=${props.data.name}`}>{props.data.name}</Link>
+                  <Link to={`/groups/${props.data.id}`}>{props.data.name}</Link>
               </div>
               {
                   props.isEdit ?

@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import DeletePopup from "./deletePopup";
-import {closeDeletePopup} from "../../../../../store/reducers/groupsPageReducer";
+import {closeDeletePopup} from "../../../../../store/reducers/groupsReducer";
 
 let mapStateToProps = (state) => {
     return {

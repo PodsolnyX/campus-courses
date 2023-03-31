@@ -5,14 +5,14 @@ import courseStatusModalReducer from "./reducers/modalReducers/courseStatusReduc
 import noticeModalReducer from "./reducers/modalReducers/noticeModalReducer";
 import teacherModalReducer from "./reducers/modalReducers/teacherModalReducer";
 import markModalReducer from "./reducers/modalReducers/markModalReducer";
-import groupsPageReducer from "./reducers/groupsPageReducer";
+import groupsReducer from "./reducers/groupsReducer";
 import registrationPageReducer from "./reducers/registrationPageReducer";
 import loginPageReducer from "./reducers/loginPageReducer";
 import userReducer from "./reducers/userReducer";
 import profilePageReducer from "./reducers/profilePageReducer";
 
 let reducers = combineReducers({
-    groupsPage: groupsPageReducer,
+    groupsPage: groupsReducer,
     registrationPage: registrationPageReducer,
     loginPage: loginPageReducer,
     profilePage: profilePageReducer,

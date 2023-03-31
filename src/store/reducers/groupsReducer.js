@@ -21,7 +21,7 @@ let initialState = {
     isLoading: false
 };
 
-const groupsPageReducer = (state = initialState, action) => {
+const groupsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_GROUPS:
             return {
@@ -97,6 +97,4 @@ export const getGroupCourses = (id) => (dispatch) => {
     })
 }
 
-
-
-export default groupsPageReducer;
+export default groupsReducer;

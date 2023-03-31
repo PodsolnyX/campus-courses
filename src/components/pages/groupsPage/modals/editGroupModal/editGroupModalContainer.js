@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import EditGroupModal from "./editGroupModal";
-import {closeGroupsModal, editValueGroupsModal} from "../../../../../store/reducers/groupsPageReducer";
+import {closeGroupsModal, editValueGroupsModal} from "../../../../../store/reducers/groupsReducer";
 
 let mapStateToProps = (state) => {
     return {
