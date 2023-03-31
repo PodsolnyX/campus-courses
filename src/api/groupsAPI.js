@@ -11,6 +11,19 @@ const getGroups = () => {
         });
 }
 
+const getGroupCourses = (id) => {
+    return instance.get(`groups/${id}`)
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            if (error.response.status === 404)
+                toastError("Данная группа не найдена")
+            else toastError("Что-то пошло не так")
+        });
+}
+
 export const groupsAPI = {
-    getGroups: getGroups
+    getGroups: getGroups,
+    getGroupCourses: getGroupCourses
 };

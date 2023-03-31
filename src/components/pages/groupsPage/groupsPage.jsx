@@ -11,8 +11,6 @@ const GroupsPage = (props) => {
         props.getGroups();
     }, []);
 
-    //console.log(props)
-
     return (
         <div>
             <EditGroupsModalContainer/>

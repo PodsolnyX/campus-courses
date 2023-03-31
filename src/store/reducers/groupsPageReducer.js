@@ -3,6 +3,7 @@ import {groupsAPI} from "../../api/groupsAPI";
 const
     OPEN_GROUPS_MODAL = "OPEN_GROUPS_MODAL",
     SET_GROUPS = "SET_GROUPS",
+    SET_GROUP_COURSES = "SET_GROUP_COURSES",
     CLOSE_GROUPS_MODAL = "CLOSE_GROUPS_MODAL",
     EDIT_VALUE_GROUPS_MODAL = "EDIT_VALUE_GROUPS_MODAL",
     OPEN_DELETE_POPUP = "OPEN_DELETE_POPUP",
@@ -16,6 +17,7 @@ let initialState = {
     isEdit: false,
     currentGroup: {},
     groups: [],
+    groupCourses: [],
     isLoading: false
 };
 
@@ -25,6 +27,11 @@ const groupsPageReducer = (state = initialState, action) => {
             return {
                 ...state,
                 groups: action.data
+            };
+        case SET_GROUP_COURSES:
+            return {
+                ...state,
+                groupCourses: action.data
             };
         case SET_LOADING_GROUPS:
             return {
@@ -71,6 +78,7 @@ export const openDeletePopup = () => ({type: OPEN_DELETE_POPUP});
 export const closeDeletePopup = () => ({type: CLOSE_DELETE_POPUP});
 
 export const setGroups = (data) => ({type: SET_GROUPS, data});
+export const setGroupCourses = (data) => ({type: SET_GROUP_COURSES, data})
 export const setLoadingGroups = (isLoading) => ({type: SET_LOADING_GROUPS, isLoading});
 
 export const getGroups = () => (dispatch) => {
@@ -80,5 +88,15 @@ export const getGroups = () => (dispatch) => {
         dispatch(setLoadingGroups(false));
     })
 }
+
+export const getGroupCourses = (id) => (dispatch) => {
+    dispatch(setLoadingGroups(true));
+    groupsAPI.getGroupCourses(id).then(data => {
+        if (data) dispatch(setGroupCourses(data));
+        dispatch(setLoadingGroups(false));
+    })
+}
+
+
 
 export default groupsPageReducer;
