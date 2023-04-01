@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
-import {openCourseModal} from "../../../store/reducers/modalReducers/courseModalReducer";
 import CoursePage from "./coursePage";
-import {getCourseDetails} from "../../../store/reducers/coursesReducer";
+import {getCourseDetails, openCourseModal} from "../../../store/reducers/coursesReducer";
 import {withRouter} from "../../../hoc/withRouter";
 
 let mapStateToProps = (state) => {

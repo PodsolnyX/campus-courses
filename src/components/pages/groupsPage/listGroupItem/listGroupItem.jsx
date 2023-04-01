@@ -11,7 +11,7 @@ const ListGroupItem = (props) => {
                   <Link to={`/groups/${props.data.id}`}>{props.data.name}</Link>
               </div>
               {
-                  props.isEdit ?
+                  props.isAdmin ?
                       <div className={"col d-flex justify-content-end"}>
                           <Button variant={"outline-warning"} className={"me-2"}
                                   onClick={() => props.openGroupsModal(props.data, true)}>

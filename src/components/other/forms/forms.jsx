@@ -1,3 +1,6 @@
+import Select from "react-select";
+import {Form} from "react-bootstrap";
+
 export const FormFIO = (props) => {
     return (
         <div>
@@ -114,6 +117,99 @@ export const FormGroupName = (props) => {
                    onChange={props.onChange} type="text" id={"inputGroupName"}
                    name="groupName" disabled={props.disabled}/>
             <div className={"text-danger"}>{props.errors?.groupName?.message}</div>
+        </div>
+    );
+}
+
+export const FormStartYear = (props) => {
+    return (
+        <div>
+            <input {...props.register("startYear", {
+                required: "Обязательное поле",
+                max: {
+                    value: Number(new Date().toISOString().slice(0, 4)) + 3,
+                    message: "Год должен быть не больше текущего на три года"
+                },
+                min: {
+                    value: new Date().toISOString().slice(0, 4),
+                    message: "Минимальный год - текущий"
+                },
+                pattern: {
+                    value: /^\d+\s*$/,
+                    message: "Неправильный формат"
+                }
+            })}
+                   className={`form-control ${props.errors?.startYear?.message ? "border-danger" : undefined}`}
+                   onChange={props.onChange} type="text" id={"inputStartYear"}
+                   name="startYear" disabled={props.disabled}/>
+            <div className={"text-danger"}>{props.errors?.startYear?.message}</div>
+        </div>
+    );
+}
+
+export const FormMaxStudentsCount = (props) => {
+    return (
+        <div>
+            <input {...props.register("maxStudentsCount", {
+                required: "Обязательное поле",
+                max: {
+                    value: 500,
+                    message: "Максимальное кол-во студентов - 500"
+                },
+                min: {
+                    value: 5,
+                    message: "Минмальное кол-во студентов - 5"
+                },
+                pattern: {
+                    value: /^\d+\s*$/,
+                    message: "Неправильный формат"
+                }
+            })}
+                   className={`form-control ${props.errors?.maxStudentsCount?.message ? "border-danger" : undefined}`}
+                   onChange={props.onChange} type="text" id={"inputMaxStudentsCount"}
+                   name="maxStudentsCount" disabled={props.disabled}/>
+            <div className={"text-danger"}>{props.errors?.maxStudentsCount?.message}</div>
+        </div>
+    );
+}
+
+export const FormSemester = (props) => {
+    return (
+        <div>
+            <Form.Check
+                type={"radio"}
+                label={"Осенний"}
+                id={"AutumnCheck"}
+                name="semester"
+                value={"Autumn"}
+                checked={props.semester === "Autumn"}
+                onChange={props.onChange}
+                inline
+            />
+
+            <Form.Check
+                type={"radio"}
+                label={"Весенний"}
+                id={"springCheck"}
+                name="semester"
+                value={"Spring"}
+                checked={props.semester === "Spring"}
+                onChange={props.onChange}
+                inline
+            />
+        </div>
+    );
+}
+
+export const FormMainTeacher = (props) => {
+    return (
+        <div>
+            <Select
+                    options={props.options}
+                    defaultValue={props.defaultValue}
+                    name="mainTeacherId"
+                    onChange={props.onChange}
+            />
         </div>
     );
 }

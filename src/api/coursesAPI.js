@@ -13,6 +13,25 @@ const getCourseDetails = (id) => {
         });
 }
 
+const createCourse = (id, data) => {
+    return instance.post(`courses/${id}`, {
+        name: data.groupName,
+        startYear: data.startYear,
+        maximumStudentsCount: data.maxStudentsCount,
+        semester: data.semester,
+        requirements: data.requirements,
+        annotations: data.annotations,
+        mainTeacherId: data.mainTeacherId
+    })
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 export const coursesAPI = {
-    getCourseDetails: getCourseDetails
+    getCourseDetails: getCourseDetails,
+    createCourse: createCourse
 };

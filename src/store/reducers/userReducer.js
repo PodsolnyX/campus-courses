@@ -3,12 +3,14 @@ import {userAPI} from "../../api/userAPI";
 const SET_USER_DATA = "SET_USER_DATA",
     SET_USER_ROLES = "SET_USER_ROLES",
     CLEAR_USER_DATA = "CLEAR_USER_DATA",
-    SET_IS_AUTH = "SET_IS_AUTH"
+    SET_IS_AUTH = "SET_IS_AUTH",
+    SET_USERS = "SET_USERS"
 ;
 
 let initialState = {
     userData : {},
     userRoles: [],
+    users: [],
     isAuth: !!localStorage.getItem("token")
 };
 
@@ -36,6 +38,17 @@ const userReducer = (state = initialState, action) => {
                 userData: [],
                 isAuth: false
             };
+        case SET_USERS:
+            action.data.forEach((el) => {
+                Object.assign(el, {
+                    ["value"]: el["id"],
+                    ["label"]: el["fullName"],
+                })
+            });
+            return {
+                ...state,
+                users: action.data
+            }
         default:
             return state;
     }
@@ -45,6 +58,7 @@ export const setUserProfile = (userData) => ({type: SET_USER_DATA, userData});
 export const setUserRoles = (userRoles) => ({type: SET_USER_ROLES, userRoles});
 export const setIsAuth = () => ({type: SET_IS_AUTH});
 export const clearUserProfile = () => ({type: CLEAR_USER_DATA});
+export const setUsers = (data) => ({type: SET_USERS, data});
 
 export const getUserProfile = () => (dispatch) => {
     userAPI.getProfile().then(data => {
@@ -60,6 +74,14 @@ export const logoutUser = () => (dispatch) => {
         if (data) {
             localStorage.removeItem('token');
             dispatch(clearUserProfile());
+        }
+    })
+}
+
+export const getUsers = () => (dispatch) => {
+    userAPI.getUsers().then(data => {
+        if (data) {
+            dispatch(setUsers(data));
         }
     })
 }

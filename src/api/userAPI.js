@@ -60,6 +60,16 @@ const getRoles = () => {
         });
 }
 
+const getUsers = () => {
+    return instance.get("users")
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 const logoutUser = () => {
     return instance.post("logout")
         .then(response => {
@@ -94,6 +104,7 @@ export const userAPI = {
     getProfile: getProfile,
     getRoles: getRoles,
     logoutUser: logoutUser,
-    editUserProfile: editUserProfile
+    editUserProfile: editUserProfile,
+    getUsers: getUsers
 };
 

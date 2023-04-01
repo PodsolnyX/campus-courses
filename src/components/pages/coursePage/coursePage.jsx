@@ -1,5 +1,5 @@
 import {Button, Container} from "react-bootstrap";
-import EditCourseModalContainer from "./modals/editCourseModal/editCourseModalContainer";
+import EditCourseModalContainer from "../concreteGroupPage/editCourseModal/editCourseModalContainer";
 import CourseInfoContainer from "./courseInfo/courseInfoContainer";
 import {useEffect} from "react";
 import CourseInfoTabsContainer from "./courseInformationTabs/courseInfoTabsContainer";
@@ -15,7 +15,7 @@ const CoursePage = (props) => {
         <Container className={"col"}>
             <div className="col-12 col-lg-10 mx-auto mt-5">
                 <div>
-                    <EditCourseModalContainer/>
+                    {/*<EditCourseModalContainer/>*/}
                     {
                         props.isLoading ? undefined :
                             <div className={"d-flex justify-content-between"}>

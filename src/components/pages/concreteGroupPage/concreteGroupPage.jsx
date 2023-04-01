@@ -1,6 +1,6 @@
 import {Button, Card, Container, ListGroup, Spinner} from "react-bootstrap";
 import ListCoursesItem from "./listCoursesItem/listCoursesItem";
-import EditCourseModalContainer from "../coursePage/modals/editCourseModal/editCourseModalContainer";
+import EditCourseModalContainer from "./editCourseModal/editCourseModalContainer";
 import {useEffect} from "react";
 import LoadSpinner from "../../other/loadSpinner/loadSpinner";
 
@@ -16,16 +16,22 @@ const ConcreteGroupPage = (props) => {
     }, []);
 
     const groupName = (props.groups?.find(group => group.id === props.router.params.id))?.name;
+    const isAdmin = (props.userRoles["isAdmin"] === true);
 
     return (
         <div>
-            <EditCourseModalContainer/>
+            {isAdmin ? <EditCourseModalContainer/> : undefined}
             <Container className={"col"}>
                 <div className="col-12 col-lg-8 mx-auto mt-5">
                     <div className={"d-flex justify-content-between"}>
                         <h3>Группа - {groupName}</h3>
-                        <Button variant={"outline-primary"} onClick={() => props.openCourseModal(false)}>Создать
-                            курс</Button>
+                        {
+                            isAdmin ?
+                                <Button variant={"outline-primary"} onClick={() => props.openCourseModal()}>
+                                    Создать курс
+                                </Button>
+                                : undefined
+                        }
                     </div>
                     <Card className={"mt-4"}>
                         {
@@ -36,7 +42,8 @@ const ConcreteGroupPage = (props) => {
                                     {
                                         props.groupCourses.length === 0
                                             ?
-                                            <div className={"text-secondary mx-auto my-3"}>В данной группе ещё нет курсов</div>
+                                            <div className={"text-secondary mx-auto my-3"}>В данной группе ещё нет
+                                                курсов</div>
                                             :
                                             props.groupCourses.map(course =>
                                                 <ListCoursesItem data={course} key={course.id}/>)

@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import "./htmlEditor.css";
 
-const HtmlEditor = () => {
-    const [value, setValue] = useState('');
-
-    return <ReactQuill theme="snow" value={value}
-                       // style={{maxHeight: "200px", overflowY: "auto"}}
-                       onChange={setValue} />;
+const HtmlEditor = (props) => {
+    return <ReactQuill theme="snow" value={props.value} onChange={props.onChange} />;
 }
 
 export default HtmlEditor;

@@ -6,7 +6,7 @@ import LoadSpinner from "../../other/loadSpinner/loadSpinner";
 
 const GroupsPage = (props) => {
 
-    const isEdit = (props.userRoles["isAdmin"] === true);
+    const isAdmin = (props.userRoles["isAdmin"] === true);
 
     useEffect(() => {
         props.getGroups();
@@ -14,13 +14,13 @@ const GroupsPage = (props) => {
 
     return (
         <div>
-            <EditGroupsModalContainer/>
+            {isAdmin ? <EditGroupsModalContainer/> : undefined}
             <Container className={"col"}>
                 <div className="col-12 col-lg-8 mx-auto mt-5">
                     <div className={"d-flex justify-content-between"}>
                         <h3>Группы кампусных курсов</h3>
                         {
-                            isEdit ?
+                            isAdmin ?
                                 <Button variant={"outline-primary"}
                                         onClick={() => props.openGroupsModal({name: ""}, false)}
                                 >Создать группу</Button>
@@ -36,7 +36,7 @@ const GroupsPage = (props) => {
                                 <ListGroup variant="flush">
                                     {
                                         props.groups.map((group) =>
-                                            <ListGroupItemContainer data={group} isEdit={isEdit} key={group.id}/>)
+                                            <ListGroupItemContainer data={group} isAdmin={isAdmin} key={group.id}/>)
                                     }
                                 </ListGroup>
                         }
