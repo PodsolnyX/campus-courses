@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import StudentTab from "./studentTab";
-import {openMarkModal} from "../../../../../store/reducers/modalReducers/markModalReducer";
+import {openMarkModal} from "../../../../../store/reducers/coursesReducer";
 
 let mapStateToProps = (state) => {
     return {

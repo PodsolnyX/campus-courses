@@ -1,9 +1,5 @@
 import {legacy_createStore as createStore, combineReducers, applyMiddleware} from 'redux';
 import ThunkMiddleware from "redux-thunk";
-import courseStatusModalReducer from "./reducers/modalReducers/courseStatusReducer";
-import noticeModalReducer from "./reducers/modalReducers/noticeModalReducer";
-import teacherModalReducer from "./reducers/modalReducers/teacherModalReducer";
-import markModalReducer from "./reducers/modalReducers/markModalReducer";
 import groupsReducer from "./reducers/groupsReducer";
 import registrationPageReducer from "./reducers/registrationPageReducer";
 import loginPageReducer from "./reducers/loginPageReducer";
@@ -18,10 +14,6 @@ let reducers = combineReducers({
     loginPage: loginPageReducer,
     profilePage: profilePageReducer,
     user: userReducer,
-    courseStatusModal: courseStatusModalReducer,
-    noticeModal: noticeModalReducer,
-    teacherModal: teacherModalReducer,
-    markModal: markModalReducer
 });
 
 let store = createStore(reducers, applyMiddleware(ThunkMiddleware));

@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import NoticeTab from "./noticeTab";
-import {openNoticeModal} from "../../../../../store/reducers/modalReducers/noticeModalReducer";
+import {openNoticeModal} from "../../../../../store/reducers/coursesReducer";
 
 let mapStateToProps = (state) => {
     return {

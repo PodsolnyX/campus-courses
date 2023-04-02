@@ -1,5 +1,5 @@
 import {Button, Container} from "react-bootstrap";
-import EditCourseModalContainer from "../concreteGroupPage/editCourseModal/editCourseModalContainer";
+import EditCourseModalContainer from "../concreteGroupPage/createCourseModal/createCourseModalContainer";
 import CourseInfoContainer from "./courseInfo/courseInfoContainer";
 import {useEffect} from "react";
 import CourseInfoTabsContainer from "./courseInformationTabs/courseInfoTabsContainer";

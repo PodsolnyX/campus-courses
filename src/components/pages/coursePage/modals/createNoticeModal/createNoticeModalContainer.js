@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
-import {closeNoticeModal, editValueNoticeModal} from "../../../../../store/reducers/modalReducers/noticeModalReducer";
 import CreateNoticeModal from "./createNoticeModal";
+import {closeNoticeModal, editValueNoticeModal} from "../../../../../store/reducers/coursesReducer";
 
 let mapStateToProps = (state) => {
     return {
-        isShow: state.noticeModal.isShow,
-        value: state.noticeModal.value
+        isShow: state.coursePage.noticeModal.isShow,
+        value: state.coursePage.noticeModal.value
     };
 }
 

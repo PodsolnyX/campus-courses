@@ -12,7 +12,7 @@ import {
 import {toastError} from "../../../../helpers/toaster";
 import LoadSpinner from "../../../other/loadSpinner/loadSpinner";
 
-const EditCourseModal = (props) => {
+const CreateCourseModal = (props) => {
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm({
         mode: "onBlur"
@@ -117,4 +117,4 @@ const EditCourseModal = (props) => {
     );
 }
 
-export default EditCourseModal;
+export default CreateCourseModal;

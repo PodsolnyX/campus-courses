@@ -1,8 +1,8 @@
-import {Button, Card, Container, ListGroup, Spinner} from "react-bootstrap";
+import {Button, Card, Container, ListGroup} from "react-bootstrap";
 import ListCoursesItem from "./listCoursesItem/listCoursesItem";
-import EditCourseModalContainer from "./editCourseModal/editCourseModalContainer";
 import {useEffect} from "react";
 import LoadSpinner from "../../other/loadSpinner/loadSpinner";
+import CreateCourseModalContainer from "./createCourseModal/createCourseModalContainer";
 
 const ConcreteGroupPage = (props) => {
 
@@ -20,7 +20,7 @@ const ConcreteGroupPage = (props) => {
 
     return (
         <div>
-            {isAdmin ? <EditCourseModalContainer/> : undefined}
+            {isAdmin ? <CreateCourseModalContainer/> : undefined}
             <Container className={"col"}>
                 <div className="col-12 col-lg-8 mx-auto mt-5">
                     <div className={"d-flex justify-content-between"}>

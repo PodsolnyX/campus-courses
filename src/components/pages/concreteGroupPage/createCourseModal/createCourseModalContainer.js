@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import EditCourseModal from "./editCourseModal";
+import CreateCourseModal from "./createCourseModal";
 import {getUsers} from "../../../../store/reducers/userReducer";
 import {closeCourseModal, createCourse, setCourseModalData} from "../../../../store/reducers/coursesReducer";
 import {withRouter} from "../../../../hoc/withRouter";
@@ -7,9 +7,9 @@ import {withRouter} from "../../../../hoc/withRouter";
 let mapStateToProps = (state) => {
 
     return {
-        isShow: state.coursePage.isShowCourseModal,
+        isShow: state.coursePage.createCourseModal.isShow,
         users: state.user.users,
-        currentCourse: state.coursePage.currentCourse,
+        currentCourse: state.coursePage.createCourseModal.currentCourse,
         isLoading: state.coursePage.isLoadingModal
     };
 }
@@ -19,4 +19,4 @@ export default connect(mapStateToProps, {
     getUsers,
     setCourseModalData,
     createCourse
-})(withRouter(EditCourseModal));
+})(withRouter(CreateCourseModal));
