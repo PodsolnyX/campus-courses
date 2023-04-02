@@ -36,9 +36,9 @@ const CreateCourseModal = (props) => {
 
     const onChange = (e) => {
         if (e.target) {
-            props.setCourseModalData(e.target.name, e.target.value);
+            props.setCreateCourseModalData(e.target.name, e.target.value);
         } else {
-            props.setCourseModalData("mainTeacherId", e.value);
+            props.setCreateCourseModalData("mainTeacherId", e.value);
         }
     }
     const onSubmit = () => {
@@ -52,16 +52,16 @@ const CreateCourseModal = (props) => {
         props.createCourse(props.router.params.id);
     }
     const onChangeRequirements = (e) => {
-        props.setCourseModalData("requirements", e);
+        props.setCreateCourseModalData("requirements", e);
     }
     const onChangeAnnotations = (e) => {
-        props.setCourseModalData("annotations", e);
+        props.setCreateCourseModalData("annotations", e);
     }
 
     return (
         <Modal
             show={props.isShow}
-            onHide={props.closeCourseModal}
+            onHide={props.closeCreateCourseModal}
             keyboard={true}
             centered
             size="lg"
@@ -109,7 +109,7 @@ const CreateCourseModal = (props) => {
                     }
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={props.closeCourseModal}>Отмена</Button>
+                    <Button variant="secondary" onClick={props.closeCreateCourseModal}>Отмена</Button>
                     <Button variant="primary" type={"submit"} disabled={props.isLoading}>Сохранить</Button>
                 </Modal.Footer>
             </form>

@@ -5,7 +5,8 @@ import {openCourseStatusModal} from "../../../../store/reducers/coursesReducer";
 let mapStateToProps = (state) => {
     return {
         course: state.coursePage.course,
-        isLoading: state.coursePage.isLoading
+        isLoading: state.coursePage.isLoading,
+        userRoles: state.user.userRoles
     };
 }
 

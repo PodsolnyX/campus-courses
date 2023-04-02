@@ -10,6 +10,10 @@ const
     CLOSE_CREATE_COURSE_MODAL = "CLOSE_CREATE_COURSE_MODAL",
     SET_CREATE_COURSE_MODAL_DATA = "SET_CREATE_COURSE_MODAL_DATA",
 
+    OPEN_EDIT_COURSE_MODAL = "OPEN_EDIT_COURSE_MODAL",
+    CLOSE_EDIT_COURSE_MODAL = "CLOSE_EDIT_COURSE_MODAL",
+    SET_EDIT_COURSE_MODAL_DATA = "SET_EDIT_COURSE_MODAL_DATA",
+
     OPEN_COURSE_STATUS_MODAL = "OPEN_COURSE_STATUS_MODAL",
     CLOSE_COURSE_STATUS_MODAL = "CLOSE_COURSE_STATUS_MODAL",
     EDIT_VALUE_COURSE_STATUS_MODAL = "EDIT_VALUE_COURSE_STATUS_MODAL",
@@ -43,6 +47,13 @@ let initialState = {
             mainTeacherId: ""
         }
     },
+    editCourseModal: {
+        isShow: false,
+        data: {
+            requirements: "",
+            annotations: ""
+        }
+    },
     courseStatusModal: {
         isShow: false
     },
@@ -50,7 +61,11 @@ let initialState = {
         isShow: false
     },
     noticeModal: {
-        isShow: false
+        isShow: false,
+        data: {
+            text: "",
+            isImportant: false
+        }
     },
     teacherModal: {
         isShow: false
@@ -100,6 +115,35 @@ const coursesReducer = (state = initialState, action) => {
                     ...state.createCourseModal,
                     currentCourse: {
                         ...state.createCourseModal.currentCourse,
+                        [action.keyValue]: action.value
+                    }
+                }
+            };
+
+        case OPEN_EDIT_COURSE_MODAL:
+            return {
+                ...state,
+                editCourseModal: {
+                    ...state.editCourseModal,
+                    isShow: true,
+                    data: action.initData
+                }
+            };
+        case CLOSE_EDIT_COURSE_MODAL:
+            return {
+                ...state,
+                editCourseModal: {
+                    ...state.editCourseModal,
+                    isShow: false
+                }
+            };
+        case SET_EDIT_COURSE_MODAL_DATA:
+            return {
+                ...state,
+                editCourseModal: {
+                    ...state.editCourseModal,
+                    data: {
+                        ...state.editCourseModal.data,
                         [action.keyValue]: action.value
                     }
                 }
@@ -190,7 +234,13 @@ const coursesReducer = (state = initialState, action) => {
         case EDIT_VALUE_NOTICE_MODAL:
             return {
                 ...state,
-                value: action.value
+                noticeModal: {
+                    ...state.noticeModal,
+                    data: {
+                        ...state.noticeModal.data,
+                        [action.keyValue]: action.value
+                    }
+                }
             }
         default:
             return state;
@@ -200,9 +250,13 @@ const coursesReducer = (state = initialState, action) => {
 export const setCourseDetails = (data) => ({type: SET_COURSE_DETAILS, data});
 export const setLoadingCourse = (isLoading) => ({type: SET_LOADING_COURSE, isLoading});
 
-export const openCourseModal = () => ({type: OPEN_CREATE_COURSE_MODAL});
-export const closeCourseModal = () => ({type: CLOSE_CREATE_COURSE_MODAL});
-export const setCourseModalData = (keyValue, value) => ({type: SET_CREATE_COURSE_MODAL_DATA, keyValue, value});
+export const openCreateCourseModal = () => ({type: OPEN_CREATE_COURSE_MODAL});
+export const closeCreateCourseModal = () => ({type: CLOSE_CREATE_COURSE_MODAL});
+export const setCreateCourseModalData = (keyValue, value) => ({type: SET_CREATE_COURSE_MODAL_DATA, keyValue, value});
+
+export const openEditCourseModal = (initData) => ({type: OPEN_EDIT_COURSE_MODAL, initData});
+export const closeEditCourseModal = () => ({type: CLOSE_EDIT_COURSE_MODAL});
+export const setEditCourseModalData = (keyValue, value) => ({type: SET_EDIT_COURSE_MODAL_DATA, keyValue, value});
 
 export const openCourseStatusModal = () => ({type: OPEN_COURSE_STATUS_MODAL});
 export const closeCourseStatusModal = () => ({type: CLOSE_COURSE_STATUS_MODAL});
@@ -218,7 +272,7 @@ export const editValueTeacherModal = (value) => ({type: EDIT_VALUE_TEACHER_MODAL
 
 export const openNoticeModal = () => ({type: OPEN_NOTICE_MODAL});
 export const closeNoticeModal = () => ({type: CLOSE_NOTICE_MODAL});
-export const editValueNoticeModal = (value) => ({type: EDIT_VALUE_NOTICE_MODAL, value});
+export const editDataNoticeModal = (keyValue, value) => ({type: EDIT_VALUE_NOTICE_MODAL, keyValue, value});
 
 export const setLoadingModalCourse = (isLoading) => ({type: SET_LOADING_MODAL_COURSE, isLoading});
 
@@ -234,9 +288,35 @@ export const createCourse = (groupId) => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
     coursesAPI.createCourse(groupId, getState().coursePage.createCourseModal.currentCourse).then(data => {
         if (data) {
-            dispatch(closeCourseModal());
+            dispatch(closeCreateCourseModal());
             toastSuccess("Курс успешно создан")
             dispatch(getGroupCourses(groupId));
+        }
+        dispatch(setLoadingModalCourse(false));
+    })
+}
+
+export const editCourse = (id) => (dispatch, getState) => {
+    dispatch(setLoadingModalCourse(true));
+    id = getState().coursePage.course.id;
+    coursesAPI.editCourse(id, getState().coursePage.editCourseModal.data).then(data => {
+        if (data) {
+            dispatch(closeEditCourseModal());
+            toastSuccess("Курс успешно изменён")
+            dispatch(getCourseDetails(id));
+        }
+        dispatch(setLoadingModalCourse(false));
+    })
+}
+
+export const createNotice = (id) => (dispatch, getState) => {
+    dispatch(setLoadingModalCourse(true));
+    id = getState().coursePage.course.id;
+    coursesAPI.createNotice(id, getState().coursePage.noticeModal.data).then(data => {
+        if (data) {
+            dispatch(closeNoticeModal());
+            toastSuccess("Уведомление успешно отправлено")
+            dispatch(getCourseDetails(id));
         }
         dispatch(setLoadingModalCourse(false));
     })

@@ -31,7 +31,35 @@ const createCourse = (id, data) => {
         });
 }
 
+const editCourse = (id, data) => {
+    return instance.put(`courses/${id}`, {
+        requirements: data.requirements,
+        annotations: data.annotations
+    })
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
+const createNotice = (id, data) => {
+    return instance.post(`courses/${id}/notifications`, {
+        text: data.text,
+        isImportant: data.isImportant
+    })
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 export const coursesAPI = {
     getCourseDetails: getCourseDetails,
-    createCourse: createCourse
+    createCourse: createCourse,
+    editCourse: editCourse,
+    createNotice: createNotice
 };

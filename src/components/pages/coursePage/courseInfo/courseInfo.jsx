@@ -10,22 +10,26 @@ const CourseInfo = (props) => {
             <div className={"fw-bold my-auto"}>Основные данные курса</div>
             <Card className={"mt-1"}>
                 {
-                    props.isLoading ?
-                        <LoadSpinner/>
-                        :
+                    props.isLoading ? <LoadSpinner/> :
                         <ListGroup variant="flush">
                             <ListGroup.Item>
                                 <div className={"d-flex justify-content-between"}>
-                                    <EditCourseStatusModalContainer/>
+
                                     <div>
                                         <div className={"fw-bold"}>Статус курса</div>
                                         <div className={`text-${CONST.COURSE_STATUS_COLOR[props.course.status]}`}>
                                             {CONST.COURSE_STATUS[props.course.status]}
                                         </div>
                                     </div>
-                                    <div className={"my-auto"} onClick={props.openCourseStatusModal}>
-                                        <Button variant={"outline-warning"}>Изменить статус</Button>
-                                    </div>
+                                    {
+                                        props.userRoles["isAdmin"] === true ?
+                                        <div>
+                                            <EditCourseStatusModalContainer/>
+                                            <div className={"my-auto"} onClick={props.openCourseStatusModal}>
+                                                <Button variant={"outline-warning"}>Изменить статус</Button>
+                                            </div>
+                                        </div> : undefined
+                                    }
                                 </div>
                             </ListGroup.Item>
                             <ListGroup.Item>

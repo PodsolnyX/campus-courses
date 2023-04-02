@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import ConcreteGroupPage from "./concreteGroupPage";
 import {withRouter} from "../../../hoc/withRouter";
 import {getGroupCourses, getGroups} from "../../../store/reducers/groupsReducer";
-import {openCourseModal} from "../../../store/reducers/coursesReducer";
+import {openCreateCourseModal} from "../../../store/reducers/coursesReducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -14,7 +14,7 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    openCourseModal,
+    openCreateCourseModal,
     getGroupCourses,
     getGroups
 })(withRouter(ConcreteGroupPage));

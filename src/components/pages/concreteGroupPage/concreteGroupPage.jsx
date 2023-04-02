@@ -16,18 +16,17 @@ const ConcreteGroupPage = (props) => {
     }, []);
 
     const groupName = (props.groups?.find(group => group.id === props.router.params.id))?.name;
-    const isAdmin = (props.userRoles["isAdmin"] === true);
 
     return (
         <div>
-            {isAdmin ? <CreateCourseModalContainer/> : undefined}
+            { props.userRoles["isAdmin"] === true ? <CreateCourseModalContainer/> : undefined}
             <Container className={"col"}>
                 <div className="col-12 col-lg-8 mx-auto mt-5">
                     <div className={"d-flex justify-content-between"}>
                         <h3>Группа - {groupName}</h3>
                         {
-                            isAdmin ?
-                                <Button variant={"outline-primary"} onClick={() => props.openCourseModal()}>
+                            props.userRoles["isAdmin"] === true ?
+                                <Button variant={"outline-primary"} onClick={() => props.openCreateCourseModal()}>
                                     Создать курс
                                 </Button>
                                 : undefined
@@ -35,9 +34,7 @@ const ConcreteGroupPage = (props) => {
                     </div>
                     <Card className={"mt-4"}>
                         {
-                            props.isLoading ?
-                                <LoadSpinner/>
-                                :
+                            props.isLoading ? <LoadSpinner/> :
                                 <ListGroup variant="flush">
                                     {
                                         props.groupCourses.length === 0

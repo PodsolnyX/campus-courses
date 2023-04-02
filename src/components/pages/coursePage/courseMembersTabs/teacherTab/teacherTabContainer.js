@@ -5,6 +5,7 @@ import {openTeacherModal} from "../../../../../store/reducers/coursesReducer";
 let mapStateToProps = (state) => {
     return {
         teachers: state.coursePage.course.teachers,
+        userRoles: state.user.userRoles
     };
 }
 

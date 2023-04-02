@@ -5,10 +5,15 @@ import AddTeacherModalContainer from "../../modals/addTeacherModal/addTeacherMod
 const TeacherTab = (props) => {
     return (
         <div>
-            <AddTeacherModalContainer/>
-            <Button variant={"outline-primary"} className={"mb-3"} onClick={props.openTeacherModal}>
-                Добавить преподавателя
-            </Button>
+            {
+                props.userRoles["isAdmin"] === true ?
+                    <div>
+                        <AddTeacherModalContainer/>
+                        <Button variant={"outline-primary"} className={"mb-3"} onClick={props.openTeacherModal}>
+                            Добавить преподавателя
+                        </Button>
+                    </div> : undefined
+            }
             <ListGroup variant={"flush"}>
                 {
                     props.teachers?.map(t =>

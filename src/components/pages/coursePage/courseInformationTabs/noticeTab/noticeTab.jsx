@@ -6,9 +6,13 @@ const NoticeTab = (props) => {
 
     return (
         <div className={"border-bottom border-end border-start border-1 p-3"}>
-            <CreateNoticeModalContainer/>
-            <Button variant={"outline-primary"} onClick={props.openNoticeModal}>
-                Создать уведомление</Button>
+            { props.userRoles["isAdmin"] === true ?
+                <div>
+                    <CreateNoticeModalContainer/>
+                    <Button variant={"outline-primary"} onClick={props.openNoticeModal}>
+                        Создать уведомление</Button>
+                </div> : undefined
+            }
             <ListGroup variant="flush" className={"mt-3"} style={{maxHeight:"200px", overflowY: "auto"}}>
                 {
                     props.notifications?.length === 0 ?

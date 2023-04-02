@@ -127,12 +127,12 @@ export const FormStartYear = (props) => {
             <input {...props.register("startYear", {
                 required: "Обязательное поле",
                 max: {
-                    value: Number(new Date().toISOString().slice(0, 4)) + 3,
-                    message: "Год должен быть не больше текущего на три года"
+                    value: 2029,
+                    message: "Максимальный год - 2029"
                 },
                 min: {
-                    value: new Date().toISOString().slice(0, 4),
-                    message: "Минимальный год - текущий"
+                    value: 2000,
+                    message: "Минимальный год - 2000"
                 },
                 pattern: {
                     value: /^\d+\s*$/,
@@ -153,12 +153,12 @@ export const FormMaxStudentsCount = (props) => {
             <input {...props.register("maxStudentsCount", {
                 required: "Обязательное поле",
                 max: {
-                    value: 500,
-                    message: "Максимальное кол-во студентов - 500"
+                    value: 200,
+                    message: "Максимальное кол-во студентов - 200"
                 },
                 min: {
-                    value: 5,
-                    message: "Минмальное кол-во студентов - 5"
+                    value: 1,
+                    message: "Минимальное кол-во студентов - 1"
                 },
                 pattern: {
                     value: /^\d+\s*$/,
@@ -205,11 +205,31 @@ export const FormMainTeacher = (props) => {
     return (
         <div>
             <Select
-                    options={props.options}
-                    defaultValue={props.defaultValue}
-                    name="mainTeacherId"
-                    onChange={props.onChange}
+                options={props.options}
+                defaultValue={props.defaultValue}
+                name="mainTeacherId"
+                onChange={props.onChange}
             />
+        </div>
+    );
+}
+
+export const FormNoticeText = (props) => {
+    return (
+        <Form.Control as="textarea" rows={5} value={props.text}
+                      onChange={props.onChange} name={"text"}/>
+    );
+}
+
+export const FormIsImportantNotice = (props) => {
+    return (
+        <div className="form-check form-switch my-auto">
+            <input className="form-check-input" type="checkbox"
+                   id="isImportantCheck" checked={props.isImportant}
+                   name={"isImportant"}
+                   onChange={props.onChange}
+            />
+            <label className="form-label">Важное уведомление</label>
         </div>
     );
 }

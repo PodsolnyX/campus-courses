@@ -4,7 +4,8 @@ import {openMarkModal} from "../../../../../store/reducers/coursesReducer";
 
 let mapStateToProps = (state) => {
     return {
-        students: state.coursePage.course.students
+        students: state.coursePage.course.students,
+        userRoles: state.user.userRoles
     };
 }
 
