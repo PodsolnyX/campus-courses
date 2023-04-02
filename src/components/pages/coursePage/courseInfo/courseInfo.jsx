@@ -22,11 +22,13 @@ const CourseInfo = (props) => {
                                         </div>
                                     </div>
                                     {
-                                        props.userRoles["isAdmin"] === true ?
+                                        props.userRoles["isAdmin"] === true && props.course.status !== "Finished" ?
                                         <div>
                                             <EditCourseStatusModalContainer/>
-                                            <div className={"my-auto"} onClick={props.openCourseStatusModal}>
-                                                <Button variant={"outline-warning"}>Изменить статус</Button>
+                                            <div className={"my-auto"} >
+                                                <Button variant={"outline-warning"}
+                                                        onClick={() => props.openCourseStatusModal(props.course.status)}
+                                                >Изменить статус</Button>
                                             </div>
                                         </div> : undefined
                                     }

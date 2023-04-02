@@ -67,10 +67,23 @@ const createNotice = (id, data) => {
         });
 }
 
+const setCourseStatus = (id, status) => {
+    return instance.post(`courses/${id}/status`, {
+        status: status
+    })
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 export const coursesAPI = {
     getCourseDetails: getCourseDetails,
     createCourse: createCourse,
     editCourse: editCourse,
     deleteCourse: deleteCourse,
-    createNotice: createNotice
+    createNotice: createNotice,
+    setCourseStatus: setCourseStatus
 };

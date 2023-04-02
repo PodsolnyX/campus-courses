@@ -1,10 +1,23 @@
-import {Button, Form, Modal} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
+import {FormCourseStatus} from "../../../../other/forms/forms";
+import LoadSpinner from "../../../../other/loadSpinner/loadSpinner";
+import {toastError} from "../../../../../helpers/toaster";
 
 const EditCourseStatusModal = (props) => {
 
-    const onInputChange = (e) => {
+    const onChange = (e) => {
         props.editValueCourseStatusModal(e.target.value);
     }
+
+    const onSave = () => {
+        if (props.status === "") {
+            toastError("Выберете статус");
+            return;
+        }
+        props.setCourseStatus();
+    }
+
+    console.log(props.curStatus)
 
     return (
         <Modal
@@ -17,41 +30,15 @@ const EditCourseStatusModal = (props) => {
                 <Modal.Title>Изменение статуса курса</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div>
-                    <Form>
-                        <Form.Check
-                            type={"radio"}
-                            label={"Открыт для записи"}
-                            name="open"
-                            inline
-                            value={"open"}
-                            checked={props.value === "open"}
-                            onChange={onInputChange}
-                        />
-                        <Form.Check
-                            type={"radio"}
-                            label={"В процессе"}
-                            name="process"
-                            inline
-                            value={"process"}
-                            checked={props.value === "process"}
-                            onChange={onInputChange}
-                        />
-                        <Form.Check
-                            type={"radio"}
-                            label={"Завершен"}
-                            name="done"
-                            inline
-                            value={"done"}
-                            checked={props.value === "done"}
-                            onChange={onInputChange}
-                        />
-                    </Form>
-                </div>
+                { props.isLoading ? <LoadSpinner/> :
+                <FormCourseStatus status={props.status} curStatus={props.curStatus} onChange={onChange}/>
+                }
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={props.closeCourseStatusModal}>Отмена</Button>
-                <Button variant="primary">Сохранить</Button>
+                <Button variant="primary" disabled={props.isLoading} onClick={onSave}>
+                    Сохранить
+                </Button>
             </Modal.Footer>
         </Modal>
     );

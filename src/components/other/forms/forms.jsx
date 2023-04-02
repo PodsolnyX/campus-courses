@@ -201,6 +201,48 @@ export const FormSemester = (props) => {
     );
 }
 
+export const FormCourseStatus = (props) => {
+
+    return (
+        <div>
+            { props.curStatus !== "OpenForAssigning" && props.curStatus !== "Started" && props.curStatus !== "Finished" ?
+                <Form.Check
+                type={"radio"}
+                label={"Открыт для записи"}
+                id={"OpenForAssigningCheck"}
+                name="status"
+                value={"OpenForAssigning"}
+                checked={props.status === "OpenForAssigning"}
+                onChange={props.onChange}
+                inline
+                /> : undefined
+            }
+            { props.curStatus !== "Started" && props.curStatus !== "Finished" ?
+                <Form.Check
+                    type={"radio"}
+                    label={"В процессе"}
+                    id={"StartedCheck"}
+                    name="status"
+                    value={"Started"}
+                    checked={props.status === "Started"}
+                    onChange={props.onChange}
+                    inline
+                /> : undefined
+            }
+            <Form.Check
+                type={"radio"}
+                label={"Завершен"}
+                id={"FinishedCheck"}
+                name="status"
+                value={"Finished"}
+                checked={props.status === "Finished"}
+                onChange={props.onChange}
+                inline
+            />
+        </div>
+    );
+}
+
 export const FormMainTeacher = (props) => {
     return (
         <div>

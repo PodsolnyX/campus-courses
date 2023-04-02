@@ -56,7 +56,9 @@ let initialState = {
         }
     },
     courseStatusModal: {
-        isShow: false
+        isShow: false,
+        status: "",
+        curStatus: ""
     },
     markModal: {
         isShow: false
@@ -155,7 +157,8 @@ const coursesReducer = (state = initialState, action) => {
                 ...state,
                 courseStatusModal: {
                     ...state.courseStatusModal,
-                    isShow: true
+                    isShow: true,
+                    curStatus: action.curStatus
                 }
             };
         case CLOSE_COURSE_STATUS_MODAL:
@@ -169,7 +172,10 @@ const coursesReducer = (state = initialState, action) => {
         case EDIT_VALUE_COURSE_STATUS_MODAL:
             return {
                 ...state,
-                value: action.value
+                courseStatusModal: {
+                    ...state.courseStatusModal,
+                    status: action.status
+                }
             }
 
         case OPEN_MARK_MODAL:
@@ -259,9 +265,9 @@ export const openEditCourseModal = (initData) => ({type: OPEN_EDIT_COURSE_MODAL,
 export const closeEditCourseModal = () => ({type: CLOSE_EDIT_COURSE_MODAL});
 export const setEditCourseModalData = (keyValue, value) => ({type: SET_EDIT_COURSE_MODAL_DATA, keyValue, value});
 
-export const openCourseStatusModal = () => ({type: OPEN_COURSE_STATUS_MODAL});
+export const openCourseStatusModal = (curStatus) => ({type: OPEN_COURSE_STATUS_MODAL, curStatus});
 export const closeCourseStatusModal = () => ({type: CLOSE_COURSE_STATUS_MODAL});
-export const editValueCourseStatusModal = (value) => ({type: EDIT_VALUE_COURSE_STATUS_MODAL, value});
+export const editValueCourseStatusModal = (status) => ({type: EDIT_VALUE_COURSE_STATUS_MODAL, status});
 
 export const openMarkModal = () => ({type: OPEN_MARK_MODAL});
 export const closeMarkModal = () => ({type: CLOSE_MARK_MODAL});
@@ -297,9 +303,9 @@ export const createCourse = (groupId) => (dispatch, getState) => {
     })
 }
 
-export const editCourse = (id) => (dispatch, getState) => {
+export const editCourse = () => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
-    id = getState().coursePage.course.id;
+    const id = getState().coursePage.course.id;
     coursesAPI.editCourse(id, getState().coursePage.editCourseModal.data).then(data => {
         if (data) {
             dispatch(closeEditCourseModal());
@@ -310,9 +316,9 @@ export const editCourse = (id) => (dispatch, getState) => {
     })
 }
 
-export const deleteCourse = (id) => (dispatch, getState) => {
+export const deleteCourse = () => (dispatch, getState) => {
     dispatch(setLoadingCourse(true));
-    id = getState().coursePage.course.id;
+    const id = getState().coursePage.course.id;
     coursesAPI.deleteCourse(id).then(data => {
         if (data === 200) {
             toastSuccess("Курс успешно удалён");
@@ -321,13 +327,26 @@ export const deleteCourse = (id) => (dispatch, getState) => {
     })
 }
 
-export const createNotice = (id) => (dispatch, getState) => {
+export const createNotice = () => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
-    id = getState().coursePage.course.id;
+    const id = getState().coursePage.course.id;
     coursesAPI.createNotice(id, getState().coursePage.noticeModal.data).then(data => {
         if (data) {
             dispatch(closeNoticeModal());
             toastSuccess("Уведомление успешно отправлено")
+            dispatch(getCourseDetails(id));
+        }
+        dispatch(setLoadingModalCourse(false));
+    })
+}
+
+export const setCourseStatus = () => (dispatch, getState) => {
+    dispatch(setLoadingModalCourse(true));
+    const id = getState().coursePage.course.id;
+    coursesAPI.setCourseStatus(id, getState().coursePage.courseStatusModal.status).then(data => {
+        if (data) {
+            dispatch(closeCourseStatusModal());
+            toastSuccess("Статус успешно изменён")
             dispatch(getCourseDetails(id));
         }
         dispatch(setLoadingModalCourse(false));
