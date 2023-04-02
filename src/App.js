@@ -3,8 +3,6 @@ import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/pages/mainPage/mainPage";
 import GroupsPageContainer from "./components/pages/groupsPage/groupsPageContainer";
 import ConcreteGroupPageContainer from "./components/pages/concreteGroupPage/concreteGroupPageContainer";
-import UserCoursesPage from "./components/pages/userCoursesPage/userCoursesPage";
-import TaughtCoursesPage from "./components/pages/taughtCoursesPage/taughtCoursesPage";
 import NotFoundPage from "./components/pages/notFoundPage/notFoundPage";
 import Footer from "./components/other/footer/footer";
 import CoursePageContainer from "./components/pages/coursePage/coursePageContainer";
@@ -19,6 +17,8 @@ import NavbarContainer from "./components/other/navbar/navbarContainer";
 import PrivateRoute from "./hoc/privateRoute";
 import ProfilePageContainer from "./components/pages/profilePage/profilePageContainer";
 import ConfirmPopup from "./components/other/confirmPopup/confirmPopupContainer";
+import UserCoursesPageContainer from "./components/pages/userCoursesPage/userCoursesPageContainer";
+import TaughtCoursesPageContainer from "./components/pages/taughtCoursesPage/taughtCoursesPageContainer";
 
 let mapStateToProps = (state) => {
     return {
@@ -57,9 +57,9 @@ function App (props) {
                     <Route path="/groups/:id"
                            element={<PrivateRoute component={<ConcreteGroupPageContainer/>}/>}/>
                     <Route path="/courses/my"
-                           element={<PrivateRoute component={<UserCoursesPage/>} role={["isStudent"]}/>}/>
+                           element={<PrivateRoute component={<UserCoursesPageContainer/>} role={["isStudent"]}/>}/>
                     <Route path="/courses/teaching"
-                           element={<PrivateRoute component={<TaughtCoursesPage/>} role={["isTeacher"]}/>}/>
+                           element={<PrivateRoute component={<TaughtCoursesPageContainer/>} role={["isTeacher"]}/>}/>
                     <Route path="/courses/:id"
                            element={<PrivateRoute component={<CoursePageContainer/>}/>}/>
                     <Route path="*" element={<NotFoundPage/>}/>

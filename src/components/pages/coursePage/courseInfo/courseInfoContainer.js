@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import CourseInfo from "./courseInfo";
-import {openCourseStatusModal} from "../../../../store/reducers/coursesReducer";
+import {openCourseStatusModal, signUpCourse} from "../../../../store/reducers/coursesReducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -11,5 +11,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    openCourseStatusModal
+    openCourseStatusModal,
+    signUpCourse
 })(CourseInfo);

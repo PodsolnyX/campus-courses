@@ -2,6 +2,7 @@ import {Button, Card, ListGroup, Spinner} from "react-bootstrap";
 import EditCourseStatusModalContainer from "../modals/editCourseStatusModal/editCourseStatusModalContainer";
 import {CONST} from "../../../../helpers/constants";
 import LoadSpinner from "../../../other/loadSpinner/loadSpinner";
+import {signUpCourse} from "../../../../store/reducers/coursesReducer";
 
 
 const CourseInfo = (props) => {
@@ -31,6 +32,10 @@ const CourseInfo = (props) => {
                                                 >Изменить статус</Button>
                                             </div>
                                         </div> : undefined
+                                    }
+                                    {props.userRoles["isAdmin"] === false ?
+                                        <Button variant={"outline-success"} onClick={props.signUpCourse}>
+                                            Записаться на курс</Button> : undefined
                                     }
                                 </div>
                             </ListGroup.Item>

@@ -1,10 +1,11 @@
 import {coursesAPI} from "../../api/coursesAPI";
 import {toastSuccess} from "../../helpers/toaster";
 import {getGroupCourses} from "./groupsReducer";
-import {useNavigate} from "react-router-dom";
 
 const
     SET_COURSE_DETAILS = "SET_COURSE_DETAILS",
+    SET_USER_COURSES = "SET_USER_COURSES",
+    SET_TAUGHT_COURSES = "SET_TAUGHT_COURSES",
     SET_LOADING_COURSE = "SET_LOADING_COURSE",
 
     OPEN_CREATE_COURSE_MODAL = "OPEN_CREATE_COURSE_MODAL",
@@ -36,6 +37,8 @@ const
 
 let initialState = {
     course: [],
+    userCourses: [],
+    taughtCourses: [],
     createCourseModal: {
         isShow: false,
         currentCourse: {
@@ -83,6 +86,16 @@ const coursesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 course: action.data
+            };
+        case SET_USER_COURSES:
+            return {
+                ...state,
+                userCourses: action.data
+            };
+        case SET_TAUGHT_COURSES:
+            return {
+                ...state,
+                taughtCourses: action.data
             };
         case SET_LOADING_COURSE:
             return {
@@ -255,6 +268,8 @@ const coursesReducer = (state = initialState, action) => {
 }
 
 export const setCourseDetails = (data) => ({type: SET_COURSE_DETAILS, data});
+export const setUserCourses = (data) => ({type: SET_USER_COURSES, data});
+export const setTaughtCourses = (data) => ({type: SET_TAUGHT_COURSES, data});
 export const setLoadingCourse = (isLoading) => ({type: SET_LOADING_COURSE, isLoading});
 
 export const openCreateCourseModal = () => ({type: OPEN_CREATE_COURSE_MODAL});
@@ -287,6 +302,22 @@ export const getCourseDetails = (id) => (dispatch) => {
     dispatch(setLoadingCourse(true));
     coursesAPI.getCourseDetails(id).then(data => {
         if (data) dispatch(setCourseDetails(data));
+        dispatch(setLoadingCourse(false));
+    })
+}
+
+export const getUserCourses = () => (dispatch) => {
+    dispatch(setLoadingCourse(true));
+    coursesAPI.getUserCourses().then(data => {
+        if (data) dispatch(setUserCourses(data));
+        dispatch(setLoadingCourse(false));
+    })
+}
+
+export const getTaughtCourses = () => (dispatch) => {
+    dispatch(setLoadingCourse(true));
+    coursesAPI.getTaughtCourses().then(data => {
+        if (data) dispatch(setTaughtCourses(data));
         dispatch(setLoadingCourse(false));
     })
 }
@@ -350,6 +381,18 @@ export const setCourseStatus = () => (dispatch, getState) => {
             dispatch(getCourseDetails(id));
         }
         dispatch(setLoadingModalCourse(false));
+    })
+}
+
+export const signUpCourse = () => (dispatch, getState) => {
+    dispatch(setLoadingCourse(true));
+    const id = getState().coursePage.course.id;
+    coursesAPI.signUpCourse(id).then(data => {
+        if (data === 200) {
+            toastSuccess("Заявка успешно отправлена")
+            dispatch(getCourseDetails(id));
+        }
+        dispatch(setLoadingCourse(false));
     })
 }
 

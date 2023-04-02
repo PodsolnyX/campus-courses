@@ -17,8 +17,6 @@ const EditCourseStatusModal = (props) => {
         props.setCourseStatus();
     }
 
-    console.log(props.curStatus)
-
     return (
         <Modal
             show={props.isShow}

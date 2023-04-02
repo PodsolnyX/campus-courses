@@ -13,6 +13,26 @@ const getCourseDetails = (id) => {
         });
 }
 
+const getUserCourses = () => {
+    return instance.get(`courses/my`)
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
+const getTaughtCourses = () => {
+    return instance.get(`courses/teaching`)
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 const createCourse = (id, data) => {
     return instance.post(`courses/${id}`, {
         name: data.groupName,
@@ -79,11 +99,24 @@ const setCourseStatus = (id, status) => {
         });
 }
 
+const signUpCourse = (id) => {
+    return instance.post(`courses/${id}/sign-up`)
+        .then(response => {
+            if (response.status === 200) return 200;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 export const coursesAPI = {
     getCourseDetails: getCourseDetails,
+    getUserCourses: getUserCourses,
+    getTaughtCourses: getTaughtCourses,
     createCourse: createCourse,
     editCourse: editCourse,
     deleteCourse: deleteCourse,
     createNotice: createNotice,
-    setCourseStatus: setCourseStatus
+    setCourseStatus: setCourseStatus,
+    signUpCourse: signUpCourse
 };
