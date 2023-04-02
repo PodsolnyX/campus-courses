@@ -396,4 +396,16 @@ export const signUpCourse = () => (dispatch, getState) => {
     })
 }
 
+export const editStudentCourseStatus = (studentId, status) => (dispatch, getState) => {
+    dispatch(setLoadingCourse(true));
+    const courseId = getState().coursePage.course.id;
+    coursesAPI.editStudentCourseStatus(courseId, studentId, status).then(data => {
+        if (data) {
+            toastSuccess("Успешно")
+            dispatch(getCourseDetails(courseId));
+        }
+        dispatch(setLoadingCourse(false));
+    })
+}
+
 export default coursesReducer;

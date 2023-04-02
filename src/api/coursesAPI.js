@@ -105,6 +105,19 @@ const signUpCourse = (id) => {
             if (response.status === 200) return 200;
         })
         .catch(error => {
+            console.log(error.response)
+            toastError("Что-то пошло не так")
+        });
+}
+
+const editStudentCourseStatus = (courseId, studentId, status) => {
+    return instance.post(`courses/${courseId}/student-status/${studentId}`, {
+        status: status
+    })
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
             toastError("Что-то пошло не так")
         });
 }
@@ -118,5 +131,6 @@ export const coursesAPI = {
     deleteCourse: deleteCourse,
     createNotice: createNotice,
     setCourseStatus: setCourseStatus,
-    signUpCourse: signUpCourse
+    signUpCourse: signUpCourse,
+    editStudentCourseStatus: editStudentCourseStatus
 };

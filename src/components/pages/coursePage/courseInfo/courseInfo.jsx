@@ -33,7 +33,7 @@ const CourseInfo = (props) => {
                                             </div>
                                         </div> : undefined
                                     }
-                                    {props.userRoles["isAdmin"] === false ?
+                                    {props.userRoles["isAdmin"] === false && props.course.status === "OpenForAssigning" ?
                                         <Button variant={"outline-success"} onClick={props.signUpCourse}>
                                             Записаться на курс</Button> : undefined
                                     }

@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import StudentTab from "./studentTab";
-import {openMarkModal} from "../../../../../store/reducers/coursesReducer";
+import {editStudentCourseStatus, openMarkModal} from "../../../../../store/reducers/coursesReducer";
+import {openConfirmPopup} from "../../../../../store/reducers/confirmPopupReducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -10,5 +11,7 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    openMarkModal
+    openMarkModal,
+    editStudentCourseStatus,
+    openConfirmPopup
 })(StudentTab);

@@ -1,14 +1,25 @@
 import {Button, ListGroup} from "react-bootstrap";
-import {toastSuccess} from "../../../../../../helpers/toaster";
 import {CONST} from "../../../../../../helpers/constants";
 
 const StudentTabItem = (props) => {
+
+    const onAccept = () => {
+        props.editStudentCourseStatus(props.data.id, "Accepted")
+    }
+
+    const onDecline = () => {
+        props.openConfirmPopup(() => {
+                props.editStudentCourseStatus(props.data.id, "Declined")
+            }
+        )
+    }
+
     return (
         <ListGroup.Item>
             <div className={"row"}>
                 <div className={"col"}>
                     <div className={"fw-bold"}>{props.data.name}</div>
-                    { !props.isAdmin ? undefined :
+                    {!props.isAdmin ? undefined :
                         <div className={"text-secondary"}>Статус - {
                             props.data.status === "Accepted" ?
                                 <span className={"text-success"}>принят в группу</span>
@@ -48,11 +59,11 @@ const StudentTabItem = (props) => {
                                         <div className={"row"}>
                                             <div className={"d-flex justify-content-end"}>
                                                 <Button variant={"outline-primary"} className={"me-2"}
-                                                        onClick={() => toastSuccess("Студент успешно принят")}>
+                                                        onClick={onAccept}>
                                                     Принять
                                                 </Button>
                                                 <Button variant={"outline-danger"}
-                                                        onClick={() => toastSuccess("Студент успешно отклонён")}>
+                                                        onClick={onDecline}>
                                                     Отклонить
                                                 </Button>
                                             </div>
