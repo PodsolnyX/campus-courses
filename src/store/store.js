@@ -6,6 +6,7 @@ import loginPageReducer from "./reducers/loginPageReducer";
 import userReducer from "./reducers/userReducer";
 import profilePageReducer from "./reducers/profilePageReducer";
 import coursesReducer from "./reducers/coursesReducer";
+import confirmPopupReducer from "./reducers/confirmPopupReducer";
 
 let reducers = combineReducers({
     groupsPage: groupsReducer,
@@ -14,6 +15,7 @@ let reducers = combineReducers({
     loginPage: loginPageReducer,
     profilePage: profilePageReducer,
     user: userReducer,
+    confirmPopup: confirmPopupReducer
 });
 
 let store = createStore(reducers, applyMiddleware(ThunkMiddleware));

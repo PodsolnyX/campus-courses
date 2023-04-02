@@ -3,6 +3,11 @@ import {Link} from "react-router-dom";
 
 const ListGroupItem = (props) => {
 
+    const onDeleteGroup = () => {
+        props.openConfirmPopup(() => {
+            props.deleteGroup(props.data)
+        })
+    }
 
     return (
       <ListGroup.Item>
@@ -17,7 +22,7 @@ const ListGroupItem = (props) => {
                                   onClick={() => props.openGroupsModal(props.data, true)}>
                               Изменить
                           </Button>
-                          <Button variant={"outline-danger"} onClick={() => props.openDeletePopup(props.data)}>
+                          <Button variant={"outline-danger"} onClick={onDeleteGroup}>
                               Удалить
                           </Button>
                       </div>

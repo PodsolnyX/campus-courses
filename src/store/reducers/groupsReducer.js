@@ -7,15 +7,12 @@ const
     SET_GROUP_COURSES = "SET_GROUP_COURSES",
     CLOSE_GROUPS_MODAL = "CLOSE_GROUPS_MODAL",
     EDIT_NAME_GROUPS_MODAL = "EDIT_NAME_GROUPS_MODAL",
-    OPEN_DELETE_POPUP = "OPEN_DELETE_POPUP",
-    CLOSE_DELETE_POPUP = "CLOSE_DELETE_POPUP",
     SET_LOADING_GROUPS = "SET_LOADING_GROUPS",
     SET_LOADING_MODAL_GROUPS = "SET_LOADING_MODAL_GROUPS"
 ;
 
 let initialState = {
     isShowModal: false,
-    isShowPopup: false,
     isEdit: false,
     currentGroup: {},
     groups: [],
@@ -66,17 +63,6 @@ const groupsReducer = (state = initialState, action) => {
                     name: action.name
                 }
             };
-        case OPEN_DELETE_POPUP:
-            return {
-                ...state,
-                isShowPopup: true,
-                currentGroup: action.data
-            };
-        case CLOSE_DELETE_POPUP:
-            return {
-                ...state,
-                isShowPopup: false
-            };
         default:
             return state;
     }
@@ -85,9 +71,6 @@ const groupsReducer = (state = initialState, action) => {
 export const openGroupsModal = (data, isEdit) => ({type: OPEN_GROUPS_MODAL, data, isEdit});
 export const closeGroupsModal = () => ({type: CLOSE_GROUPS_MODAL});
 export const editNameGroupsModal = (name) => ({type: EDIT_NAME_GROUPS_MODAL, name})
-
-export const openDeletePopup = (data) => ({type: OPEN_DELETE_POPUP, data});
-export const closeDeletePopup = () => ({type: CLOSE_DELETE_POPUP});
 
 export const setGroups = (data) => ({type: SET_GROUPS, data});
 export const setGroupCourses = (data) => ({type: SET_GROUP_COURSES, data})
@@ -136,11 +119,10 @@ export const editGroup = () => (dispatch, getState) => {
         })
 }
 
-export const deleteGroup = () => (dispatch, getState) => {
+export const deleteGroup = (currentGroup) => (dispatch, getState) => {
     dispatch(setLoadingModalGroups(true));
-    groupsAPI.deleteGroup(getState().groupsPage.currentGroup.id).then(data => {
+    groupsAPI.deleteGroup(currentGroup.id).then(data => {
         if (data === 200) {
-            dispatch(closeDeletePopup());
             toastSuccess("Группа успешно удалена");
             dispatch(getGroups());
         }

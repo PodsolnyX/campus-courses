@@ -1,7 +1,8 @@
 import {connect} from "react-redux";
 import CoursePage from "./coursePage";
-import {getCourseDetails, openEditCourseModal} from "../../../store/reducers/coursesReducer";
+import {deleteCourse, getCourseDetails, openEditCourseModal} from "../../../store/reducers/coursesReducer";
 import {withRouter} from "../../../hoc/withRouter";
+import {openConfirmPopup} from "../../../store/reducers/confirmPopupReducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -13,5 +14,7 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     openEditCourseModal,
-    getCourseDetails
+    getCourseDetails,
+    deleteCourse,
+    openConfirmPopup
 })(withRouter(CoursePage));

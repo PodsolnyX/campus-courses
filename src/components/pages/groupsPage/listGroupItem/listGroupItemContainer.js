@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import ListGroupItem from "./listGroupItem";
-import {openDeletePopup, openGroupsModal} from "../../../../store/reducers/groupsReducer";
+import {deleteGroup, openGroupsModal} from "../../../../store/reducers/groupsReducer";
+import {openConfirmPopup} from "../../../../store/reducers/confirmPopupReducer";
 
 let mapStateToProps = (state, props) => {
     return {
@@ -11,6 +12,7 @@ let mapStateToProps = (state, props) => {
 }
 
 export default connect(mapStateToProps, {
-    openDeletePopup,
-    openGroupsModal
+    openGroupsModal,
+    openConfirmPopup,
+    deleteGroup
 })(ListGroupItem);

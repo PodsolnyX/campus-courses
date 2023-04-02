@@ -1,8 +1,6 @@
 import './App.css';
-import {Route, Routes, Navigate} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/pages/mainPage/mainPage";
-import ProfilePage from "./components/pages/profilePage/profilePage";
-import DeletePopupContainer from "./components/pages/groupsPage/modals/deletePopup/deletePopupContainer";
 import GroupsPageContainer from "./components/pages/groupsPage/groupsPageContainer";
 import ConcreteGroupPageContainer from "./components/pages/concreteGroupPage/concreteGroupPageContainer";
 import UserCoursesPage from "./components/pages/userCoursesPage/userCoursesPage";
@@ -20,6 +18,7 @@ import {useEffect} from "react";
 import NavbarContainer from "./components/other/navbar/navbarContainer";
 import PrivateRoute from "./hoc/privateRoute";
 import ProfilePageContainer from "./components/pages/profilePage/profilePageContainer";
+import ConfirmPopup from "./components/other/confirmPopup/confirmPopupContainer";
 
 let mapStateToProps = (state) => {
     return {
@@ -41,7 +40,7 @@ function App (props) {
     return (
         <div className="App">
             <NavbarContainer/>
-            <DeletePopupContainer/>
+            <ConfirmPopup/>
             <ToastContainer/>
             <div className={"content"}>
                 <Routes>

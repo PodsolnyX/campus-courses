@@ -9,5 +9,6 @@ export const toastInfo = (text) => {
 }
 
 export const toastError = (text) => {
+    toast.dismiss();
     toast.error(text, {autoClose: false, closeButton: true, transition: Slide});
 }

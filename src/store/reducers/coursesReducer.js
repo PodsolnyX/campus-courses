@@ -1,6 +1,7 @@
 import {coursesAPI} from "../../api/coursesAPI";
 import {toastSuccess} from "../../helpers/toaster";
 import {getGroupCourses} from "./groupsReducer";
+import {useNavigate} from "react-router-dom";
 
 const
     SET_COURSE_DETAILS = "SET_COURSE_DETAILS",
@@ -306,6 +307,17 @@ export const editCourse = (id) => (dispatch, getState) => {
             dispatch(getCourseDetails(id));
         }
         dispatch(setLoadingModalCourse(false));
+    })
+}
+
+export const deleteCourse = (id) => (dispatch, getState) => {
+    dispatch(setLoadingCourse(true));
+    id = getState().coursePage.course.id;
+    coursesAPI.deleteCourse(id).then(data => {
+        if (data === 200) {
+            toastSuccess("Курс успешно удалён");
+        }
+        dispatch(setLoadingCourse(false));
     })
 }
 

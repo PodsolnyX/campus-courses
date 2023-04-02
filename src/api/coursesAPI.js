@@ -44,6 +44,16 @@ const editCourse = (id, data) => {
         });
 }
 
+const deleteCourse = (id) => {
+    return instance.delete(`courses/${id}`)
+        .then(response => {
+            if (response.status === 200) return 200;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
 const createNotice = (id, data) => {
     return instance.post(`courses/${id}/notifications`, {
         text: data.text,
@@ -61,5 +71,6 @@ export const coursesAPI = {
     getCourseDetails: getCourseDetails,
     createCourse: createCourse,
     editCourse: editCourse,
+    deleteCourse: deleteCourse,
     createNotice: createNotice
 };
