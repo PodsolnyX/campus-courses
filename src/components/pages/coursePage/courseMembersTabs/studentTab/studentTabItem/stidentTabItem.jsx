@@ -3,8 +3,6 @@ import {CONST} from "../../../../../../helpers/constants";
 
 const StudentTabItem = (props) => {
 
-    const isAdmin = props.userRoles["isAdmin"] === true;
-
     const onAccept = () => {
         props.editStudentCourseStatus(props.data.id, "Accepted")
     }
@@ -38,7 +36,7 @@ const StudentTabItem = (props) => {
             <div className={"row"}>
                 <div className={"col"}>
                     <div className={"fw-bold"}>{props.data.name}</div>
-                    {!isAdmin ? undefined :
+                    {!props.isCanEdit ? undefined :
                         <div className={"text-secondary"}>Статус - {
                             props.data.status === "Accepted" ?
                                 <span className={"text-success"}>принят в группу</span>
@@ -51,7 +49,7 @@ const StudentTabItem = (props) => {
                     <div className={"text-secondary"}>{props.data.email}</div>
                 </div>
                 {
-                    !isAdmin ? undefined :
+                    !props.isCanEdit ? undefined :
                         <div className={"col my-auto"}>
                             {
                                 props.data.status === "Accepted" ?

@@ -3,6 +3,7 @@ import ListCoursesItem from "./listCoursesItem/listCoursesItem";
 import {useEffect} from "react";
 import LoadSpinner from "../../other/loadSpinner/loadSpinner";
 import CreateCourseModalContainer from "./createCourseModal/createCourseModalContainer";
+import {isAdmin} from "../../../helpers/roleDeterminant";
 
 const ConcreteGroupPage = (props) => {
 
@@ -19,13 +20,13 @@ const ConcreteGroupPage = (props) => {
 
     return (
         <div>
-            { props.userRoles["isAdmin"] === true ? <CreateCourseModalContainer/> : undefined}
+            { isAdmin(props.userRoles) ? <CreateCourseModalContainer/> : undefined}
             <Container className={"col"}>
                 <div className="col-12 col-lg-8 mx-auto mt-5">
                     <div className={"d-flex justify-content-between"}>
                         <h3>Группа - {groupName}</h3>
                         {
-                            props.userRoles["isAdmin"] === true ?
+                            isAdmin(props.userRoles) ?
                                 <Button variant={"outline-primary"} onClick={() => props.openCreateCourseModal()}>
                                     Создать курс
                                 </Button>

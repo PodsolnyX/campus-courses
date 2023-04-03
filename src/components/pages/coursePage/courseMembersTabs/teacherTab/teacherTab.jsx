@@ -1,12 +1,16 @@
 import {Button, ListGroup} from "react-bootstrap";
 import TeacherTabItem from "./teacherTabItem/teacherTabItem";
 import AddTeacherModalContainer from "../../modals/addTeacherModal/addTeacherModalContainer";
+import {isAdmin, isCourseMainTeacher} from "../../../../../helpers/roleDeterminant";
 
 const TeacherTab = (props) => {
+
+    const isCanEdit = isAdmin(props.userRoles) || isCourseMainTeacher(props.userEmail, props.teachers);
+
     return (
         <div>
             {
-                props.userRoles["isAdmin"] === true ?
+                isCanEdit ?
                     <div>
                         <AddTeacherModalContainer/>
                         <Button variant={"outline-primary"} className={"mb-3"} onClick={props.openTeacherModal}>

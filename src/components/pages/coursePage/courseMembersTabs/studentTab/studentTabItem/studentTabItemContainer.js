@@ -4,9 +4,7 @@ import {editStudentCourseStatus, openMarkModal} from "../../../../../../store/re
 import {openConfirmPopup} from "../../../../../../store/reducers/confirmPopupReducer";
 
 let mapStateToProps = (state) => {
-    return {
-        userRoles: state.user.userRoles
-    };
+    return {};
 }
 
 export default connect(mapStateToProps, {

@@ -1,13 +1,18 @@
-import {Button, Card, ListGroup, Spinner} from "react-bootstrap";
+import {Button, Card, ListGroup} from "react-bootstrap";
 import EditCourseStatusModalContainer from "../modals/editCourseStatusModal/editCourseStatusModalContainer";
 import {CONST} from "../../../../helpers/constants";
 import LoadSpinner from "../../../other/loadSpinner/loadSpinner";
-import {signUpCourse} from "../../../../store/reducers/coursesReducer";
+import {isAdmin, isCourseStudent, isCourseTeacher} from "../../../../helpers/roleDeterminant";
 
 
 const CourseInfo = (props) => {
+
+    const isTeacher = isCourseTeacher(props.userEmail, props.course.teachers)
+    const isCanEdit = isAdmin(props.userRoles) || isTeacher;
+
     return (
         <div className={"mt-2"}>
+            {isCanEdit && props.course.status !== "Finished" ? <EditCourseStatusModalContainer/> : undefined}
             <div className={"fw-bold my-auto"}>Основные данные курса</div>
             <Card className={"mt-1"}>
                 {
@@ -22,21 +27,22 @@ const CourseInfo = (props) => {
                                             {CONST.COURSE_STATUS[props.course.status]}
                                         </div>
                                     </div>
-                                    {
-                                        props.userRoles["isAdmin"] === true && props.course.status !== "Finished" ?
-                                        <div>
-                                            <EditCourseStatusModalContainer/>
-                                            <div className={"my-auto"} >
+                                    <div className={"d-flex"}>
+                                        {
+                                            isCanEdit ?
                                                 <Button variant={"outline-warning"}
                                                         onClick={() => props.openCourseStatusModal(props.course.status)}
                                                 >Изменить статус</Button>
-                                            </div>
-                                        </div> : undefined
-                                    }
-                                    {props.userRoles["isAdmin"] === false && props.course.status === "OpenForAssigning" ?
-                                        <Button variant={"outline-success"} onClick={props.signUpCourse}>
-                                            Записаться на курс</Button> : undefined
-                                    }
+                                                : undefined
+                                        }
+                                        {!isTeacher && !isCourseStudent(props.course.id, props.userCourses)
+                                        && props.course.status === "OpenForAssigning" ?
+                                            <Button variant={"outline-success"} onClick={props.signUpCourse}
+                                                    className={"ms-2"}
+                                            >
+                                                Записаться на курс</Button> : undefined
+                                        }
+                                    </div>
                                 </div>
                             </ListGroup.Item>
                             <ListGroup.Item>

@@ -1,6 +1,7 @@
 import {coursesAPI} from "../../api/coursesAPI";
 import {toastSuccess} from "../../helpers/toaster";
 import {getGroupCourses, setGroupCourses} from "./groupsReducer";
+import {isCourseMainTeacher, isCourseStudent, isCourseTeacher} from "../../helpers/roleDeterminant";
 
 const
     SET_COURSE_DETAILS = "SET_COURSE_DETAILS",
@@ -434,6 +435,7 @@ export const signUpCourse = () => (dispatch, getState) => {
     coursesAPI.signUpCourse(id).then(data => {
         if (data === 200) {
             toastSuccess("Заявка успешно отправлена")
+            dispatch(getUserCourses());
             dispatch(getCourseDetails(id));
         }
         dispatch(setLoadingCourse(false));

@@ -1,6 +1,7 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {Link, NavLink} from "react-router-dom";
 import s from "./navbar.module.css";
+import {isStudent, isTeacher} from "../../../helpers/roleDeterminant";
 
 const NavBar = (props) => {
 
@@ -24,13 +25,13 @@ const NavBar = (props) => {
                                 </NavLink> : undefined
                         }
                         {
-                            props.isAuth && props.userRoles["isStudent"] === true ?
+                            props.isAuth && isStudent(props.userRoles) ?
                                 <NavLink className={({isActive}) => isActive ? s.activeLink : s.nonActiveLink}
                                          to={"/courses/my"}>Мои курсы
                                 </NavLink> : undefined
                         }
                         {
-                            props.isAuth && props.userRoles["isTeacher"] === true ?
+                            props.isAuth && isTeacher(props.userRoles) ?
                                 <NavLink className={({isActive}) => isActive ? s.activeLink : s.nonActiveLink}
                                          to={"/courses/teaching"}>Преподаваемые курсы
                                 </NavLink> : undefined
