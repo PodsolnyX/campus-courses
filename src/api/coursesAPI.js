@@ -105,7 +105,6 @@ const signUpCourse = (id) => {
             if (response.status === 200) return 200;
         })
         .catch(error => {
-            console.log(error.response)
             toastError("Что-то пошло не так")
         });
 }
@@ -140,10 +139,9 @@ const addCourseTeacher = (courseId, userId) => {
         userId: userId
     })
         .then(response => {
-            if (response.status === 200) return 200;
+            if (response.status === 200) return response.data;
         })
         .catch(error => {
-            console.log(error.response)
             toastError("Что-то пошло не так")
         });
 }

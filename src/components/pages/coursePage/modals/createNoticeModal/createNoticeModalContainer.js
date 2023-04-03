@@ -8,7 +8,8 @@ import {
 let mapStateToProps = (state) => {
     return {
         isShow: state.coursePage.noticeModal.isShow,
-        data: state.coursePage.noticeModal.data
+        data: state.coursePage.noticeModal.data,
+        isLoading: state.coursePage.isLoadingModal
     };
 }
 

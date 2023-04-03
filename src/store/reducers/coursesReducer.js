@@ -1,6 +1,6 @@
 import {coursesAPI} from "../../api/coursesAPI";
 import {toastSuccess} from "../../helpers/toaster";
-import {getGroupCourses} from "./groupsReducer";
+import {getGroupCourses, setGroupCourses} from "./groupsReducer";
 
 const
     SET_COURSE_DETAILS = "SET_COURSE_DETAILS",
@@ -346,7 +346,7 @@ export const createCourse = (groupId) => (dispatch, getState) => {
         if (data) {
             dispatch(closeCreateCourseModal());
             toastSuccess("Курс успешно создан")
-            dispatch(getGroupCourses(groupId));
+            dispatch(setGroupCourses(data));
         }
         dispatch(setLoadingModalCourse(false));
     })
@@ -359,7 +359,7 @@ export const editCourse = () => (dispatch, getState) => {
         if (data) {
             dispatch(closeEditCourseModal());
             toastSuccess("Курс успешно изменён")
-            dispatch(getCourseDetails(id));
+            dispatch(setCourseDetails(data))
         }
         dispatch(setLoadingModalCourse(false));
     })
@@ -383,7 +383,7 @@ export const createNotice = () => (dispatch, getState) => {
         if (data) {
             dispatch(closeNoticeModal());
             toastSuccess("Уведомление успешно отправлено")
-            dispatch(getCourseDetails(id));
+            dispatch(setCourseDetails(data))
         }
         dispatch(setLoadingModalCourse(false));
     })
@@ -396,7 +396,7 @@ export const setCourseStatus = () => (dispatch, getState) => {
         if (data) {
             dispatch(closeCourseStatusModal());
             toastSuccess("Статус успешно изменён")
-            dispatch(getCourseDetails(id));
+            dispatch(setCourseDetails(data))
         }
         dispatch(setLoadingModalCourse(false));
     })
@@ -409,7 +409,7 @@ export const addCourseTeacher = () => (dispatch, getState) => {
         if (data) {
             dispatch(closeTeacherModal());
             toastSuccess("Преподаватель успешно добавлен")
-            dispatch(getCourseDetails(id));
+            dispatch(setCourseDetails(data))
         }
         dispatch(setLoadingModalCourse(false));
     })
@@ -446,7 +446,7 @@ export const editStudentCourseStatus = (studentId, status) => (dispatch, getStat
     coursesAPI.editStudentCourseStatus(courseId, studentId, status).then(data => {
         if (data) {
             toastSuccess("Успешно")
-            dispatch(getCourseDetails(courseId));
+            dispatch(setCourseDetails(data))
         }
         dispatch(setLoadingCourse(false));
     })
