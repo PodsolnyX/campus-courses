@@ -42,7 +42,7 @@ function App (props) {
             <NavbarContainer/>
             <ConfirmPopup/>
             <ToastContainer/>
-            <div className={"content"}>
+            <div className={"content mb-5"}>
                 <Routes>
                     <Route path="/"
                            element={<PrivateRoute component={<MainPage/>}/>}/>

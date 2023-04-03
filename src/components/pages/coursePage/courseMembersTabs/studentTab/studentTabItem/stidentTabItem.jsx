@@ -49,7 +49,7 @@ const StudentTabItem = (props) => {
                     <div className={"text-secondary"}>{props.data.email}</div>
                 </div>
                 {
-                    !props.isCanEdit ? undefined :
+                    !props.isCanEdit && !props.isCanView ? undefined :
                         <div className={"col my-auto"}>
                             {
                                 props.data.status === "Accepted" ?

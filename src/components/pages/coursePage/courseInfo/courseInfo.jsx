@@ -29,7 +29,7 @@ const CourseInfo = (props) => {
                                     </div>
                                     <div className={"d-flex"}>
                                         {
-                                            isCanEdit ?
+                                            isCanEdit && props.course.status !== "Finished"?
                                                 <Button variant={"outline-warning"}
                                                         onClick={() => props.openCourseStatusModal(props.course.status)}
                                                 >Изменить статус</Button>

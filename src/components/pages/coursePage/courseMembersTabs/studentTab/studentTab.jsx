@@ -16,7 +16,9 @@ const StudentTab = (props) => {
                     props.course.students?.length === 0 ?
                         <div className={"text-secondary mx-auto my-3"}>Заявок студентов нет</div>
                     : props.course.students?.map(s =>
-                        <StudentTabItemContainer data={s} key={s.id} isCanEdit={isCanEdit}/>
+                        <StudentTabItemContainer data={s} key={s.id} isCanEdit={isCanEdit}
+                                                 isCanView={props.userEmail === s.email}
+                        />
                     )
                 }
             </ListGroup>
