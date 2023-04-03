@@ -4,7 +4,8 @@ import {loginUser, setLoginFormData} from "../../../store/reducers/loginPageRedu
 
 let mapStateToProps = (state) => {
     return {
-        formData: state.loginPage.formData
+        formData: state.loginPage.formData,
+        isLoading: state.loginPage.isLoading
     };
 }
 

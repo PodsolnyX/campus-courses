@@ -4,7 +4,8 @@ import {registerUser, setRegistrationFormData} from "../../../store/reducers/reg
 
 let mapStateToProps = (state) => {
     return {
-        formData: state.registrationPage.formData
+        formData: state.registrationPage.formData,
+        isLoading: state.registrationPage.isLoading
     };
 }
 
