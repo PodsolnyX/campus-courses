@@ -28,6 +28,8 @@ const CoursePage = (props) => {
         })
     }
 
+    console.log(props.course)
+
     return (
         <Container className={"col"}>
             <div className="col-12 col-lg-10 mx-auto mt-5">

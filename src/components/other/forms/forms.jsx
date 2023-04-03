@@ -201,6 +201,32 @@ export const FormSemester = (props) => {
     );
 }
 
+
+export const FormMark = (props) => {
+    return (
+        <div>
+            <Form.Check
+                type={"radio"}
+                label={"Пройдено"}
+                name="mark"
+                inline
+                value={"Passed"}
+                checked={props.mark === "Passed"}
+                onChange={props.onChange}
+            />
+            <Form.Check
+                type={"radio"}
+                label={"Провалено"}
+                name="mark"
+                inline
+                value={"Failed"}
+                checked={props.mark === "Failed"}
+                onChange={props.onChange}
+            />
+        </div>
+    );
+}
+
 export const FormCourseStatus = (props) => {
 
     return (

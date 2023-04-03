@@ -1,15 +1,20 @@
 import {connect} from "react-redux";
 import AddTeacherModal from "./addTeacherModal";
-import {closeTeacherModal, editValueTeacherModal} from "../../../../../store/reducers/coursesReducer";
+import {addCourseTeacher, closeTeacherModal, editValueTeacherModal} from "../../../../../store/reducers/coursesReducer";
+import {getUsers} from "../../../../../store/reducers/userReducer";
 
 let mapStateToProps = (state) => {
     return {
         isShow: state.coursePage.teacherModal.isShow,
-        value: state.coursePage.teacherModal.value
+        userId: state.coursePage.teacherModal.userId,
+        users: state.user.users,
+        isLoading: state.coursePage.isLoadingModal
     };
 }
 
 export default connect(mapStateToProps, {
     closeTeacherModal,
-    editValueTeacherModal
+    getUsers,
+    editValueTeacherModal,
+    addCourseTeacher
 })(AddTeacherModal);

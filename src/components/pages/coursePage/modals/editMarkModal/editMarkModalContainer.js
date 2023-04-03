@@ -1,15 +1,17 @@
 import {connect} from "react-redux";
 import EditMarkModal from "./editMarkModal";
-import {closeMarkModal, editValueMarkModal} from "../../../../../store/reducers/coursesReducer";
+import {closeMarkModal, editStudentMark, editValueMarkModal} from "../../../../../store/reducers/coursesReducer";
 
 let mapStateToProps = (state) => {
     return {
         isShow: state.coursePage.markModal.isShow,
-        value: state.coursePage.markModal.value
+        data: state.coursePage.markModal.data,
+        isLoading: state.coursePage.isLoadingModal
     };
 }
 
 export default connect(mapStateToProps, {
     closeMarkModal,
-    editValueMarkModal
+    editValueMarkModal,
+    editStudentMark
 })(EditMarkModal);

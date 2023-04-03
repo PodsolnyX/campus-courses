@@ -3,6 +3,8 @@ import {CONST} from "../../../../../../helpers/constants";
 
 const StudentTabItem = (props) => {
 
+    const isAdmin = props.userRoles["isAdmin"] === true;
+
     const onAccept = () => {
         props.editStudentCourseStatus(props.data.id, "Accepted")
     }
@@ -14,12 +16,29 @@ const StudentTabItem = (props) => {
         )
     }
 
+    const onMidtermMark = () => {
+        props.openMarkModal({
+            markType: "Midterm",
+            mark: props.data.midtermResult,
+            name: props.data.name,
+            id: props.data.id
+        })
+    }
+    const onFinalMark = () => {
+        props.openMarkModal({
+            markType: "Final",
+            mark: props.data.finalResult,
+            name: props.data.name,
+            id: props.data.id
+        })
+    }
+
     return (
         <ListGroup.Item>
             <div className={"row"}>
                 <div className={"col"}>
                     <div className={"fw-bold"}>{props.data.name}</div>
-                    {!props.isAdmin ? undefined :
+                    {!isAdmin ? undefined :
                         <div className={"text-secondary"}>Статус - {
                             props.data.status === "Accepted" ?
                                 <span className={"text-success"}>принят в группу</span>
@@ -32,12 +51,12 @@ const StudentTabItem = (props) => {
                     <div className={"text-secondary"}>{props.data.email}</div>
                 </div>
                 {
-                    !props.isAdmin ? undefined :
+                    !isAdmin ? undefined :
                         <div className={"col my-auto"}>
                             {
                                 props.data.status === "Accepted" ?
                                     <div className={"row text-md-end"}>
-                                        <div className={"col-12 mb-2"} onClick={props.openMarkModal}
+                                        <div className={"col-12 mb-2"} onClick={onMidtermMark}
                                              style={{cursor: "pointer"}}>
                                             Промежуточная аттестация -
                                             <span
@@ -45,7 +64,7 @@ const StudentTabItem = (props) => {
                                         {CONST.RESULT_STATUS[props.data.midtermResult]}
                                     </span>
                                         </div>
-                                        <div className={"col-12"} onClick={props.openMarkModal}
+                                        <div className={"col-12"} onClick={onFinalMark}
                                              style={{cursor: "pointer"}}>
                                             Финальная аттестация -
                                             <span

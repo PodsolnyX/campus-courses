@@ -122,6 +122,32 @@ const editStudentCourseStatus = (courseId, studentId, status) => {
         });
 }
 
+const editStudentMark = (courseId, data) => {
+    return instance.post(`courses/${courseId}/marks/${data.id}`, {
+        markType: data.markType,
+        mark: data.mark
+    })
+        .then(response => {
+            if (response.status === 200) return response.data;
+        })
+        .catch(error => {
+            toastError("Что-то пошло не так")
+        });
+}
+
+const addCourseTeacher = (courseId, userId) => {
+    return instance.post(`courses/${courseId}/teachers`, {
+        userId: userId
+    })
+        .then(response => {
+            if (response.status === 200) return 200;
+        })
+        .catch(error => {
+            console.log(error.response)
+            toastError("Что-то пошло не так")
+        });
+}
+
 export const coursesAPI = {
     getCourseDetails: getCourseDetails,
     getUserCourses: getUserCourses,
@@ -132,5 +158,7 @@ export const coursesAPI = {
     createNotice: createNotice,
     setCourseStatus: setCourseStatus,
     signUpCourse: signUpCourse,
-    editStudentCourseStatus: editStudentCourseStatus
+    editStudentCourseStatus: editStudentCourseStatus,
+    editStudentMark: editStudentMark,
+    addCourseTeacher: addCourseTeacher
 };

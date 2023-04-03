@@ -64,7 +64,13 @@ let initialState = {
         curStatus: ""
     },
     markModal: {
-        isShow: false
+        isShow: false,
+        data: {
+            markType: "",
+            mark: "",
+            name: "",
+            id: ""
+        }
     },
     noticeModal: {
         isShow: false,
@@ -74,7 +80,8 @@ let initialState = {
         }
     },
     teacherModal: {
-        isShow: false
+        isShow: false,
+        userId: ""
     },
     isLoading: false,
     isLoadingModal: false
@@ -196,7 +203,8 @@ const coursesReducer = (state = initialState, action) => {
                 ...state,
                 markModal: {
                     ...state.markModal,
-                    isShow: true
+                    isShow: true,
+                    data: action.data
                 }
             };
         case CLOSE_MARK_MODAL:
@@ -210,7 +218,14 @@ const coursesReducer = (state = initialState, action) => {
         case EDIT_VALUE_MARK_MODAL:
             return {
                 ...state,
-                value: action.value
+                markModal: {
+                    ...state.markModal,
+                    isShow: true,
+                    data: {
+                        ...state.markModal.data,
+                        mark: action.value
+                    }
+                }
             }
 
         case OPEN_TEACHER_MODAL:
@@ -232,7 +247,10 @@ const coursesReducer = (state = initialState, action) => {
         case EDIT_VALUE_TEACHER_MODAL:
             return {
                 ...state,
-                value: action.value
+                teacherModal: {
+                    ...state.teacherModal,
+                    userId: action.userId
+                }
             }
 
         case OPEN_NOTICE_MODAL:
@@ -284,13 +302,13 @@ export const openCourseStatusModal = (curStatus) => ({type: OPEN_COURSE_STATUS_M
 export const closeCourseStatusModal = () => ({type: CLOSE_COURSE_STATUS_MODAL});
 export const editValueCourseStatusModal = (status) => ({type: EDIT_VALUE_COURSE_STATUS_MODAL, status});
 
-export const openMarkModal = () => ({type: OPEN_MARK_MODAL});
+export const openMarkModal = (data) => ({type: OPEN_MARK_MODAL, data});
 export const closeMarkModal = () => ({type: CLOSE_MARK_MODAL});
 export const editValueMarkModal = (value) => ({type: EDIT_VALUE_MARK_MODAL, value});
 
 export const openTeacherModal = () => ({type: OPEN_TEACHER_MODAL});
 export const closeTeacherModal = () => ({type: CLOSE_TEACHER_MODAL});
-export const editValueTeacherModal = (value) => ({type: EDIT_VALUE_TEACHER_MODAL, value});
+export const editValueTeacherModal = (userId) => ({type: EDIT_VALUE_TEACHER_MODAL, userId});
 
 export const openNoticeModal = () => ({type: OPEN_NOTICE_MODAL});
 export const closeNoticeModal = () => ({type: CLOSE_NOTICE_MODAL});
@@ -379,6 +397,32 @@ export const setCourseStatus = () => (dispatch, getState) => {
             dispatch(closeCourseStatusModal());
             toastSuccess("Статус успешно изменён")
             dispatch(getCourseDetails(id));
+        }
+        dispatch(setLoadingModalCourse(false));
+    })
+}
+
+export const addCourseTeacher = () => (dispatch, getState) => {
+    dispatch(setLoadingModalCourse(true));
+    const id = getState().coursePage.course.id;
+    coursesAPI.addCourseTeacher(id, getState().coursePage.teacherModal.userId).then(data => {
+        if (data) {
+            dispatch(closeTeacherModal());
+            toastSuccess("Преподаватель успешно добавлен")
+            dispatch(getCourseDetails(id));
+        }
+        dispatch(setLoadingModalCourse(false));
+    })
+}
+
+export const editStudentMark = () => (dispatch, getState) => {
+    dispatch(setLoadingModalCourse(true));
+    const id = getState().coursePage.course.id;
+    coursesAPI.editStudentMark(id, getState().coursePage.markModal.data).then(data => {
+        if (data) {
+            dispatch(setCourseDetails(data))
+            dispatch(closeMarkModal());
+            toastSuccess("Оценка успешно изменена")
         }
         dispatch(setLoadingModalCourse(false));
     })

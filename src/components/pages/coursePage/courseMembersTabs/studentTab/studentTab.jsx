@@ -1,6 +1,6 @@
 import {ListGroup} from "react-bootstrap";
-import StudentTabItem from "./studentTabItem/stidentTabItem";
 import EditMarkModalContainer from "../../modals/editMarkModal/editMarkModalContainer";
+import StudentTabItemContainer from "./studentTabItem/studentTabItemContainer";
 
 
 const StudentTab = (props) => {
@@ -13,10 +13,7 @@ const StudentTab = (props) => {
                     props.students?.length === 0 ?
                         <div className={"text-secondary mx-auto my-3"}>Заявок студентов нет</div>
                     : props.students?.map(s =>
-                        <StudentTabItem data={s} openMarkModal={props.openMarkModal}
-                                        key={s.id} isAdmin={isAdmin} editStudentCourseStatus={props.editStudentCourseStatus}
-                                        openConfirmPopup={props.openConfirmPopup}
-                        />
+                        <StudentTabItemContainer data={s} key={s.id}/>
                     )
                 }
             </ListGroup>

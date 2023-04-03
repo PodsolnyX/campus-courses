@@ -1,16 +1,27 @@
-import {Button, Form, Modal} from "react-bootstrap";
-import Select from "react-select";
+import {Button, Modal} from "react-bootstrap";
+import {useEffect} from "react";
+import {FormMainTeacher} from "../../../../other/forms/forms";
+import {toastError} from "../../../../../helpers/toaster";
+import LoadSpinner from "../../../../other/loadSpinner/loadSpinner";
 
 const AddTeacherModal = (props) => {
 
-    const options = [
-        { value: '1', label: 'Иванов' },
-        { value: '2', label: 'Сидоров' },
-        { value: '3', label: 'Арышев' }
-    ]
+    const defaultTeacher = props.users[props.users.findIndex(obj => obj.value === props.userId)];
 
-    const onInputChange = (e) => {
-        props.editValueTeacherModal(e.target.value);
+    useEffect(() => {
+        props.getUsers();
+    }, [])
+
+    const onChange = (e) => {
+        props.editValueTeacherModal(e.value);
+    }
+
+    const onSave = () => {
+        if (props.userId === "") {
+            toastError("Выберете преподавателя");
+            return;
+        }
+        props.addCourseTeacher()
     }
 
     return (
@@ -24,12 +35,16 @@ const AddTeacherModal = (props) => {
                 <Modal.Title>Добавление преподавателя на курс</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <label htmlFor="" className="form-label">Выберите преподавателя</label>
-                <Select options={options}/>
+                {props.isLoading ? <LoadSpinner marginX={2}/> :
+                    <div>
+                        <label htmlFor="" className="form-label">Выберите преподавателя</label>
+                        <FormMainTeacher options={props.users} defaultValue={defaultTeacher} onChange={onChange}/>
+                    </div>
+                }
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={props.closeTeacherModal}>Отмена</Button>
-                <Button variant="primary">Сохранить</Button>
+                <Button variant="primary" onClick={onSave} disabled={props.isLoading}>Сохранить</Button>
             </Modal.Footer>
         </Modal>
     );
