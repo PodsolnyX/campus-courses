@@ -1,4 +1,4 @@
-import {Button, Card, Container, Spinner} from "react-bootstrap";
+import {Button, Card, Container} from "react-bootstrap";
 import {useEffect} from "react";
 import {FormBirthDay, FormFIO} from "../../other/forms/forms";
 import {useForm} from "react-hook-form";

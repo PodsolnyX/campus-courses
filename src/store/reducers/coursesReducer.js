@@ -1,7 +1,6 @@
 import {coursesAPI} from "../../api/coursesAPI";
 import {toastSuccess} from "../../helpers/toaster";
-import {getGroupCourses, setGroupCourses} from "./groupsReducer";
-import {isCourseMainTeacher, isCourseStudent, isCourseTeacher} from "../../helpers/roleDeterminant";
+import {setGroupCourses} from "./groupsReducer";
 
 const
     SET_COURSE_DETAILS = "SET_COURSE_DETAILS",

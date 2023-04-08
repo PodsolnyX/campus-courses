@@ -45,7 +45,7 @@ function App (props) {
             <div className={"content mb-5"}>
                 <Routes>
                     <Route path="/"
-                           element={<PrivateRoute component={<MainPage/>}/>}/>
+                           element={<MainPage/>}/>
                     <Route path="/registration"
                            element={<PrivateRoute component={<RegistrationPageContainer/>} unauthorized={true}/>}/>
                     <Route path="/login"
