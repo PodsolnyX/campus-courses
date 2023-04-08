@@ -1,4 +1,6 @@
+
 import './App.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/pages/mainPage/mainPage";
 import GroupsPageContainer from "./components/pages/groupsPage/groupsPageContainer";

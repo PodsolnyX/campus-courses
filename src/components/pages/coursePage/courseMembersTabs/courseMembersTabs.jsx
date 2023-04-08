@@ -12,12 +12,12 @@ const CourseMembersTabs = (props) => {
                 justify
             >
                 <Tab eventKey="teachers" title="Преподаватели">
-                    <div className={"border-bottom border-end border-start border-1 p-3"}>
+                    <div className={"bg-white border-bottom border-end border-start border-1 p-3"}>
                         <TeacherTabContainer/>
                     </div>
                 </Tab>
                 <Tab eventKey="students" title="Студенты">
-                    <div className={"border-bottom border-end border-start border-1 p-3"}>
+                    <div className={"bg-white border-bottom border-end border-start border-1 p-3"}>
                         {
                             props.isLoading ? <LoadSpinner/> : <StudentTabContainer/>
                         }

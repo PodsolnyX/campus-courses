@@ -1,4 +1,4 @@
-import {Container, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import {Link, NavLink} from "react-router-dom";
 import s from "./navbar.module.css";
 import {isStudent, isTeacher} from "../../../helpers/roleDeterminant";
@@ -6,7 +6,7 @@ import {isStudent, isTeacher} from "../../../helpers/roleDeterminant";
 const NavBar = (props) => {
 
     return (
-        <Navbar bg="dark" variant={"dark"} expand="md" style={{minHeight: "70px"}}>
+        <Navbar bg="light" variant={"light"} expand="lg" style={{minHeight: "90px"}}>
             <Container fluid>
                 <Link to={"/"}>
                     <Navbar.Brand>Кампусные курсы</Navbar.Brand>
@@ -41,11 +41,19 @@ const NavBar = (props) => {
                         {
                             props.isAuth ?
                                 <div>
-                                    <Link className={"col text-white me-4"} to={"/profile"}>{props.userData.email}</Link>
-                                    <Link className={"col text-white"} onClick={props.logoutUser}>Выйти</Link>
+                                    <Link className={`col me-4 ${s.navBarLink}`} to={"/profile"}>{props.userData.email}</Link>
+                                    <Link className={`col`} onClick={props.logoutUser}>
+                                        <Button variant={"outline-danger"}>
+                                            Выйти
+                                        </Button>
+                                    </Link>
                                 </div>
                                 :
-                                <Link className={"col text-white"} to={"/login"}>Войти</Link>
+                                <Link to={"/login"}>
+                                    <Button variant={"outline-primary"}>
+                                        Войти
+                                    </Button>
+                                </Link>
                         }
                     </div>
                 </Navbar.Collapse>

@@ -27,20 +27,20 @@ const GroupsPage = (props) => {
                         }
                     </div>
 
-                    <Card className={"mt-4"}>
+                    <div className={"mt-4"}>
                         {
                             props.isLoading ?
                                 <LoadSpinner/>
                                 :
-                                <ListGroup variant="flush">
+                                <div >
                                     {
                                         props.groups.map((group) =>
                                             <ListGroupItemContainer data={group} isAdmin={isAdmin(props.userRoles)}
                                                                     key={group.id}/>)
                                     }
-                                </ListGroup>
+                                </div>
                         }
-                    </Card>
+                    </div>
                 </div>
             </Container>
         </div>

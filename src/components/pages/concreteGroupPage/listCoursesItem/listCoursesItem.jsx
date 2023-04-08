@@ -1,12 +1,12 @@
-import {ListGroup} from "react-bootstrap";
+import {Card, ListGroup} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {CONST} from "../../../../helpers/constants";
 
 const ListCoursesItem = (props) => {
     return (
-        <ListGroup.Item>
+        <Card className={"mb-2 card-list"}>
             <Link to={`/courses/${props.data.id}`}>
-                <div>
+                <Card.Body>
                     <div className={"d-flex justify-content-between"}>
                         <h5>{props.data.name}</h5>
                         <div className={`fw-bold text-end text-${CONST.COURSE_STATUS_COLOR[props.data.status]}`}>
@@ -19,9 +19,9 @@ const ListCoursesItem = (props) => {
                         - {props.data.maximumStudentsCount}</div>
                     <div className={"text-secondary"} style={{fontSize: "14px"}}>Мест свободно
                         - {props.data.remainingSlotsCount}</div>
-                </div>
+                </Card.Body>
             </Link>
-        </ListGroup.Item>
+        </Card>
     );
 }
 

@@ -16,11 +16,10 @@ const TaughtCoursesPage = (props) => {
                     <div className={"d-flex justify-content-between"}>
                         <h3>Преподаваемые кампусные курсы</h3>
                     </div>
-                    <Card className={"mt-4"}>
-                        <ListGroup variant="flush">
+                    <div className={"mt-4"}>
                             {
                                 props.isLoading ? <LoadSpinner/> :
-                                    <ListGroup variant="flush">
+                                    <div>
                                         {
                                             props.courses.length === 0
                                                 ?
@@ -31,10 +30,9 @@ const TaughtCoursesPage = (props) => {
                                                 props.courses.map(course =>
                                                     <ListCoursesItem data={course} key={course.id}/>)
                                         }
-                                    </ListGroup>
+                                    </div>
                             }
-                        </ListGroup>
-                    </Card>
+                    </div>
                 </div>
             </Container>
         </div>

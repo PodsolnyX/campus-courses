@@ -33,10 +33,10 @@ const ConcreteGroupPage = (props) => {
                                 : undefined
                         }
                     </div>
-                    <Card className={"mt-4"}>
+                    <div className={"mt-4"}>
                         {
                             props.isLoading ? <LoadSpinner/> :
-                                <ListGroup variant="flush">
+                                <div>
                                     {
                                         props.groupCourses.length === 0
                                             ?
@@ -46,9 +46,9 @@ const ConcreteGroupPage = (props) => {
                                             props.groupCourses.map(course =>
                                                 <ListCoursesItem data={course} key={course.id}/>)
                                     }
-                                </ListGroup>
+                                </div>
                         }
-                    </Card>
+                    </div>
                 </div>
             </Container>
         </div>

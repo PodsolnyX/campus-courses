@@ -1,4 +1,19 @@
+.App {
+    background: #ecf3f5;
+}
+
+.card {
+    border-width: 0;
+    border-radius: 8px;
+    background: #fefefe;
+}
+
+.card-list:hover{
+    transition: 0.1s;
+    box-shadow: 0 5px 15px rgba(104, 195, 236, 0.2);
+}
 
 .content {
+
     min-height: calc(100vh - 170px);
 }

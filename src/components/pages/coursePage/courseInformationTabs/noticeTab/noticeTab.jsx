@@ -8,7 +8,7 @@ const NoticeTab = (props) => {
     const isCanEdit = isAdmin(props.userRoles) || isCourseTeacher(props.userEmail, props.course.teachers);
 
     return (
-        <div className={"border-bottom border-end border-start border-1 p-3"}>
+        <div className={"bg-white border-bottom border-end border-start border-1 p-3"}>
             { isCanEdit ?
                 <div>
                     <CreateNoticeModalContainer/>

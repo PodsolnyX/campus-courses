@@ -13,7 +13,7 @@ const CourseInformationTabs = (props) => {
             justify
         >
             <Tab eventKey="requirements" title="Требования к курсу">
-                <div className={"border-bottom border-end border-start border-1 p-3"}>
+                <div className={"bg-white border-bottom border-end border-start border-1 p-3"}>
                     {
                         props.isLoading ? <LoadSpinner/> :
                             <div dangerouslySetInnerHTML={{__html: props.course.requirements}}></div>
@@ -21,7 +21,7 @@ const CourseInformationTabs = (props) => {
                 </div>
             </Tab>
             <Tab eventKey="annotations" title="Аннотация">
-                <div className={"border-bottom border-end border-start border-1 p-3"}>
+                <div className={"bg-white border-bottom border-end border-start border-1 p-3"}>
                     <div dangerouslySetInnerHTML={{__html: props.course.annotations}}></div>
                 </div>
             </Tab>

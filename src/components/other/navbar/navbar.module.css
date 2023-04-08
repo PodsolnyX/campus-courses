@@ -1,20 +1,25 @@
 
 .activeLink {
-    color: white;
+    color: black;
     transition: 0.3s;
     margin-left: 10px;
 }
 
 .activeLink:hover {
-    color: #c4c4c4;
+    color: #0399E9;
 }
 
 .nonActiveLink {
-    color: gray;
+    color: #5b5b5b;
     transition: 0.3s;
     margin-left: 10px;
 }
 
 .nonActiveLink:hover {
-    color: white;
+    color: #0399E9;
+
+}
+
+.navBarLink:hover {
+    color: #0399E9;
 }
