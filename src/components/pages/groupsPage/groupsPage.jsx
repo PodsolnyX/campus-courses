@@ -20,7 +20,7 @@ const GroupsPage = (props) => {
                         <h3>Группы кампусных курсов</h3>
                         {
                             isAdmin(props.userRoles) ?
-                                <Button variant={"outline-primary"}
+                                <Button variant={"primary"} className={"button-inline"}
                                         onClick={() => props.openGroupsModal({name: ""}, false)}
                                 >Создать группу</Button>
                                 : undefined

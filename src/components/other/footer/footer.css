@@ -1,13 +1,15 @@
 .footer {
-    background-color: #fefefe;
+    background-color: #ececec;
     display: flex;
-    justify-content: center;
-    height: 40px;
+    justify-content: space-between;
+    height: 60px;
     width: 100%;
-    padding: 8px;
+    padding: 18px;
+    border-top: #c9c9c9 solid 1px;
 }
 
 .footer > span {
     color: gray;
     font-size: 14px;
+    margin-left: 10px;
 }

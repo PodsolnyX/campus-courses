@@ -34,7 +34,7 @@ const StudentTabItem = (props) => {
     return (
         <ListGroup.Item>
             <div className={"row"}>
-                <div className={"col"}>
+                <div className={"col-md"}>
                     <div className={"fw-bold"}>{props.data.name}</div>
                     {!props.isCanEdit ? undefined :
                         <div className={"text-secondary"}>Статус - {
@@ -50,11 +50,11 @@ const StudentTabItem = (props) => {
                 </div>
                 {
                     !props.isCanEdit && !props.isCanView ? undefined :
-                        <div className={"col my-auto"}>
+                        <div className={"col-md my-auto text-secondary"}>
                             {
                                 props.data.status === "Accepted" ?
-                                    <div className={"row text-md-end"}>
-                                        <div className={"col-12 mb-2"} onClick={onMidtermMark}
+                                    <div className={"row text-start text-md-end"}>
+                                        <div className={"col-12"} onClick={onMidtermMark}
                                              style={{cursor: "pointer"}}>
                                             Промежуточная аттестация -
                                             <span

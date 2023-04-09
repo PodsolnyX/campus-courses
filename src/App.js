@@ -21,6 +21,7 @@ import ProfilePageContainer from "./components/pages/profilePage/profilePageCont
 import ConfirmPopup from "./components/other/confirmPopup/confirmPopupContainer";
 import UserCoursesPageContainer from "./components/pages/userCoursesPage/userCoursesPageContainer";
 import TaughtCoursesPageContainer from "./components/pages/taughtCoursesPage/taughtCoursesPageContainer";
+import {Container} from "react-bootstrap";
 
 let mapStateToProps = (state) => {
     return {
@@ -67,7 +68,10 @@ function App (props) {
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>
             </div>
-            <Footer/>
+            <Container>
+                <Footer/>
+            </Container>
+
         </div>
     );
 }

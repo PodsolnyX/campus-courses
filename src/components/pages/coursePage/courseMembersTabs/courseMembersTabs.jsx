@@ -5,7 +5,7 @@ import LoadSpinner from "../../../other/loadSpinner/loadSpinner";
 
 const CourseMembersTabs = (props) => {
     return (
-        <div className="mt-4 mb-5">
+        <div className="mt-4">
             <Tabs
                 defaultActiveKey="students"
                 id="justify-tab-example"

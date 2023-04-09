@@ -13,7 +13,7 @@ const CourseInfo = (props) => {
     return (
         <div className={"mt-2"}>
             {isCanEdit && props.course.status !== "Finished" ? <EditCourseStatusModalContainer/> : undefined}
-            <div className={"fw-bold my-auto"}>Основные данные курса</div>
+
             <Card className={"mt-1"}>
                 {
                     props.isLoading ? <LoadSpinner/> :
@@ -30,9 +30,9 @@ const CourseInfo = (props) => {
                                     <div className={"d-flex"}>
                                         {
                                             isCanEdit && props.course.status !== "Finished"?
-                                                <Button variant={"outline-warning"}
+                                                <Button variant={"outline-primary"}
                                                         onClick={() => props.openCourseStatusModal(props.course.status)}
-                                                >Изменить статус</Button>
+                                                >Изменить</Button>
                                                 : undefined
                                         }
                                         {!isTeacher && !isCourseStudent(props.course.id, props.userCourses)
@@ -40,7 +40,7 @@ const CourseInfo = (props) => {
                                             <Button variant={"outline-success"} onClick={props.signUpCourse}
                                                     className={"ms-2"}
                                             >
-                                                Записаться на курс</Button> : undefined
+                                                Записаться</Button> : undefined
                                         }
                                     </div>
                                 </div>

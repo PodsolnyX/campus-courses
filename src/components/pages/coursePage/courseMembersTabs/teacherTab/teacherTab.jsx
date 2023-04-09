@@ -13,7 +13,7 @@ const TeacherTab = (props) => {
                 isCanEdit ?
                     <div>
                         <AddTeacherModalContainer/>
-                        <Button variant={"outline-primary"} className={"mb-3"} onClick={props.openTeacherModal}>
+                        <Button variant={"primary"} className={"mb-3 button-inline"} onClick={props.openTeacherModal}>
                             Добавить преподавателя
                         </Button>
                     </div> : undefined

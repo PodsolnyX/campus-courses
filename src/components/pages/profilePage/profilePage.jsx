@@ -36,8 +36,8 @@ const ProfilePage = (props) => {
     return (
         <Container className={"col"}>
             <Card className="col-12 col-md-10 col-lg-8 mx-auto mt-5">
-                <Card.Body>
-                    <h4 className={"text-center"}>Профиль</h4>
+                <Card.Body className={"px-5 pt-5 pb-4"}>
+                    <h4 className={"text-center pb-2"}>Профиль</h4>
                     {
                         props.isLoading
                             ?
@@ -62,14 +62,15 @@ const ProfilePage = (props) => {
                                         <FormBirthDay register={register} errors={errors} onChange={onChange} disabled={!props.isEdit}/>
                                     </div>
                                 </div>
-                                <div className="mt-3 d-flex justify-content-end">
+                                <div className="mt-4 d-flex justify-content-end">
                                     {
                                         props.isEdit ?
                                             <Button variant={"outline-primary"} onClick={onSave}>
                                                 Сохранить
                                             </Button>
                                             :
-                                            <Button variant={"warning"} onClick={props.setIsEditProfilePage}>
+                                            <Button variant={"primary"} className={"button-inline"}
+                                                    onClick={props.setIsEditProfilePage}>
                                                 Изменить
                                             </Button>
                                     }

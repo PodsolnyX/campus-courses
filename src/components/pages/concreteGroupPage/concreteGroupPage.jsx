@@ -27,7 +27,8 @@ const ConcreteGroupPage = (props) => {
                         <h3>Группа - {groupName}</h3>
                         {
                             isAdmin(props.userRoles) ?
-                                <Button variant={"outline-primary"} onClick={() => props.openCreateCourseModal()}>
+                                <Button variant={"primary"} className={"button-inline"}
+                                        onClick={() => props.openCreateCourseModal()}>
                                     Создать курс
                                 </Button>
                                 : undefined

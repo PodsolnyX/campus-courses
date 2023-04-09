@@ -6,8 +6,9 @@ import {isStudent, isTeacher} from "../../../helpers/roleDeterminant";
 const NavBar = (props) => {
 
     return (
-        <Navbar bg="light" variant={"light"} expand="lg" style={{minHeight: "90px"}}>
-            <Container fluid>
+        <Navbar bg="light" variant={"light"} expand="lg" sticky="top"
+                style={{minHeight: "90px", boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)"}}>
+            <Container>
                 <Link to={"/"}>
                     <Navbar.Brand>Кампусные курсы</Navbar.Brand>
                 </Link>

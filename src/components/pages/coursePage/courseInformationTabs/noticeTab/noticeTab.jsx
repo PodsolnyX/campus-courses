@@ -12,7 +12,7 @@ const NoticeTab = (props) => {
             { isCanEdit ?
                 <div>
                     <CreateNoticeModalContainer/>
-                    <Button variant={"outline-primary"} onClick={props.openNoticeModal}>
+                    <Button variant={"primary"} className={"button-inline"} onClick={props.openNoticeModal}>
                         Создать уведомление</Button>
                 </div> : undefined
             }
