@@ -27,10 +27,10 @@ const CourseInfo = (props) => {
                                             {CONST.COURSE_STATUS[props.course.status]}
                                         </div>
                                     </div>
-                                    <div className={"d-flex"}>
+                                    <div className={"text-center"}>
                                         {
                                             isCanEdit && props.course.status !== "Finished"?
-                                                <Button variant={"outline-primary"}
+                                                <Button variant={"outline-primary"} className={"mt-2 mt-sm-0 ms-sm-2"}
                                                         onClick={() => props.openCourseStatusModal(props.course.status)}
                                                 >Изменить</Button>
                                                 : undefined
@@ -38,7 +38,7 @@ const CourseInfo = (props) => {
                                         {!isTeacher && !isCourseStudent(props.course.id, props.userCourses)
                                         && props.course.status === "OpenForAssigning" ?
                                             <Button variant={"outline-success"} onClick={props.signUpCourse}
-                                                    className={"ms-2"}
+                                                    className={"mt-2 mt-sm-0 ms-sm-2"}
                                             >
                                                 Записаться</Button> : undefined
                                         }

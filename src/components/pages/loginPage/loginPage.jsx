@@ -24,8 +24,8 @@ const LoginPage = (props) => {
 
     return (
         <Container className={"col"}>
-            <Card className="col-10 col-sm-9 col-md-7 col-lg-5 col-xl-4 mx-auto mt-5">
-                <Card.Body className={"px-5 pt-5 pb-4"}>
+            <Card className="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4 mx-auto mt-5">
+                <Card.Body className={"px-4 px-sm-5 pt-5 pb-4"}>
                     <h4 className={"text-center mb-5"}>Авторизация</h4>
                     {
                         props.isLoading ? <LoadSpinner/> :

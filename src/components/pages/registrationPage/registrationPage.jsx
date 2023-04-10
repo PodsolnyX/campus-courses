@@ -28,7 +28,7 @@ const RegistrationPage = (props) => {
     return (
         <Container className="col">
             <Card className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto mt-5">
-                <Card.Body className={"px-5 pt-5 pb-4"}>
+                <Card.Body className={"px-4 px-sm-5 pt-5 pb-4"}>
                     <h4 className={"text-center mb-5"}>Регистрация</h4>
                     {
                         props.isLoading ? <LoadSpinner/> :

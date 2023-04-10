@@ -34,7 +34,7 @@ const CoursePage = (props) => {
 
     return (
         <Container className={"col"}>
-            <div className="col-12 col-lg-10 mx-auto mt-5 bg-white p-5">
+            <div className="col-12 col-lg-10 mx-auto mt-5 bg-white py-4 py-md-5 px-2 px-md-5">
                 <div>
                     {
                         isCanEdit ? <EditCourseModalContainer/> : undefined}
