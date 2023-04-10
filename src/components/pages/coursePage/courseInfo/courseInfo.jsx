@@ -11,7 +11,7 @@ const CourseInfo = (props) => {
     const isCanEdit = isAdmin(props.userRoles) || isTeacher;
 
     return (
-        <div className={"mt-2"}>
+        <div className={"mt-5"}>
             {isCanEdit && props.course.status !== "Finished" ? <EditCourseStatusModalContainer/> : undefined}
 
             <Card className={"mt-1"}>

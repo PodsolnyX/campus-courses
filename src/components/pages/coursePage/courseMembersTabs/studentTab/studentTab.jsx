@@ -3,19 +3,28 @@ import EditMarkModalContainer from "../../modals/editMarkModal/editMarkModalCont
 import StudentTabItemContainer from "./studentTabItem/studentTabItemContainer";
 import {isAdmin, isCourseTeacher} from "../../../../../helpers/roleDeterminant";
 
-
 const StudentTab = (props) => {
 
+    const sort = (a, b) => {
+        if (a.email === props.userEmail) return -1;
+        if (a.status === "Accepted" && b.status === "InQueue") return -1;
+        if (a.status === "Accepted" && b.status === "Declined") return -1;
+        if (a.status === "InQueue" && b.status === "Declined") return -1;
+        return 1;
+    }
+
     const isCanEdit = isAdmin(props.userRoles) || isCourseTeacher(props.userEmail, props.course.teachers);
+    const student = props.course?.students ? [...props.course.students] : [];
+    student.sort(sort);
 
     return (
         <div>
             {isCanEdit ? <EditMarkModalContainer/> : undefined}
             <ListGroup variant={"flush"}>
                 {
-                    props.course.students?.length === 0 ?
+                    student.length === 0 ?
                         <div className={"text-secondary mx-auto my-3"}>Заявок студентов нет</div>
-                    : props.course.students?.map(s =>
+                    : student.map(s =>
                         <StudentTabItemContainer data={s} key={s.id} isCanEdit={isCanEdit}
                                                  isCanView={props.userEmail === s.email}
                         />
