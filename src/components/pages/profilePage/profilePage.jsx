@@ -1,47 +1,83 @@
 import {Button, Card, Container} from "react-bootstrap";
-import {useState} from "react";
+import {useEffect} from "react";
+import {FormBirthDay, FormFIO} from "../../other/forms/forms";
+import {useForm} from "react-hook-form";
+import LoadSpinner from "../../other/loadSpinner/loadSpinner";
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
 
-    const [isEdit, setIsEdit] = useState(false);
+    const {register, handleSubmit, formState: {errors}, reset} = useForm({
+        mode: "onBlur"
+    });
 
-    const onStartEdit = () => {
-        setIsEdit(true);
+    useEffect(() => {
+        props.getUserProfileForPage();
+    },[]);
+
+    useEffect(() => {
+        if (props.formData) {
+            reset({
+                name: props.formData.fullName,
+                birthDate: props.formData.birthDate?.slice(0, 10)
+            });
+        }
+    }, [props.formData]);
+
+    const onChange = (e) => {
+        const key = e.target.name === "name" ? "fullName" : e.target.name;
+        props.setProfileFormData(key, e.target.value);
     }
 
-    const onEdit = () => {
-        setIsEdit(false);
+    const onSave = () => {
+        if(Object.entries(errors).length === 0)
+            props.saveProfileData();
     }
 
     return (
         <Container className={"col"}>
             <Card className="col-12 col-md-10 col-lg-8 mx-auto mt-5">
-                <Card.Body>
-                    <h4 className={"text-center"}>Профиль</h4>
-                    <div className={"mt-5 ms-3 me-3"}>
-                        <div className="row">
-                            <label htmlFor="" className="col-4 form-label">ФИО</label>
-                            <input type="text" className="col form-control"
-                                   id="inputName" name="name"/>
-                        </div>
-                        <div className={"row mt-3"}>
-                            <label htmlFor="" className="col-4 form-label">Email</label>
-                            <label className="col">user@mail.ru</label>
-                        </div>
-                        <div className="row mt-3">
-                            <label htmlFor="" className="col-4 form-label">Дата рождения</label>
-                            <input type="date" className="col form-control"
-                                   id="inputBirthDate" name="birthDate"/>
-                        </div>
-                        <div className="mt-3 d-flex justify-content-end">
-                            {
-                                isEdit ?
-                                    <Button variant={"outline-primary"} onClick={onEdit} id="btn-edit">Сохранить</Button>
-                                    :
-                                    <Button variant={"warning"} onClick={onStartEdit} id="btn-edit">Изменить</Button>
-                            }
-                        </div>
-                    </div>
+                <Card.Body className={"px-5 pt-5 pb-4"}>
+                    <h4 className={"text-center pb-2"}>Профиль</h4>
+                    {
+                        props.isLoading
+                            ?
+                            <LoadSpinner/>
+                            :
+                            <form className={"mt-5 ms-3 me-3"}
+                                  onSubmit={handleSubmit(onSave)}
+                            >
+                                <div className="row">
+                                    <label htmlFor="" className="col-4 form-label">ФИО</label>
+                                    <div className={"col"}>
+                                        <FormFIO register={register} errors={errors} onChange={onChange} disabled={!props.isEdit}/>
+                                    </div>
+                                </div>
+                                <div className={"row mt-3"}>
+                                    <label htmlFor="" className="col-4 form-label">Email</label>
+                                    <label className="col">{props.formData.email}</label>
+                                </div>
+                                <div className="row mt-3">
+                                    <label htmlFor="" className="col-4 form-label">Дата рождения</label>
+                                    <div className={"col"}>
+                                        <FormBirthDay register={register} errors={errors} onChange={onChange} disabled={!props.isEdit}/>
+                                    </div>
+                                </div>
+                                <div className="mt-4 d-flex justify-content-end">
+                                    {
+                                        props.isEdit ?
+                                            <Button variant={"outline-primary"} onClick={onSave}>
+                                                Сохранить
+                                            </Button>
+                                            :
+                                            <Button variant={"primary"} className={"button-inline"}
+                                                    onClick={props.setIsEditProfilePage}>
+                                                Изменить
+                                            </Button>
+                                    }
+                                </div>
+                            </form>
+                    }
+
                 </Card.Body>
             </Card>
         </Container>

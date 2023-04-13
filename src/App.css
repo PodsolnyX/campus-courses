@@ -1,4 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;500&family=Raleway:wght@100;200;300;400;500&family=Roboto+Condensed:wght@300&display=swap');
+
+.App {
+    background: #ececec;
+}
+
+* {
+    font-family: Manrope, serif;
+}
+
+.card {
+    border-width: 0;
+    border-radius: 8px;
+    background: #fefefe;
+}
+
+.card-list:hover {
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(87, 87, 87, 0.2);
+}
 
 .content {
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 170px);
+}
+
+.button-inline {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    color: #ececec;
+}
+
+.button-outline {
+    padding-bottom: 8px;
+}
+
+.main-page-bg {
+    height: 90vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)),
+    url("https://psv4.userapi.com/c237031/u257022229/docs/d25/48168324fbd5/cqGUkVff3tNX9XmF5DEbYb6Y02253KL3rUDr2zN3B7iE7X6kXcofp3GDMLKDN_-ETbcoCYaj_1.jpg?extra=JBFqOUgqwz7GBU3CiWhPCO8dsZWLZjcBz7o323D_YKuWJL6R_6VJQsXfSwgiU6SonyWGMtFGOhCTLwiAbpe_3aoxLAWoBEGOI-RLiAVvsvuQI9dLKUtgR0yMXQ-Biktm_woq9QSENjFk6cdfBK3GiXU");
+    background-size: cover;
+    background-position: center;
+
 }

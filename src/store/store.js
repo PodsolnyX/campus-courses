@@ -1,14 +1,23 @@
-import { legacy_createStore as createStore, combineReducers} from 'redux'
-import deletePopupReducer from "./reducers/deletePopupReducer";
-import groupsModalReducer from "./reducers/groupsModalReducer";
-import courseModalReducer from "./reducers/courseModalReducer";
+import {legacy_createStore as createStore, combineReducers, applyMiddleware} from 'redux';
+import ThunkMiddleware from "redux-thunk";
+import groupsReducer from "./reducers/groupsReducer";
+import registrationPageReducer from "./reducers/registrationPageReducer";
+import loginPageReducer from "./reducers/loginPageReducer";
+import userReducer from "./reducers/userReducer";
+import profilePageReducer from "./reducers/profilePageReducer";
+import coursesReducer from "./reducers/coursesReducer";
+import confirmPopupReducer from "./reducers/confirmPopupReducer";
 
 let reducers = combineReducers({
-    deletePopup: deletePopupReducer,
-    groupsModal: groupsModalReducer,
-    courseModal: courseModalReducer
+    groupsPage: groupsReducer,
+    coursePage: coursesReducer,
+    registrationPage: registrationPageReducer,
+    loginPage: loginPageReducer,
+    profilePage: profilePageReducer,
+    user: userReducer,
+    confirmPopup: confirmPopupReducer
 });
 
-let store = createStore(reducers);
+let store = createStore(reducers, applyMiddleware(ThunkMiddleware));
 
 export default store;

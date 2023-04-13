@@ -1,16 +1,18 @@
 import {connect} from "react-redux";
 import ListGroupItem from "./listGroupItem";
-import {openDeletePopup} from "../../../../store/reducers/deletePopupReducer";
-import {openGroupsModal} from "../../../../store/reducers/groupsModalReducer";
+import {deleteGroup, openGroupsModal} from "../../../../store/reducers/groupsReducer";
+import {openConfirmPopup} from "../../../../store/reducers/confirmPopupReducer";
 
 let mapStateToProps = (state, props) => {
     return {
         title: props.title,
-        isEdit: props.isEdit
+        isEdit: props.isEdit,
+        data: props.data
     };
 }
 
 export default connect(mapStateToProps, {
-    openDeletePopup,
-    openGroupsModal
+    openGroupsModal,
+    openConfirmPopup,
+    deleteGroup
 })(ListGroupItem);

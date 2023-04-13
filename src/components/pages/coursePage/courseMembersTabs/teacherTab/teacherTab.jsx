@@ -1,12 +1,29 @@
-import {ListGroup} from "react-bootstrap";
+import {Button, ListGroup} from "react-bootstrap";
 import TeacherTabItem from "./teacherTabItem/teacherTabItem";
+import AddTeacherModalContainer from "../../modals/addTeacherModal/addTeacherModalContainer";
+import {isAdmin, isCourseMainTeacher} from "../../../../../helpers/roleDeterminant";
 
-const TeacherTab = () => {
+const TeacherTab = (props) => {
+
+    const isCanEdit = isAdmin(props.userRoles) || isCourseMainTeacher(props.userEmail, props.teachers);
+
     return (
-        <div className={"border-bottom border-end border-start border-1 p-3"}>
+        <div>
+            {
+                isCanEdit ?
+                    <div>
+                        <AddTeacherModalContainer/>
+                        <Button variant={"outline-primary"} className={"mb-3"} onClick={props.openTeacherModal}>
+                            Добавить преподавателя
+                        </Button>
+                    </div> : undefined
+            }
             <ListGroup variant={"flush"}>
-                <TeacherTabItem variant={1}/>
-                <TeacherTabItem/>
+                {
+                    props.teachers?.map(t =>
+                        <TeacherTabItem data={t} key={t.email}/>
+                    )
+                }
             </ListGroup>
         </div>
     );
