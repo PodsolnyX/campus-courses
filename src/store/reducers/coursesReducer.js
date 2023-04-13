@@ -370,6 +370,7 @@ export const deleteCourse = () => (dispatch, getState) => {
     const id = getState().coursePage.course.id;
     coursesAPI.deleteCourse(id).then(data => {
         if (data === 200) {
+            dispatch(setGroupCourses([]));
             toastSuccess("Курс успешно удалён");
         }
         dispatch(setLoadingCourse(false));

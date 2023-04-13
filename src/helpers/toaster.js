@@ -1,6 +1,7 @@
 import {Slide, toast} from "react-toastify";
 
 export const toastSuccess = (text) => {
+    toast.dismiss();
     toast.success(text, {autoClose: 1000, closeButton: false, transition: Slide, position: "bottom-right"});
 }
 

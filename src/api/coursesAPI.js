@@ -142,7 +142,10 @@ const addCourseTeacher = (courseId, userId) => {
             if (response.status === 200) return response.data;
         })
         .catch(error => {
-            toastError("Что-то пошло не так")
+            if (error.response.data.message === "This user is already teaching at this course.")
+                toastError("Данный пользователь уже является преподавателем");
+            else
+                toastError("Что-то пошло не так");
         });
 }
 

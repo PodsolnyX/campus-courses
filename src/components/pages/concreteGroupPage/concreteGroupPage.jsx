@@ -41,7 +41,7 @@ const ConcreteGroupPage = (props) => {
                                     {
                                         props.groupCourses.length === 0
                                             ?
-                                            <div className={"text-secondary mx-auto my-3"}>В данной группе ещё нет
+                                            <div className={"text-secondary my-5 text-center"}>В данной группе ещё нет
                                                 курсов</div>
                                             :
                                             props.groupCourses.map(course =>
