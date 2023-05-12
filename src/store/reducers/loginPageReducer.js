@@ -1,6 +1,6 @@
 import {userAPI} from "../../api/userAPI";
-import {toastSuccess} from "../../helpers/toaster";
 import {getUserProfile, setIsAuth} from "./userReducer";
+import {setErrorToast, setSuccessToast} from "./toasterReducer";
 
 const
     SET_LOGIN_FORM_DATA = "SET_LOGIN_FORM_DATA",
@@ -40,13 +40,15 @@ export const setLoadingLogin = (isLoading) => ({type: SET_LOADING_LOGIN, isLoadi
 
 export const loginUser = () => (dispatch, getState) => {
     dispatch(setLoadingLogin(true));
-    userAPI.loginUser(getState().loginPage.formData).then(data => {
-        if (data) {
-            localStorage.setItem('token', data.token);
+    userAPI.loginUser(getState().loginPage.formData).then(response => {
+        if (response.status === 200) {
+            localStorage.setItem('token', response.data.token);
             dispatch(setIsAuth());
             dispatch(getUserProfile());
-            toastSuccess("Вы успешно авторизовались!")
+            dispatch(setSuccessToast("Вы успешно авторизовались!"));
         }
+        else dispatch(setErrorToast("Неверный логин или пароль"));
+
         dispatch(setLoadingLogin(false));
     });
 

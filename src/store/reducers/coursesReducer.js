@@ -1,6 +1,6 @@
 import {coursesAPI} from "../../api/coursesAPI";
-import {toastSuccess} from "../../helpers/toaster";
 import {setGroupCourses} from "./groupsReducer";
+import {setErrorToast, setSuccessToast} from "./toasterReducer";
 
 const
     SET_COURSE_DETAILS = "SET_COURSE_DETAILS",
@@ -318,36 +318,40 @@ export const setLoadingModalCourse = (isLoading) => ({type: SET_LOADING_MODAL_CO
 
 export const getCourseDetails = (id) => (dispatch) => {
     dispatch(setLoadingCourse(true));
-    coursesAPI.getCourseDetails(id).then(data => {
-        if (data) dispatch(setCourseDetails(data));
+    coursesAPI.getCourseDetails(id).then(response => {
+        if (response.status === 200)
+            dispatch(setCourseDetails(response.data));
         dispatch(setLoadingCourse(false));
     })
 }
 
 export const getUserCourses = () => (dispatch) => {
     dispatch(setLoadingCourse(true));
-    coursesAPI.getUserCourses().then(data => {
-        if (data) dispatch(setUserCourses(data));
+    coursesAPI.getUserCourses().then(response => {
+        if (response.status === 200)
+            dispatch(setUserCourses(response.data));
         dispatch(setLoadingCourse(false));
     })
 }
 
 export const getTaughtCourses = () => (dispatch) => {
     dispatch(setLoadingCourse(true));
-    coursesAPI.getTaughtCourses().then(data => {
-        if (data) dispatch(setTaughtCourses(data));
+    coursesAPI.getTaughtCourses().then(response => {
+        if (response.status === 200)
+            dispatch(setTaughtCourses(response.data));
         dispatch(setLoadingCourse(false));
     })
 }
 
 export const createCourse = (groupId) => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
-    coursesAPI.createCourse(groupId, getState().coursePage.createCourseModal.currentCourse).then(data => {
-        if (data) {
+    coursesAPI.createCourse(groupId, getState().coursePage.createCourseModal.currentCourse).then(response => {
+        if (response.status === 200) {
             dispatch(closeCreateCourseModal());
-            toastSuccess("Курс успешно создан")
-            dispatch(setGroupCourses(data));
+            dispatch(setSuccessToast("Курс успешно создан"));
+            dispatch(setGroupCourses(response.data));
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingModalCourse(false));
     })
 }
@@ -355,12 +359,13 @@ export const createCourse = (groupId) => (dispatch, getState) => {
 export const editCourse = () => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
     const id = getState().coursePage.course.id;
-    coursesAPI.editCourse(id, getState().coursePage.editCourseModal.data).then(data => {
-        if (data) {
+    coursesAPI.editCourse(id, getState().coursePage.editCourseModal.data).then(response => {
+        if (response.status === 200) {
             dispatch(closeEditCourseModal());
-            toastSuccess("Курс успешно изменён")
-            dispatch(setCourseDetails(data))
+            dispatch(setSuccessToast("Курс успешно изменён"));
+            dispatch(setCourseDetails(response.data))
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingModalCourse(false));
     })
 }
@@ -368,11 +373,12 @@ export const editCourse = () => (dispatch, getState) => {
 export const deleteCourse = () => (dispatch, getState) => {
     dispatch(setLoadingCourse(true));
     const id = getState().coursePage.course.id;
-    coursesAPI.deleteCourse(id).then(data => {
-        if (data === 200) {
+    coursesAPI.deleteCourse(id).then(response => {
+        if (response.status === 200) {
             dispatch(setGroupCourses([]));
-            toastSuccess("Курс успешно удалён");
+            dispatch(setSuccessToast("Курс успешно удалён"));
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingCourse(false));
     })
 }
@@ -380,12 +386,13 @@ export const deleteCourse = () => (dispatch, getState) => {
 export const createNotice = () => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
     const id = getState().coursePage.course.id;
-    coursesAPI.createNotice(id, getState().coursePage.noticeModal.data).then(data => {
-        if (data) {
+    coursesAPI.createNotice(id, getState().coursePage.noticeModal.data).then(response => {
+        if (response.status === 200) {
             dispatch(closeNoticeModal());
-            toastSuccess("Уведомление успешно отправлено")
-            dispatch(setCourseDetails(data))
+            dispatch(setSuccessToast("Уведомление успешно отправлено"));
+            dispatch(setCourseDetails(response.data))
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingModalCourse(false));
     })
 }
@@ -393,12 +400,13 @@ export const createNotice = () => (dispatch, getState) => {
 export const setCourseStatus = () => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
     const id = getState().coursePage.course.id;
-    coursesAPI.setCourseStatus(id, getState().coursePage.courseStatusModal.status).then(data => {
-        if (data) {
+    coursesAPI.setCourseStatus(id, getState().coursePage.courseStatusModal.status).then(response => {
+        if (response.status === 200) {
             dispatch(closeCourseStatusModal());
-            toastSuccess("Статус успешно изменён")
-            dispatch(setCourseDetails(data))
+            dispatch(setSuccessToast("Статус успешно изменён"));
+            dispatch(setCourseDetails(response.data))
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingModalCourse(false));
     })
 }
@@ -406,12 +414,13 @@ export const setCourseStatus = () => (dispatch, getState) => {
 export const addCourseTeacher = () => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
     const id = getState().coursePage.course.id;
-    coursesAPI.addCourseTeacher(id, getState().coursePage.teacherModal.userId).then(data => {
-        if (data) {
+    coursesAPI.addCourseTeacher(id, getState().coursePage.teacherModal.userId).then(response => {
+        if (response.status === 200) {
             dispatch(closeTeacherModal());
-            toastSuccess("Преподаватель успешно добавлен")
-            dispatch(setCourseDetails(data))
+            dispatch(setSuccessToast("Преподаватель успешно добавлен"));
+            dispatch(setCourseDetails(response.data))
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingModalCourse(false));
     })
 }
@@ -419,12 +428,13 @@ export const addCourseTeacher = () => (dispatch, getState) => {
 export const editStudentMark = () => (dispatch, getState) => {
     dispatch(setLoadingModalCourse(true));
     const id = getState().coursePage.course.id;
-    coursesAPI.editStudentMark(id, getState().coursePage.markModal.data).then(data => {
-        if (data) {
-            dispatch(setCourseDetails(data))
+    coursesAPI.editStudentMark(id, getState().coursePage.markModal.data).then(response => {
+        if (response.status === 200) {
+            dispatch(setCourseDetails(response.data))
             dispatch(closeMarkModal());
-            toastSuccess("Оценка успешно изменена")
+            dispatch(setSuccessToast("Оценка успешно изменена"));
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingModalCourse(false));
     })
 }
@@ -432,12 +442,13 @@ export const editStudentMark = () => (dispatch, getState) => {
 export const signUpCourse = () => (dispatch, getState) => {
     dispatch(setLoadingCourse(true));
     const id = getState().coursePage.course.id;
-    coursesAPI.signUpCourse(id).then(data => {
-        if (data === 200) {
-            toastSuccess("Заявка успешно отправлена")
+    coursesAPI.signUpCourse(id).then(response => {
+        if (response.status === 200) {
+            dispatch(setSuccessToast("Заявка успешно отправлена"));
             dispatch(getUserCourses());
             dispatch(getCourseDetails(id));
         }
+        else dispatch(setErrorToast("Что-то пошло не так"));
         dispatch(setLoadingCourse(false));
     })
 }
@@ -445,11 +456,12 @@ export const signUpCourse = () => (dispatch, getState) => {
 export const editStudentCourseStatus = (studentId, status) => (dispatch, getState) => {
     dispatch(setLoadingCourse(true));
     const courseId = getState().coursePage.course.id;
-    coursesAPI.editStudentCourseStatus(courseId, studentId, status).then(data => {
-        if (data) {
-            toastSuccess("Успешно")
-            dispatch(setCourseDetails(data))
+    coursesAPI.editStudentCourseStatus(courseId, studentId, status).then(response => {
+        if (response.status === 200) {
+            dispatch(setSuccessToast("Успешно"));
+            dispatch(setCourseDetails(response.data))
         }
+        else dispatch(setErrorToast("Что-то пошло не так"));
         dispatch(setLoadingCourse(false));
     })
 }

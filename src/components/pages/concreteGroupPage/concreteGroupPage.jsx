@@ -1,4 +1,4 @@
-import {Button, Card, Container, ListGroup} from "react-bootstrap";
+import {Button, Container} from "react-bootstrap";
 import ListCoursesItem from "./listCoursesItem/listCoursesItem";
 import {useEffect} from "react";
 import LoadSpinner from "../../other/loadSpinner/loadSpinner";
@@ -24,9 +24,9 @@ const ConcreteGroupPage = (props) => {
             <Container className={"col"}>
                 <div className="col-12 col-lg-8 mx-auto mt-5">
                     <div className={"d-flex justify-content-between"}>
-                        <h3>Группа - {groupName}</h3>
+                        <h3>Группа {groupName ? `- ${groupName}` : "не существует"}</h3>
                         {
-                            isAdmin(props.userRoles) ?
+                            isAdmin(props.userRoles) && groupName?
                                 <Button variant={"primary"} className={"button-inline"}
                                         onClick={() => props.openCreateCourseModal()}>
                                     Создать курс
@@ -34,22 +34,26 @@ const ConcreteGroupPage = (props) => {
                                 : undefined
                         }
                     </div>
-                    <div className={"mt-4"}>
-                        {
-                            props.isLoading ? <LoadSpinner/> :
-                                <div>
-                                    {
-                                        props.groupCourses.length === 0
-                                            ?
-                                            <div className={"text-secondary my-5 text-center"}>В данной группе ещё нет
-                                                курсов</div>
-                                            :
-                                            props.groupCourses.map(course =>
-                                                <ListCoursesItem data={course} key={course.id}/>)
-                                    }
-                                </div>
-                        }
-                    </div>
+                    {
+                        groupName ?
+                            <div className={"mt-4"}>
+                                {
+                                    props.isLoading ? <LoadSpinner/> :
+                                        <div>
+                                            {
+                                                props.groupCourses.length === 0
+                                                    ?
+                                                    <div className={"text-secondary my-5 text-center"}>
+                                                        В данной группе ещё нет курсов</div>
+                                                    :
+                                                    props.groupCourses.map(course =>
+                                                        <ListCoursesItem data={course} key={course.id}/>)
+                                            }
+                                        </div>
+                                }
+                            </div> : undefined
+                    }
+
                 </div>
             </Container>
         </div>

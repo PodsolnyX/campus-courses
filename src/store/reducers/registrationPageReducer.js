@@ -1,6 +1,6 @@
 import {userAPI} from "../../api/userAPI";
-import {toastSuccess} from "../../helpers/toaster";
 import {getUserProfile, setIsAuth} from "./userReducer";
+import {setErrorToast, setSuccessToast} from "./toasterReducer";
 
 const
     SET_REGISTRATION_FORM_DATA = "SET_REGISTRATION_FORM_DATA",
@@ -43,13 +43,17 @@ export const setLoadingRegister = (isLoading) => ({type: SET_LOADING_REGISTER, i
 
 export const registerUser = () => (dispatch, getState) => {
     dispatch(setLoadingRegister(true))
-    userAPI.registerUser(getState().registrationPage.formData).then(data => {
-        if (data) {
-            localStorage.setItem('token', data.token);
-            toastSuccess("Вы успешно зарегистрировались!");
+    userAPI.registerUser(getState().registrationPage.formData).then(response => {
+        if (response.status === 200) {
+            localStorage.setItem('token', response.data.token);
+            dispatch(setSuccessToast("Вы успешно зарегистрировались!"));
             dispatch(setIsAuth());
             dispatch(getUserProfile());
         }
+        else if (response.status === 409)
+            dispatch(setErrorToast("Аккаунт с данным email-адресом уже существует"));
+        else dispatch(setErrorToast("Неверный формат данных"));
+
         dispatch(setLoadingRegister(false))
     });
 

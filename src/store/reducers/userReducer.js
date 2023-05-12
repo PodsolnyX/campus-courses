@@ -8,7 +8,7 @@ const SET_USER_DATA = "SET_USER_DATA",
 ;
 
 let initialState = {
-    userData : {},
+    userData: {},
     userRoles: [],
     users: [],
     isAuth: !!localStorage.getItem("token")
@@ -61,17 +61,21 @@ export const clearUserProfile = () => ({type: CLEAR_USER_DATA});
 export const setUsers = (data) => ({type: SET_USERS, data});
 
 export const getUserProfile = () => (dispatch) => {
-    userAPI.getProfile().then(data => {
-        if (data) dispatch(setUserProfile(data));
-        else dispatch(clearUserProfile())
-    }).then(() => userAPI.getRoles().then(data => {
-        if (data) dispatch(setUserRoles(data));
-    }));
+    userAPI.getProfile()
+        .then(response => {
+            if (response.status === 200)
+                dispatch(setUserProfile(response.data));
+            else dispatch(clearUserProfile())
+        })
+        .then(() => userAPI.getRoles().then(response => {
+            if (response.status === 200)
+                dispatch(setUserRoles(response.data));
+        }));
 }
 
 export const logoutUser = () => (dispatch) => {
-    userAPI.logoutUser().then(data => {
-        if (data) {
+    userAPI.logoutUser().then(response => {
+        if (response.status === 200) {
             localStorage.removeItem('token');
             dispatch(clearUserProfile());
         }
@@ -79,10 +83,9 @@ export const logoutUser = () => (dispatch) => {
 }
 
 export const getUsers = () => (dispatch) => {
-    userAPI.getUsers().then(data => {
-        if (data) {
-            dispatch(setUsers(data));
-        }
+    userAPI.getUsers().then(response => {
+        if (response.status === 200)
+            dispatch(setUsers(response.data));
     })
 }
 

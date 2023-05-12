@@ -1,5 +1,5 @@
 import {userAPI} from "../../api/userAPI";
-import {toastSuccess} from "../../helpers/toaster";
+import {setErrorToast, setSuccessToast} from "./toasterReducer";
 
 const
     SET_PROFILE_FORM_DATA = "SET_PROFILE_FORM_DATA",
@@ -52,19 +52,21 @@ export const setIsEditProfilePage = () => ({type: SET_IS_EDIT_PROFILE_PAGE});
 
 export const saveProfileData = () => (dispatch, getState) => {
     dispatch(setLoadingProfilePage(true))
-    userAPI.editUserProfile(getState().profilePage.formData).then(data => {
-        if (data) {
-            userAPI.getProfile().then(data => dispatch(initProfilePageData(data)));
-            dispatch(setLoadingProfilePage(false))
-            toastSuccess("Вы успешно изменили профиль!");
+    userAPI.editUserProfile(getState().profilePage.formData).then(response => {
+        if (response.status === 200) {
+            dispatch(getUserProfileForPage());
+            dispatch(setSuccessToast("Вы успешно изменили профиль!"));
         }
+        else dispatch(setErrorToast(response.data.message));
+        dispatch(setLoadingProfilePage(false));
     });
 }
 
 export const getUserProfileForPage = () => (dispatch) => {
     dispatch(setLoadingProfilePage(true))
-    userAPI.getProfile().then(data => {
-        if (data) dispatch(initProfilePageData(data));
+    userAPI.getProfile().then(response => {
+        if (response.status === 200)
+            dispatch(initProfilePageData(response.data));
         dispatch(setLoadingProfilePage(false))
     })
 }

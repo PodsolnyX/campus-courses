@@ -1,4 +1,4 @@
-import {Card, Container, ListGroup} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import {useEffect} from "react";
 import LoadSpinner from "../../other/loadSpinner/loadSpinner";
 import ListCoursesItem from "../concreteGroupPage/listCoursesItem/listCoursesItem";

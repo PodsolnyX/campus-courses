@@ -8,7 +8,6 @@ const ConfirmPopup = (props) => {
             onHide={props.closeConfirmPopup}
             keyboard={true}
             centered
-            size="sm"
         >
             <Modal.Body>
                 <div>

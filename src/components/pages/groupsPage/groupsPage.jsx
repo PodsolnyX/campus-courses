@@ -1,4 +1,4 @@
-import {Button, Card, Container, ListGroup} from "react-bootstrap";
+import {Button, Container} from "react-bootstrap";
 import ListGroupItemContainer from "./listGroupItem/listGroupItemContainer";
 import EditGroupsModalContainer from "./modals/editGroupModal/editGroupModalContainer";
 import {useEffect} from "react";

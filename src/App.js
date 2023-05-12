@@ -8,7 +8,6 @@ import ConcreteGroupPageContainer from "./components/pages/concreteGroupPage/con
 import NotFoundPage from "./components/pages/notFoundPage/notFoundPage";
 import Footer from "./components/other/footer/footer";
 import CoursePageContainer from "./components/pages/coursePage/coursePageContainer";
-import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RegistrationPageContainer from "./components/pages/registrationPage/registrationPageContainer";
 import LoginPageContainer from "./components/pages/loginPage/loginPageContainer";
@@ -22,6 +21,7 @@ import ConfirmPopup from "./components/other/confirmPopup/confirmPopupContainer"
 import UserCoursesPageContainer from "./components/pages/userCoursesPage/userCoursesPageContainer";
 import TaughtCoursesPageContainer from "./components/pages/taughtCoursesPage/taughtCoursesPageContainer";
 import {Container} from "react-bootstrap";
+import ToasterContainer from "./components/other/toaster/toasterContainer";
 
 let mapStateToProps = (state) => {
     return {
@@ -44,7 +44,7 @@ function App (props) {
         <div className="App">
             <NavbarContainer/>
             <ConfirmPopup/>
-            <ToastContainer/>
+            <ToasterContainer/>
             <div className={"content mb-5"}>
                 <Routes>
                     <Route path="/"

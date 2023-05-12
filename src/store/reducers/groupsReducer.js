@@ -1,5 +1,5 @@
 import {groupsAPI} from "../../api/groupsAPI";
-import {toastSuccess} from "../../helpers/toaster";
+import {setErrorToast, setSuccessToast} from "./toasterReducer";
 
 const
     OPEN_GROUPS_MODAL = "OPEN_GROUPS_MODAL",
@@ -79,28 +79,32 @@ export const setLoadingModalGroups = (isLoading) => ({type: SET_LOADING_MODAL_GR
 
 export const getGroups = () => (dispatch) => {
     dispatch(setLoadingGroups(true));
-    groupsAPI.getGroups().then(data => {
-        if (data) dispatch(setGroups(data));
+    groupsAPI.getGroups().then(response => {
+        if (response.status === 200)
+            dispatch(setGroups(response.data));
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingGroups(false));
     })
 }
 
 export const getGroupCourses = (id) => (dispatch) => {
     dispatch(setLoadingGroups(true));
-    groupsAPI.getGroupCourses(id).then(data => {
-        if (data) dispatch(setGroupCourses(data));
+    groupsAPI.getGroupCourses(id).then(response => {
+        if (response.status === 200)
+            dispatch(setGroupCourses(response.data));
         dispatch(setLoadingGroups(false));
     })
 }
 
 export const createGroup = () => (dispatch, getState) => {
     dispatch(setLoadingModalGroups(true));
-    groupsAPI.createGroup(getState().groupsPage.currentGroup.name).then(data => {
-        if (data) {
+    groupsAPI.createGroup(getState().groupsPage.currentGroup.name).then(response => {
+        if (response.status === 200) {
             dispatch(closeGroupsModal());
-            toastSuccess("Группа успешно создана");
+            dispatch(setSuccessToast("Группа успешно создана"));
             dispatch(getGroups());
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingModalGroups(false));
     })
 }
@@ -109,23 +113,25 @@ export const editGroup = () => (dispatch, getState) => {
     dispatch(setLoadingModalGroups(true));
     groupsAPI.editGroup(getState().groupsPage.currentGroup.id,
         getState().groupsPage.currentGroup.name)
-        .then(data => {
-            if (data) {
+        .then(response => {
+            if (response.status === 200) {
                 dispatch(closeGroupsModal());
-                toastSuccess("Группа успешно изменена");
+                dispatch(setSuccessToast("Группа успешно изменена"));
                 dispatch(getGroups());
             }
+            else dispatch(setErrorToast(response.data.message));
             dispatch(setLoadingModalGroups(false));
         })
 }
 
-export const deleteGroup = (currentGroup) => (dispatch, getState) => {
+export const deleteGroup = (currentGroup) => (dispatch) => {
     dispatch(setLoadingModalGroups(true));
-    groupsAPI.deleteGroup(currentGroup.id).then(data => {
-        if (data === 200) {
-            toastSuccess("Группа успешно удалена");
+    groupsAPI.deleteGroup(currentGroup.id).then(response => {
+        if (response.status === 200) {
+            dispatch(setSuccessToast("Группа успешно удалена"));
             dispatch(getGroups());
         }
+        else dispatch(setErrorToast(response.data.message));
         dispatch(setLoadingModalGroups(false));
     })
 }

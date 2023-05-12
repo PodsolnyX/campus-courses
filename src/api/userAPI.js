@@ -1,4 +1,3 @@
-import {toastError} from "../helpers/toaster";
 import {instance} from "./instance";
 
 const registerUser = (userData) => {
@@ -10,18 +9,10 @@ const registerUser = (userData) => {
         confirmPassword: userData.passwordConfirmation
     })
         .then(response => {
-            if (response.status === 200) {
-                instance.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
-                return response.data;
-            }
-
+            instance.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
+            return response;
         })
-        .catch(error => {
-            if (error.response.status === 409)
-                toastError("Аккаунт с данным email-адресом уже существует")
-            else
-                toastError("Неверный формат данных")
-        });
+        .catch(error => error.response);
 }
 
 const loginUser = (userData) => {
@@ -30,57 +21,37 @@ const loginUser = (userData) => {
         password: userData.password
     })
         .then(response => {
-            if (response.status === 200) {
-                instance.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
-                return response.data;
-            }
+            instance.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
+            return response;
         })
-        .catch(error => {
-            toastError("Неверный логин или пароль")
-        });
+        .catch(error => error.response);
 }
 
 const getProfile = () => {
     return instance.get("profile")
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const getRoles = () => {
     return instance.get("roles")
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const getUsers = () => {
     return instance.get("users")
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const logoutUser = () => {
     return instance.post("logout")
         .then(response => {
-            if (response.status === 200) {
-                instance.defaults.headers["Authorization"] = `Bearer`;
-                return response.data;
-            }
+            instance.defaults.headers["Authorization"] = `Bearer`;
+            return response;
         })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .catch(error => error.response);
 }
 
 const editUserProfile = (userData) => {
@@ -88,14 +59,8 @@ const editUserProfile = (userData) => {
         fullName: userData.fullName.trimEnd(),
         birthDate: userData.birthDate
     })
-        .then(response => {
-            if (response.status === 200) {
-                return response.data;
-            }
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 export const userAPI = {

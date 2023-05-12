@@ -284,7 +284,7 @@ export const FormMainTeacher = (props) => {
 
 export const FormNoticeText = (props) => {
     return (
-        <Form.Control as="textarea" rows={5} value={props.text}
+        <Form.Control as="textarea" rows={5} value={props.text} placeholder={"Текст уведомления"}
                       onChange={props.onChange} name={"text"}/>
     );
 }

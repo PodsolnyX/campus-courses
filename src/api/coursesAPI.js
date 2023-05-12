@@ -1,36 +1,21 @@
-import {toastError} from "../helpers/toaster";
 import {instance} from "./instance";
 
 const getCourseDetails = (id) => {
     return instance.get(`courses/${id}/details`)
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            if (error.response.status === 404)
-                toastError("Данный курс не найден")
-            else toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const getUserCourses = () => {
     return instance.get(`courses/my`)
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const getTaughtCourses = () => {
     return instance.get(`courses/teaching`)
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const createCourse = (id, data) => {
@@ -43,12 +28,8 @@ const createCourse = (id, data) => {
         annotations: data.annotations,
         mainTeacherId: data.mainTeacherId
     })
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const editCourse = (id, data) => {
@@ -56,22 +37,14 @@ const editCourse = (id, data) => {
         requirements: data.requirements,
         annotations: data.annotations
     })
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const deleteCourse = (id) => {
     return instance.delete(`courses/${id}`)
-        .then(response => {
-            if (response.status === 200) return 200;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const createNotice = (id, data) => {
@@ -79,46 +52,30 @@ const createNotice = (id, data) => {
         text: data.text,
         isImportant: data.isImportant
     })
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const setCourseStatus = (id, status) => {
     return instance.post(`courses/${id}/status`, {
         status: status
     })
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const signUpCourse = (id) => {
     return instance.post(`courses/${id}/sign-up`)
-        .then(response => {
-            if (response.status === 200) return 200;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const editStudentCourseStatus = (courseId, studentId, status) => {
     return instance.post(`courses/${courseId}/student-status/${studentId}`, {
         status: status
     })
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const editStudentMark = (courseId, data) => {
@@ -126,27 +83,16 @@ const editStudentMark = (courseId, data) => {
         markType: data.markType,
         mark: data.mark
     })
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            toastError("Что-то пошло не так")
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 const addCourseTeacher = (courseId, userId) => {
     return instance.post(`courses/${courseId}/teachers`, {
         userId: userId
     })
-        .then(response => {
-            if (response.status === 200) return response.data;
-        })
-        .catch(error => {
-            if (error.response.data.message === "This user is already teaching at this course.")
-                toastError("Данный пользователь уже является преподавателем");
-            else
-                toastError("Что-то пошло не так");
-        });
+        .then(response => response)
+        .catch(error => error.response);
 }
 
 export const coursesAPI = {
